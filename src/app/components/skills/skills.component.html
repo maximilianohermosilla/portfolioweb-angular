@@ -1,16 +1,8 @@
-<div class="data">
-    <div class="row">
-        <div class="col-sm">
-            <h1>Aptitudes</h1>
-        </div>
-        <div class="col-md"></div>
-        <div class="col-md"></div>
-        <div class="col-sm">
-            <div class="contenedor">
-                <i class="bi bi-pencil-square" style="color:#65cd23"></i>
-            </div>            
-        </div>
-</div>
+<div class="row" style="margin:50px">
+    <div class="col">
+            <h1 class="rounded float-start">Aptitudes</h1>
+            <span class="rounded float-end"><i class="bi bi-pencil-square" style="color:#65cd23"></i></span>
+    </div>
 </div>
 
 <!--<div class="chart-container" style="position: relative; height:400px; width:600px">
@@ -18,73 +10,11 @@
 </div>-->
 
 <div class="row">
-    <div class="col-3"*ngFor="let skill of skillsList">
+    <div class="col-3"*ngFor="let skill of skillsList"> 
+        <a>{{skill.name}}: {{skill.score}}% </a>
+
         <div class="chart-container" >
             <canvas id="chart{{skill.id}}"></canvas>
-        </div>
+        </div>        
     </div>
 </div>
-
-<!--<div [innerHtml]="htmlVariable"></div>-->
-
-<!--<ul>
-    <li *ngFor="let skill of skillsList" style="list-style-type: none;">
-        <div class="row">
-            <div class="col-sm">
-                <div class="chart-container">
-                    <canvas id="chart{{skill.id}}"></canvas>
-                </div>
-            </div>
-            <div class="card">
-                <div class="row align-items-center">
-                    
-                    <div class="col-md" style="justify-content:center">                
-                        <h2>{{skill.name}}</h2>                        
-                        <h6>{{skill.score}}</h6>
-                        <h6>{{skill.color}}</h6>>
-                    </div>
-                    
-                    <div class="col-sm">
-                        <div class="contenedor">
-                            <i class="bi bi-pencil-fill" style="color:#65cd23"></i>
-                            <i class="bi bi-trash-fill" style="color:red"></i>
-                        </div> 
-                    </div>            
-                </div>        
-            </div>
-        </div>
-    </li>
-</ul>-->
-
-<!--<div class="chart-container" style="position: relative; height:400px; width:600px">
-    <canvas id="chart_0"></canvas>
-</div>
-
-<div class="row">
-    <div class="col-sm">
-        <div class="chart-container">
-            <canvas id="chart1"></canvas>
-        </div>
-    </div>
-    <div class="col-sm">
-        <div class="chart-container">
-            <canvas id="chart2"></canvas>
-        </div>
-    </div>
-    <div class="col-sm">
-        <div class="chart-container">
-            <canvas id="chart3"></canvas>
-        </div>
-    </div>
-    <div class="col-sm">
-        <div class="chart-container">
-            <canvas id="chart4"></canvas>
-        </div>
-    </div>
-    
-
-</div>
-
-    
-
--->

@@ -9,6 +9,10 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
+  .container{
+    margin-top:50px;
+  }
+
   .contenedor{
     width: 100%;
     display: flex;
@@ -27,6 +31,17 @@
   }
 
   .contenedor i:hover{
+    opacity: 0.5;
+  }
+
+  span i{
+    font-size: 2rem;
+     color: limegreen;
+     padding:0 8px;
+     border-radius: 50px;     
+  }
+
+  span i:hover{
     opacity: 0.5;
   }
 
@@ -95,6 +110,7 @@
     all: unset;
     border-radius: 4px;
     border: 1px solid #eee;
+    border-left: 10px solid #50a21c;    
     background-color: #fafafa;
     height: auto;
     width: 90%;
@@ -140,4 +156,12 @@
 
   .card.card.highlight-card span {
     margin-left: 60px;
+  }
+
+  .col-3{
+    margin-top: 20px
+  }
+
+  ul{
+    margin-right:1rem;
   }

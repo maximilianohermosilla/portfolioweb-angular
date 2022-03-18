@@ -69,11 +69,12 @@
   }
 
   .botonera{
-      margin: 30px
+      margin: 30px;
+      padding:35px;
   }
 
   .botonera button{
-      margin: 0.1em;
+      margin: 0.2em;
       padding: 0.5em;
       font-size: 25px;
   }
