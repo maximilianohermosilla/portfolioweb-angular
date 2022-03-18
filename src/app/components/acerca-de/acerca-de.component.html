@@ -1,0 +1,54 @@
+<div class="contenedor">
+    <img [src]="miPortfolio.profilePhoto">    
+</div>
+    <div class="row">
+        <div class="col-5">
+            <div class="data">
+                <h1>{{miPortfolio.name}}</h1>
+                <h3>{{miPortfolio.position}}</h3>
+                <h5>{{miPortfolio.ubication}}</h5>
+                <h6>Informacion de contacto</h6> 
+            </div>                
+        </div>
+
+        <div class="col-2"> 
+                     
+        </div>
+
+        <div class="col-4">
+            <div class="data">
+                <div class="row align-items-center">
+                    <div class="col-sm">
+                        <img src="{{miPortfolio.company.img}}" class="logo">
+                    </div>
+                    <div class="col-sm">
+                        <h3>{{miPortfolio.company.name}}</h3>
+                    </div>     
+                </div>
+                <div class="row align-items-center" >
+                    <div class="col-sm">
+                        <img src="{{miPortfolio.school.img}}" class="logo">
+                    </div>
+                    <div class="col-sm">
+                        <h3>{{miPortfolio.school.name}}</h3>
+                    </div>     
+                </div>
+                
+                
+            </div>          
+        </div>
+
+        <div class="col-1">
+            <div class="col-sm">
+                <div class="content">
+                    <i class="bi bi-pencil-square" style="color:#65cd23"></i>
+                </div>            
+            </div>  
+        </div>
+    </div>
+
+    <div class="botonera">
+        <button class="btn btn-primary btn">Tengo interes en</button>
+        <button class="btn btn-success">Añadir Seccion</button>
+        <button class="btn btn-success">Mas</button>
+    </div>

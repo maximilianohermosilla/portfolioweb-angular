@@ -1,0 +1,46 @@
+<div class="data">
+    <div class="row">
+        <div class="col-sm">
+            <h1>Proyectos</h1>
+        </div>
+        <div class="col-md"></div>
+        <div class="col-md"></div>
+        <div class="col-sm">
+            <div class="contenedor">
+                <i class="bi bi-pencil-square" style="color:#65cd23"></i>
+            </div>            
+        </div>
+</div>
+</div>
+
+<ul>
+<li *ngFor="let projects of projectsList" style="list-style-type: none;">
+    <div class="card-container">
+        <div class="card">
+            <div class="row align-items-center">
+                
+                <div class="col-md" style="justify-content:center">                
+                    <h2>{{projects.name}}</h2>
+                    <h6><time>{{projects.start}}</time></h6>
+                    <h6>{{projects.description}}</h6>
+                    <a href={{projects.url}}>{{projects.name}}</a>
+                </div>
+                <div class="col-3">
+                    <div class="content">
+                        <img [src]="projects.img" class="logo">
+                    </div>
+                    
+                </div>
+                <div class="col-sm">
+                    <div class="contenedor">
+                        <i class="bi bi-pencil-fill" style="color:#65cd23; margin-right: 10px"></i>
+                        <i class="bi bi-trash-fill" style="color:red"></i>
+                    </div> 
+                </div>            
+            </div>        
+        </div>
+    </div>
+</li>
+</ul>
+
+
