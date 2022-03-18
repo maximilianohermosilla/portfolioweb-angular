@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PortfolioService } from 'src/app/servicios/portfolio.service';
+import { ButtonComponent } from '../button/button.component';
 
 
 @Component({
@@ -17,6 +18,10 @@ export class HeaderComponent implements OnInit {
       //console.log(data);
       this.miPortfolio = data;
     });
+  }
+
+  startLogin(){
+    console.log("button click!");
   }
 
 }

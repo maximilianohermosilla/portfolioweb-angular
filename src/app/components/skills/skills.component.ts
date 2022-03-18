@@ -14,40 +14,32 @@ export class SkillsComponent implements OnInit {
   nombre;
   _data;
   _options;
-  htmlVariable;
 
   constructor(private servPortfolio: PortfolioService) {  }
-  //htmlVariable: string ="";
   
-  ngOnInit(): void {
-    //this.getChartBarra();      
-    //this.getSkills();    
+  ngOnInit(): void { 
     this.servPortfolio.obtenerDatos().subscribe(data =>{
       this.skillsList = data.skills; 
     });
     setTimeout(()=>{                         
-      this.createContent();
-  }, 500);
+      this.getCharts();
+    }, 500);
   }
 
-  createContent(){
+  getCharts(){
     var i=0;
     this.servPortfolio.obtenerDatos().subscribe(data =>{
       data.skills.forEach(element => {
-        console.log("Creando chart " + element.id);
         this.charts.push(this.createChart(element.id, element.name, element.score, element.color));
         this._data = this.charts[i].data;
         this._options = this.charts[i].option;
+        this.nombre="chart"+element.id;
         i++;
-
-        console.log(this._data);
-
-        this.nombre="chart"+element.id;        
 
         this.chartFactory();          
       });        
     });
-    console.log(this.charts);
+    //console.log(this.charts);
   }  
 
   createChart(id:number, name:string, score:number, color:string): any{
@@ -71,14 +63,12 @@ export class SkillsComponent implements OnInit {
       responsive: true,
     };    
     var nombre="chart"+id;
-    //console.log(nombre);
-    
+
     if (this.myChart) {
       this.myChart.destroy();
     }
 
-    var datos = { data, option };
-    console.log(datos);
+    var datos = { data, option }
     return datos;
   }
 
@@ -87,132 +77,12 @@ export class SkillsComponent implements OnInit {
     if (this.myChart) {
       this.myChart.destroy();
     }
-    console.log("nombre factory: " + this.nombre);
-    //console.log(this._data);
-    //console.log(this._options);
     new Chart(this.nombre, {
       type: "doughnut",
       options: this._options,
       data: this._data
     });
-
-    console.log("Factory "+this.nombre+" ok");
   }
-
-
-  
-  
-
-
-
-
-
-
-
-
-  getSkills(){
-    var data1 = {
-      labels: [".NET"],
-      datasets: [{
-        label: '.NET',
-        data: [85, 15],
-        backgroundColor: [
-          'rgb(100, 80, 200)',
-          'rgb(255, 255, 255)'
-        ],
-        hoverBackgroundColor: ["rgba(0,0,0,0.1)","rgba(0,0,0,0.1)"],
-        hoverBorderColor: ["rgba(90,100,36,0.2)","rgba(255,255,255,0.2)"],
-        hoverOffset: 2
-      }]
-    };
-    var option1 = {
-      responsive: true,
-    };
-
-    var data2 = {
-      labels: ["Java"],
-      datasets: [{
-        label: 'Java',
-        data: [78, 22],
-        backgroundColor: [
-          'rgb(30, 199, 30)',
-          'rgb(255, 255, 255)'
-        ],
-        hoverBackgroundColor: ["rgba(0,0,0,0.1)","rgba(0,0,0,0.1)"],
-        hoverBorderColor: ["rgba(90,100,36,0.2)","rgba(255,255,255,0.2)"],
-        hoverOffset: 2
-      }]
-    };
-    var option2 = {
-      responsive: true,
-    };
-
-    var data3 = {
-      labels: ["SQL"],
-      datasets: [{
-        label: 'SQL',
-        data: [80, 20],
-        backgroundColor: [
-          'rgb(150, 150, 100)',
-          'rgb(255, 255, 255)'
-        ],
-        hoverBackgroundColor: ["rgba(0,0,0,0.1)","rgba(0,0,0,0.1)"],
-        hoverBorderColor: ["rgba(90,100,36,0.2)","rgba(255,255,255,0.2)"],
-        hoverOffset: 2
-      }]
-    };
-    var option3 = {
-      responsive: true,
-    };
-
-    var data4 = {
-      labels: ["Angular"],
-      datasets: [{
-        label: 'Angular',
-        data: [45, 55],
-        backgroundColor: [
-          'rgb(100, 00, 10)',
-          'rgb(255, 255, 255)'
-        ],
-        hoverBackgroundColor: ["rgba(0,0,0,0.1)","rgba(0,0,0,0.1)"],
-        hoverBorderColor: ["rgba(90,100,36,0.2)","rgba(255,255,255,0.2)"],
-        hoverOffset: 2
-      }]
-    };
-    var option4 = {
-      responsive: true,
-    };
-    
-    
-    
-
-    new Chart("chart1", {
-      type: "doughnut",
-      options: option1,
-      data: data1
-    });
-    
-    new Chart("chart2", {
-      type: "doughnut",
-      options: option2,
-      data: data2
-    });
-
-    new Chart("chart3", {
-      type: "doughnut",
-      options: option3,
-      data: data3
-    });
-
-    new Chart("chart4", {
-      type: "doughnut",
-      options: option4,
-      data: data4
-    });
-
-  }
-
-
 
 
   getChartBarra(){
@@ -255,12 +125,6 @@ export class SkillsComponent implements OnInit {
       data: data
     });   
     
-  }
-
-  generateCharts(){
-    //var ctx = document.getElementById('myChart').getContext('2d');
-    return this.charts;
-  
   }
 
 }

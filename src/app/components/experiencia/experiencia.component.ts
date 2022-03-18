@@ -4,7 +4,7 @@ import { PortfolioService } from 'src/app/servicios/portfolio.service';
 @Component({
   selector: 'app-experiencia',
   templateUrl: './experiencia.component.html',
-  styleUrls: ['./experiencia.component.css']
+  styleUrls: ['../../../styles.css']
 })
 export class ExperienciaComponent implements OnInit {
   experienceList: any;

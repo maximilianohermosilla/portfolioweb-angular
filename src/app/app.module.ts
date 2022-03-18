@@ -13,6 +13,7 @@ import { PortfolioService } from './servicios/portfolio.service';
 import { HttpClientModule } from '@angular/common/http'
 import { Chart } from 'chart.js';
 import { NgChartsModule } from 'ng2-charts';
+import { ButtonComponent } from './components/button/button.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { NgChartsModule } from 'ng2-charts';
     EducacionComponent,
     SkillsComponent,
     ProyectosComponent,
-    LoginComponent
+    LoginComponent,
+    ButtonComponent
   ],
   imports: [
     BrowserModule,

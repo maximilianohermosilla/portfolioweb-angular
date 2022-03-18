@@ -4,7 +4,7 @@ import { PortfolioService } from 'src/app/servicios/portfolio.service';
 @Component({
   selector: 'app-educacion',
   templateUrl: './educacion.component.html',
-  styleUrls: ['./educacion.component.css']
+  styleUrls: ['../../../styles.css']
 })
 export class EducacionComponent implements OnInit {
   educationList: any;
@@ -13,7 +13,7 @@ export class EducacionComponent implements OnInit {
 
   ngOnInit(): void {
     this.servPortfolio.obtenerDatos().subscribe(data =>{
-      //console.log(data.education);
+      console.log(data.education);
       this.educationList = data.education;
     });
   }
