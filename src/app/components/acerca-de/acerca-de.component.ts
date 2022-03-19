@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Portfolio } from 'src/app/models/portfolio';
 import { PortfolioService } from 'src/app/servicios/portfolio.service';
+import { LoginComponent } from '../login/login.component';
 
 @Component({
   selector: 'app-acerca-de',
@@ -16,4 +18,11 @@ export class AcercaDeComponent implements OnInit {
       this.miPortfolio = data;
     });
   }
+
+  onUpdate(portfolio: Portfolio){
+    console.log("Editando datos "+portfolio.name);
+    
+  }
+
+  
 }

@@ -1,10 +1,16 @@
 <div class="contenedor">
+    
     <img [src]="miPortfolio.profilePhoto"> 
     <div class="content">
-        <i class="bi bi-pencil-square" style="color:#65cd23"></i>
+        <i class="bi bi-pencil-square"
+         style="color:#65cd23"
+         (click)="onUpdate(miPortfolio)"
+         ></i>
     </div>     
 </div>
     <div class="row" style="margin-left:30px">
+    
+    </div>
         <div class="col-5">
             <div class="data">
                 <h1>{{miPortfolio.name}}</h1>
@@ -49,10 +55,75 @@
                 </div>            
             </div>   -->
         </div>
-    </div>
 
-    <div class="botonera">
-        <button class="btn btn-primary btn">Tengo interes en</button>
-        <button class="btn btn-success">Añadir Seccion</button>
-        <button class="btn btn-success">Mas</button>
-    </div>
+<div class="botonera">
+    
+    <button class="btn btn-primary btn">Tengo interes en</button>
+    <button class="btn btn-success">Añadir Seccion</button>
+    <button class="btn btn-success">Mas</button>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#dataModal"> Editar </button>
+</div>
+
+<!-- MODAL -->
+<div class="modal" id="dataModal" >
+    
+    <div class="modal-dialog" >
+        <div class="modal-content">
+            <div class="modal-header">            
+                <h5 class="modal-title" id="staticBackdropLabel">Editar Datos Personales</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        
+            <div class="modal-body">
+                <div class="d-flex justify-content-center">
+                <form style="margin-bottom:40px"
+                    class="login-form" 
+                    (ngSubmit)="onUpdate(miPortfolio)"
+                    >
+                    <div class="form-control">
+                        <label for="user">Nombre y Apellido</label>
+                        <input
+                            type="text" 
+                            name="user" 
+                            id="user" 
+                            placeholder="Ingrese Nombre" 
+                        />
+                    </div>
+
+                    <div class="form-control">
+                        <label for="password">Posicion</label>
+                        <input 
+                            type="password" 
+                            name="password" 
+                            id="password" 
+                            placeholder="Ingrese Position"
+                        />
+                    </div>
+                    <div class="form-control">
+                        <label for="empresa">Empresa</label>
+                        <input 
+                            type="password" 
+                            name="password" 
+                            id="password" 
+                            placeholder="Ingrese Emppresa"
+                        />
+                    </div>
+
+
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+
+                </form> 
+            </div> 
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                
+
+            </div>
+        </div>
+
+</div>
+
+</div>
