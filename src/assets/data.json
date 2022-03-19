@@ -1,0 +1,154 @@
+{
+    "portfolio":{
+
+    
+    "name": "Hermosilla Andrés Maximiliano",
+    "profilePhoto": "https://argentinaprograma.inti.gob.ar/pluginfile.php/4011/user/icon/moove/f1?rev=54850",
+    "image": "https://www.unaj.edu.ar/wp-content/uploads/2016/06/logo-unaj-2016-01.jpg",
+    "position": "Full Stack Developer Jr.",    
+    "ubication": "Florencio Varela, Buenos Aires (Argentina)",
+    "about": "Full Stack Developer Jr",
+    "company": {
+        "name": "Addoc SA",        
+        "img": "/assets/addoc.jpg",
+        "url": "https://addoc.com/"
+    },
+    "school": {
+        "name": "UNAJ",
+        "img": "https://www.unaj.edu.ar/wp-content/uploads/2016/06/logo-unaj-2016-01.jpg",
+        "url": "https://www.unaj.edu.ar/"
+    },
+    "experience": [
+    {
+        "position": "Tecnología, Soporte Software .NET",
+        "company": "Addoc SA",
+        "img": "/assets/addoc.jpg",
+        "mode": "Jornada Completa",
+        "start": "2022-06-01",
+        "end": "Actualidad",
+        "timeElapsed": "9 meses",
+        "ubication": "Florencio Varela, Buenos Aires (Argentina)"
+    },
+    {
+        "position": "Data Entry",
+        "company": "AdeA SA",
+        "img": "/assets/adea.gif",
+        "mode": "Jornada Completa",
+        "start": "2013-07-24",
+        "end": "2021-05-31",
+        "timeElapsed": "7 años y 10 meses",
+        "ubication": "Florencio Varela, Buenos Aires (Argentina)"
+    }],
+    "education": [{
+        "school": "UNAJ",
+        "title": "Ingeniería en informática",
+        "image": "https://www.unaj.edu.ar/wp-content/uploads/2016/06/logo-unaj-2016-01.jpg",
+        "career": "Ingeniería en informática",
+        "score": "8.41",
+        "start": "2018",
+        "end": "Actualidad"
+    },
+    {
+        "school": "Cursos Polotic Misiones",
+        "title": "Introducción a la Programación",
+        "image": "https://cursos.polotic.misiones.gob.ar/images/polo_cursos_logo_2020.png",
+        "career": "Full Stack Developer Jr.",
+        "score": "10",
+        "start": "2020",
+        "end": "2020"
+    },
+    {
+        "school": "Cursos Polotic Misiones",
+        "title": "Inglés para Desarrollo de Software",
+        "image": "https://cursos.polotic.misiones.gob.ar/images/polo_cursos_logo_2020.png",
+        "career": "Inglés",
+        "score": "9",
+        "start": "2020",
+        "end": "2020"
+    },
+    {
+        "school": "Argentina Programa",
+        "title": "Full Stack Developer Jr",
+        "image": "https://argentinaprograma.inti.gob.ar/pluginfile.php/1/theme_moove/sliderimage1/1647226457/Banner4.png",
+        "career": "Full Stack Developer Jr",
+        "score": "9",
+        "start": "2021",
+        "end": "2022"
+    }],
+    "skills": [{
+        "id":"1",
+        "name": ".NET",
+        "score": "87",
+        "color": "blue"
+    },
+    {
+        "id":"2",
+        "name": "Java",
+        "score": "70",
+        "color": "green"
+    },
+    {
+        "id":"3",
+        "name": "SQL",
+        "score": "80",
+        "color": "yellow"
+    },
+    {
+        "id":"4",
+        "name": "Angular",
+        "score": "45",
+        "color": "red"
+    },
+    {
+        "id":"6",
+        "name": "Python",
+        "score": "30",
+        "color": "lightblue"
+    },
+    {
+        "id":"7",
+        "name": "Javascript",
+        "score": "70",
+        "color": "orange"
+    },
+    {
+        "id":"9",
+        "name": "HTML",
+        "score": "65",
+        "color": "pink"
+    },
+    {
+        "id":"11",
+        "name": "CSS",
+        "score": "55",
+        "color": "limegreen"
+    },
+    {
+        "id":"12",
+        "name": "MySQL",
+        "score": "75",
+        "color": "orange"
+    },
+    {
+        "id":"13",
+        "name": "IIS",
+        "score": "65",
+        "color": "indigo"
+    }],
+    "projects": [{
+        "name": "Perfil Digital",
+        "start": "2021-06-01",
+        "description": "Aplicación Web ASP.NET conectada a Base de Datos SQL SERVER con alrededor de 30 clientes que utilizan la plataforma para la administración de recibos de sueldos de sus empleados.",
+        "url": "https://perfildigital.adea.com.ar/adeatest",
+        "img": "/assets/addoc-perfildigital.png"
+    },
+    {
+        "name": "UPA 10 Administración",
+        "start": "2022-02-01",
+        "description": "Aplicación Web Angular + SpringBoot + MySQL para administración de guardias del personal de administración de la Unidad UPA 10 de Berazategui",
+        "url": "#",
+        "img": "/assets/upa10.jpg"
+    }]
+    }
+
+}

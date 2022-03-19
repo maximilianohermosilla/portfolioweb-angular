@@ -14,6 +14,14 @@ import { HttpClientModule } from '@angular/common/http'
 import { Chart } from 'chart.js';
 import { NgChartsModule } from 'ng2-charts';
 import { ButtonComponent } from './components/button/button.component';
+import { FormsModule } from '@angular/forms';
+import { RouterModule, Routes } from '@angular/router';
+
+const routes: Routes = [
+  {path: '', component:HeaderComponent },
+  //{path: 'login', component:LoginComponent },
+  {path: 'portfolio', component:AppComponent },
+];
 
 @NgModule({
   declarations: [
@@ -30,7 +38,9 @@ import { ButtonComponent } from './components/button/button.component';
   imports: [
     BrowserModule,
     HttpClientModule,
-    NgChartsModule
+    NgChartsModule,
+    FormsModule,
+    RouterModule.forRoot(routes, {enableTracing: true})
   ],
   providers: [],
   bootstrap: [AppComponent]

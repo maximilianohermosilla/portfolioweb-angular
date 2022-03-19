@@ -52,7 +52,7 @@ export class SkillsComponent implements OnInit {
         data: [score, 100-score],
         backgroundColor: [
           color,
-          'rgb(255, 255, 255)'
+          'rgb(255, 255, 255,0)'
         ],
         hoverBackgroundColor: ["rgba(0,0,0,0.1)","rgba(0,0,0,0.1)"],
         hoverBorderColor: ["rgba(90,100,36,0.2)","rgba(255,255,255,0.2)"],
