@@ -20,7 +20,8 @@ export class AcercaDeComponent implements OnInit {
   }
 
   onUpdate(portfolio: Portfolio){
-    console.log("Editando datos "+portfolio.name);
+    console.log("Editando datos "+portfolio.id);
+    return this.servPortfolio.updatePortfolio(portfolio);
     
   }
 

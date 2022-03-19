@@ -1,7 +1,8 @@
 <div class="row" style="margin:50px">
     <div class="col">
-            <h1 class="rounded float-start">Educación</h1>
-            <span class="rounded float-end"><i class="bi bi-pencil-square" style="color:#65cd23"></i></span>
+        <h1 class="rounded float-start"><i class="bi bi-mortarboard" style="color: rgb(51, 146, 230)"></i> Educación</h1>            
+        <span class="rounded float-end"><i class="bi bi-plus-square" style="color:green;"></i></span>
+        <span class="rounded float-end"><i class="bi bi-pencil-square" style="color:green"></i></span>
     </div>
 </div>
 
@@ -10,10 +11,10 @@
     <div class="card-container">
         <div class="card">
             <div class="row align-items-center">
-                <div class="col-3">
+                <div class="col-2">
                     <img [src]="education.image" class="logo">
                 </div>
-                <div class="col-md">                
+                <div class="col-lg">                
                     <h2>{{education.school}}</h2>
                     <h5>{{education.title}}</h5>
                     <h6><time>{{education.start}}</time> - <time>{{education.end}}</time></h6>
@@ -21,8 +22,7 @@
                 <div class="col-sm">
                     <div class="contenedor">
                         <i class="bi bi-pencil-fill"
-                             style="color:#65cd23;
-                              margin-right: 10px"
+                             style="margin-right: 10px"
                               (click) = "onUpdate(education)"
                               ></i>
                             <i class="bi bi-trash-fill"

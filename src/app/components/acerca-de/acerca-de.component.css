@@ -40,13 +40,14 @@
 
   .content i{
     font-size: 2rem;
-     color: limegreen;
+     color: green;
      padding: 0 8px;
      border-radius: 50px;     
   }
 
   .content i:hover{
     opacity: 0.5;
+    color:grey;
   }
   
   .logo{
@@ -70,13 +71,13 @@
 
   .botonera{
       margin: 30px;
-      padding:35px;
+      padding-left:10px;
   }
 
   .botonera button{
-      margin: 0.2em;
+      margin: 0.3em;
       padding: 0.5em;
-      font-size: 25px;
+      font-size: 20px;
   }
 
 
@@ -93,4 +94,16 @@
 
   p {
     margin: 0;
+  }
+
+  .form-control{
+    box-shadow: 3px 1px 5px 6px rgba(0,0,0,0.3);
+  }
+
+  #card{
+    border-bottom: 3px solid rgba(0,0,0,0.1);
+  }
+
+  .col-5{
+    padding-left: 30px;
   }

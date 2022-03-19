@@ -32,13 +32,7 @@
     margin:50px;
   }
 
-  .toolbar {
-    
-    border: 3px solid #cccccc;
-    
-    display: flex;
-  }
-
+  
 
 #chart-container {
   position: relative;

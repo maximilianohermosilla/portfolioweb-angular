@@ -1,7 +1,8 @@
 <div class="row" style="margin:50px">
     <div class="col">
-            <h1 class="rounded float-start">Experiencia</h1>
-            <span class="rounded float-end"><i class="bi bi-pencil-square" style="color:#65cd23"></i></span>
+        <h1 class="rounded float-start"><i class="bi bi-briefcase" style="color: rgb(51, 146, 230)"></i> Experiencia</h1>            
+        <span class="rounded float-end"><i class="bi bi-plus-square" style="color:green;"></i></span>
+        <span class="rounded float-end"><i class="bi bi-pencil-square" style="color:green"></i></span>
     </div>
 </div>
 
@@ -10,22 +11,24 @@
         <div class="card-container">
             <div class="card">
                 <div class="row align-items-center">
-                    <div class="col-3">
+                    <div class="col-2">
                         <div class="content">
                             <img [src]="experience.img" class="logo">
                         </div>
                         
                     </div>
-                    <div class="col-md" style="justify-content:center">                
+                    <div class="col-lg" style="justify-content:center">      
+                    <div class="card-item">
                         <h2>{{experience.company}}</h2>
                         <h4>{{experience.position}}</h4>
                         <h6><time>Desde {{experience.start}}</time> hasta <time>{{experience.end}}</time></h6>
                         <h6>{{experience.ubication}}</h6>
+                    </div>          
                     </div>
                     <div class="col-sm">
                         <div class="contenedor">
                             <i class="bi bi-pencil-fill"
-                             style="color:#65cd23;
+                             style="
                               margin-right: 10px"
                               (click) = "onUpdate(experience)"
                               ></i>

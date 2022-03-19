@@ -3,61 +3,77 @@
     <img [src]="miPortfolio.profilePhoto"> 
     <div class="content">
         <i class="bi bi-pencil-square"
-         style="color:#65cd23"
+         style="color: green"
          (click)="onUpdate(miPortfolio)"
          ></i>
     </div>     
 </div>
-    <div class="row" style="margin-left:30px">
-    
+<div class="row" style="padding-right: 30px; padding-left: 30px">
+    <div class="col-5">
+        
+            <h1>{{miPortfolio.name}}</h1>
+            <h3>{{miPortfolio.position}}</h3>
+            <h5>{{miPortfolio.ubication}}</h5>
+            <h6>Informacion de contacto</h6>
+            <a routerLink="/login" aria-current="page">Información</a> 
+                
     </div>
-        <div class="col-5">
-            <div class="data">
-                <h1>{{miPortfolio.name}}</h1>
-                <h3>{{miPortfolio.position}}</h3>
-                <h5>{{miPortfolio.ubication}}</h5>
-                <h6>Informacion de contacto</h6>
-                <a routerLink="/login" aria-current="page">Información</a> 
-            </div>                
-        </div>
 
-        <div class="col-2"> 
-                     
-        </div>
+    <div class="col-1"> 
+         <div class="contenedor">
+            <i class="bi bi-pencil-fill"
+                             style="
+                              margin-right: 10px"
+                              (click) = "onUpdate(miPortfolio)"
+                              ></i>
+         </div>               
+    </div>
+    <div class="col-1">
 
-        <div class="col-4">
-            <div class="data">
-                <div class="row align-items-center">
-                    <div class="col-sm">
-                        <img src="{{miPortfolio.company.img}}" class="logo">
-                    </div>
-                    <div class="col-sm">
-                        <h3>{{miPortfolio.company.name}}</h3>
-                    </div>     
+    </div>
+
+    <div class="col-5">
+        
+            <div class="row align-items-center" id="card">
+                <div class="col-sm">
+                    <img src="{{miPortfolio.company.img}}" class="logo">
                 </div>
-                <div class="row align-items-center" >
-                    <div class="col-sm">
-                        <img src="{{miPortfolio.school.img}}" class="logo">
-                    </div>
-                    <div class="col-sm">
-                        <h3>{{miPortfolio.school.name}}</h3>
-                    </div>     
+                <div class="col-sm">
+                    <h5>{{miPortfolio.company.name}}</h5>
+                </div> 
+                <div class="col-sm">
+                    <div class="contenedor">
+                        <i class="bi bi-pencil-fill"
+                        style="margin-right: 10px"
+                        (click) = "onUpdate(miPortfolio)"
+                        ></i>  
+                    </div>                    
+                </div>     
+            </div>
+            <div class="row align-items-center" id="card">
+                <div class="col-sm">
+                    <img src="{{miPortfolio.school.img}}" class="logo">
                 </div>
+                <div class="col-sm">
+                    <h5>{{miPortfolio.school.name}}</h5>
+                </div>  
+                <div class="col-sm">
+                    <div class="contenedor">
+                        <i class="bi bi-pencil-fill"
+                        style="margin-right: 10px"
+                        (click) = "onUpdate(miPortfolio)"
+                        ></i>  
+                    </div>  
+                </div> 
                 
-                
-            </div>          
-        </div>
+            </div>
+        
+    </div>
 
-        <div class="col-1">
-            <!-- <div class="col-sm">
-                <div class="content">
-                    <i class="bi bi-pencil-square" style="color:#65cd23"></i>
-                </div>            
-            </div>   -->
-        </div>
+
+</div>
 
 <div class="botonera">
-    
     <button class="btn btn-primary btn">Tengo interes en</button>
     <button class="btn btn-success">Añadir Seccion</button>
     <button class="btn btn-success">Mas</button>
@@ -75,53 +91,58 @@
         </div>
         
             <div class="modal-body">
-                <div class="d-flex justify-content-center">
-                <form style="margin-bottom:40px"
-                    class="login-form" 
+                
+                <form
                     (ngSubmit)="onUpdate(miPortfolio)"
                     >
-                    <div class="form-control">
-                        <label for="user">Nombre y Apellido</label>
-                        <input
+                    <div class="form-group">
+                        <label for="name">Nombre y Apellido</label>
+                        <input class="form-control"
                             type="text" 
-                            name="user" 
-                            id="user" 
+                            name="name" 
+                            id="name" 
                             placeholder="Ingrese Nombre" 
                         />
                     </div>
 
-                    <div class="form-control">
-                        <label for="password">Posicion</label>
-                        <input 
-                            type="password" 
-                            name="password" 
-                            id="password" 
-                            placeholder="Ingrese Position"
+                    <div class="form-group">
+                        <label for="position">Posicion</label>
+                        <input class="form-control"
+                            type="text" 
+                            name="position" 
+                            id="position" 
+                            placeholder="Ingrese Ocupación"
                         />
                     </div>
-                    <div class="form-control">
-                        <label for="empresa">Empresa</label>
-                        <input 
-                            type="password" 
-                            name="password" 
-                            id="password" 
-                            placeholder="Ingrese Emppresa"
+                    <div class="form-group">
+                        <label for="ubication">Ubicacion</label>
+                        <input class="form-control"
+                            type="text" 
+                            name="ubication" 
+                            id="ubication" 
+                            placeholder="Ingrese Ubicacion"
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label for="about">Descripcion</label>
+                        <input class="form-control"
+                            type="text" 
+                            name="about" 
+                            id="about" 
+                            placeholder="Descripcion"
                         />
                     </div>
 
-
-                    <button type="submit" class="btn btn-primary">Save changes</button>
-
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success">Guardar</button>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Salir</button>
+                    </div>
                 </form> 
-            </div> 
+            
 
             </div>
 
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                
-
-            </div>
+            
         </div>
 
 </div>

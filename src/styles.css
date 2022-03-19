@@ -7,6 +7,7 @@
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    
   }
 
   .container{
@@ -15,23 +16,29 @@
 
   .contenedor{
     width: 100%;
+    height: 50px;
     display: flex;
     position: relative;
     align-items: center;
     justify-content: end;
     padding-right: 30px;
-    margin: 8px 0;
   }
 
   .contenedor i{
     font-size: 2rem;
-     color: limegreen;
+     color: green;
      padding:0 8px;
      border-radius: 50px;     
   }
 
   .contenedor i:hover{
     opacity: 0.5;
+    background-color:rgb(105, 103, 103,0.1);
+  }
+
+  .contenedor img:hover{
+    opacity: 0.5;
+    background-color:rgb(105, 103, 103,0.1);
   }
 
   span i{
@@ -61,10 +68,8 @@
   }
 
   .logo{
-      display: block;
-      margin-left:0em;
-      margin-right: auto; 
-      width: 250px;   
+    text-align: center;
+    width: 100%;
   }
 
   .botonera{
@@ -80,6 +85,8 @@
   .modulo{
       border-style:groove;
       border-radius: 30px;
+      max-width: 100%;
+      margin: auto;
   }
 
   h1,
@@ -90,6 +97,7 @@
   h6,p {
     margin: 2px 0;
     position:relative;
+    
   }
 
   
@@ -100,6 +108,7 @@
   .card-container {
     display: flex;
     position:relative;
+    width: 100%;
     flex-wrap: wrap;
     justify-content: flex-start;
     margin-bottom:10px;
@@ -159,9 +168,36 @@
   }
 
   .col-3{
-    margin-top: 20px
+    margin-top: 20px;
   }
 
   ul{
     margin-right:1rem;
+  }
+
+  .modal-footer{
+    margin-top: 2em;
+  }
+
+  form{
+    padding: 1em;
+  }
+
+  .card-item{
+    text-align: left;
+    width: 100%;   
+  }
+
+  #header{
+    background-color: #1976d2;
+    padding: 1em;
+    margin:50px;
+    border-radius: 1em;
+    color: #FFF;    
+    box-shadow: 3px 1px 5px 6px rgba(0,0,0,0.3);
+  }
+
+  body{
+    position: absolute;
+    display: relative;
   }
