@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Project } from 'src/app/models/project';
 import { PortfolioService } from 'src/app/servicios/portfolio.service';
 
 @Component({
@@ -16,5 +17,13 @@ export class ProyectosComponent implements OnInit {
       //console.log(data.education);
       this.projectsList = data.projects;
     });
+  }
+
+  onDelete(projects: Project){
+    console.log("Delete");
+  }
+
+  onUpdate(projects: Project){
+    console.log("Update");
   }
 }

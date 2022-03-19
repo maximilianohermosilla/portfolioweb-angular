@@ -25,8 +25,15 @@
                 </div>
                 <div class="col-sm">
                     <div class="contenedor">
-                        <i class="bi bi-pencil-fill" style="color:#65cd23; margin-right: 10px"></i>
-                        <i class="bi bi-trash-fill" style="color:red"></i>
+                        <i class="bi bi-pencil-fill"
+                             style="color:#65cd23;
+                              margin-right: 10px"
+                              (click) = "onUpdate(projects)"
+                              ></i>
+                            <i class="bi bi-trash-fill"
+                             style="color:red"
+                                (click) = "onDelete(projects)"                            
+                             ></i>
                     </div> 
                 </div>            
             </div>        

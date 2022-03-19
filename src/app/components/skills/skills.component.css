@@ -27,6 +27,7 @@
     font-size:smaller;
   }
 
+  
   .row{
     margin:50px;
   }
@@ -37,4 +38,25 @@
     
     display: flex;
   }
-  
+
+
+#chart-container {
+  position: relative;
+}
+
+#canvas {
+  position: relative;
+  z-index: 1;
+}
+
+#buttons {
+  max-height: 90%;;
+  margin: auto;
+  bottom: 6px;
+  position: absolute;
+  z-index: 2;
+}
+
+#buttons i:hover{
+  opacity: 0.5;
+}

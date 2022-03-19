@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Experience } from 'src/app/models/experience';
 import { PortfolioService } from 'src/app/servicios/portfolio.service';
 
 @Component({
@@ -16,5 +17,13 @@ export class ExperienciaComponent implements OnInit {
       //console.log(data.education);
       this.experienceList = data.experience;
     });
+  }
+
+  onDelete(experience: Experience){
+    console.log("Delete");
+  }
+
+  onUpdate(experience: Experience){
+    console.log("Update");
   }
 }

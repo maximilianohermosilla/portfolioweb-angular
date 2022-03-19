@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Education } from 'src/app/models/education';
 import { PortfolioService } from 'src/app/servicios/portfolio.service';
 
 @Component({
@@ -12,9 +13,16 @@ export class EducacionComponent implements OnInit {
   constructor(private servPortfolio: PortfolioService) { }
 
   ngOnInit(): void {
-    this.servPortfolio.obtenerDatos().subscribe(data =>{
-      console.log(data.education);
+    this.servPortfolio.obtenerDatos().subscribe(data =>{      
       this.educationList = data.education;
     });
+  }
+
+  onDelete(education: Education){
+    console.log("Delete");
+  }
+
+  onUpdate(education: Education){
+    console.log("Update");
   }
 }

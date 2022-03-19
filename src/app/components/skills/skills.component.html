@@ -13,8 +13,26 @@
     <div class="col-3"*ngFor="let skill of skillsList"> 
         <a>{{skill.name}}: {{skill.score}}% </a>
 
-        <div class="chart-container" >
-            <canvas id="chart{{skill.id}}"></canvas>
+        <div id="chart-container" class="chart-container" >
+
+                <div id="canvas">
+                    <canvas id="chart{{skill.id}}"> </canvas>
+                </div>
+
+                <div id="buttons">
+                    <i class="bi bi-pencil-fill"
+                        style="color:#65cd23;
+                         margin-right: 10px"
+                        (click) = "onUpdate(skill)"
+                    ></i>
+                    <i class="bi bi-trash-fill"
+                        style="color:red"
+                        (click) = "onDelete(skill)"                            
+                    ></i>                    
+                </div>    
+            
+            
         </div>        
+        
     </div>
 </div>

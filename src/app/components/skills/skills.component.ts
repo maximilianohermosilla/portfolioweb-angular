@@ -1,5 +1,6 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { Chart } from 'chart.js';
+import { Skill } from 'src/app/models/skill';
 import { PortfolioService } from 'src/app/servicios/portfolio.service';
 
 @Component({
@@ -18,12 +19,15 @@ export class SkillsComponent implements OnInit {
   constructor(private servPortfolio: PortfolioService) {  }
   
   ngOnInit(): void { 
-    this.servPortfolio.obtenerDatos().subscribe(data =>{
+    this.servPortfolio.getPortfolio().subscribe(data =>{
+      console.log(data);
       this.skillsList = data.skills; 
     });
     setTimeout(()=>{                         
       this.getCharts();
     }, 500);
+
+    console.log(Object.values(this.skillsList));
   }
 
   getCharts(){
@@ -125,6 +129,14 @@ export class SkillsComponent implements OnInit {
       data: data
     });   
     
+  }
+
+  onDelete(skill: Skill){
+    console.log("Delete");
+  }
+
+  onUpdate(skill: Skill){
+    console.log("Update");
   }
 
 }
