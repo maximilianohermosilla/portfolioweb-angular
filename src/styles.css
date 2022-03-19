@@ -37,7 +37,7 @@
   }
 
   .contenedor img:hover{
-    opacity: 0.5;
+    opacity: 0.8;
     background-color:rgb(105, 103, 103,0.1);
   }
 
@@ -59,6 +59,13 @@
     margin-left: 40px;
     bottom: 0px;
     width: 180px;
+  }
+
+  #lapiz{
+    color: white;
+    position: absolute;
+    margin-left: 110px;
+    margin-bottom: 100px
   }
 
   .data{      
