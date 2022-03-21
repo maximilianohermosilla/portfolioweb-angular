@@ -16,6 +16,11 @@ import { NgChartsModule } from 'ng2-charts';
 import { ButtonComponent } from './components/button/button.component';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
+import { ColorPickerModule } from 'ngx-color-picker';
+import { PortfolioComponent } from './components/portfolio/portfolio.component';
+import { ModuloComponent } from './components/modulo/modulo.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { ModuloItemComponent } from './components/modulo-item/modulo-item.component';
 
 const routes: Routes = [
   {path: '', component:HeaderComponent },
@@ -33,13 +38,18 @@ const routes: Routes = [
     SkillsComponent,
     ProyectosComponent,
     LoginComponent,
-    ButtonComponent
+    ButtonComponent,
+    PortfolioComponent,
+    ModuloComponent,
+    FooterComponent,
+    ModuloItemComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     NgChartsModule,
     FormsModule,
+    ColorPickerModule,
     RouterModule.forRoot(routes, {enableTracing: true})
   ],
   providers: [],

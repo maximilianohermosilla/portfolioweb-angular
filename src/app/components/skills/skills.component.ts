@@ -3,6 +3,7 @@ import { Chart } from 'chart.js';
 import { Skill } from 'src/app/models/skill';
 import { PortfolioService } from 'src/app/servicios/portfolio.service';
 
+
 @Component({
   selector: 'app-skills',
   templateUrl: './skills.component.html',
@@ -136,7 +137,7 @@ export class SkillsComponent implements OnInit {
   }
 
   onUpdate(skill: Skill){
-    console.log("Update");
+    console.log("Update ", skill.id);
   }
 
 }

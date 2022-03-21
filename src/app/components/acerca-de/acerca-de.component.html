@@ -1,13 +1,20 @@
+<div class="banner">
+    <div class="banner-background" role="banner"> </div> 
+  </div>
 <div class="contenedor">
     
+    
     <img [src]="miPortfolio.profilePhoto"> 
-    <i class="bi bi-pencil" id="lapiz"         
+    <i class="bi bi-upload" id="lapiz"    
          (click)="onUpdate(miPortfolio)"
+         *ngIf="editMode"
          ></i>
     <div class="content">
         <i class="bi bi-pencil-square"
+        [ngStyle]="{'color': color}"
+         [ngStyle]="{'background-color': '{{color}}'}"    
          style="color: green"
-         (click)="onUpdate(miPortfolio)"
+         (click)="toggleEdit(miPortfolio)"
          ></i>
     </div>     
 </div>
@@ -25,9 +32,11 @@
     <div class="col-1"> 
          <div class="contenedor">
             <i class="bi bi-pencil-fill"
+            data-bs-toggle="modal" data-bs-target="#dataModal"
                              style="
                               margin-right: 10px"
                               (click) = "onUpdate(miPortfolio)"
+                              *ngIf="editMode"
                               ></i>
          </div>               
     </div>
@@ -38,33 +47,35 @@
     <div class="col-5">
         
             <div class="row align-items-center" id="card">
-                <div class="col-sm">
+                <div class="col-5">
                     <img src="{{miPortfolio.company.img}}" class="logo">
                 </div>
-                <div class="col-sm">
-                    <h5>{{miPortfolio.company.name}}</h5>
+                <div class="col-4">
+                    <h6>{{miPortfolio.company.name}}</h6>
                 </div> 
-                <div class="col-sm">
+                <div class="col-1">
                     <div class="contenedor">
                         <i class="bi bi-pencil-fill"
                         style="margin-right: 10px"
                         (click) = "onUpdate(miPortfolio)"
+                        *ngIf="editMode"
                         ></i>  
                     </div>                    
                 </div>     
             </div>
             <div class="row align-items-center" id="card">
-                <div class="col-sm">
+                <div class="col-5">
                     <img src="{{miPortfolio.school.img}}" class="logo">
                 </div>
-                <div class="col-sm">
-                    <h5>{{miPortfolio.school.name}}</h5>
+                <div class="col-4">
+                    <h6>{{miPortfolio.school.name}}</h6>
                 </div>  
-                <div class="col-sm">
+                <div class="col-1">
                     <div class="contenedor">
                         <i class="bi bi-pencil-fill"
                         style="margin-right: 10px"
                         (click) = "onUpdate(miPortfolio)"
+                        *ngIf="editMode"
                         ></i>  
                     </div>  
                 </div> 

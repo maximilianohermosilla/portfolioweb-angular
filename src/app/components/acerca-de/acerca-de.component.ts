@@ -10,6 +10,8 @@ import { LoginComponent } from '../login/login.component';
 })
 export class AcercaDeComponent implements OnInit {
   miPortfolio: any;
+  editMode: boolean= false;
+  color="";
 
   constructor(private servPortfolio: PortfolioService) { }
 
@@ -23,6 +25,12 @@ export class AcercaDeComponent implements OnInit {
     console.log("Editando datos "+portfolio.id);
     return this.servPortfolio.updatePortfolio(portfolio);
     
+  }
+
+  toggleEdit(portfolio: Portfolio){
+    this.editMode=!this.editMode;
+    this.editMode ?  this.color="#D4EFDF": this.color="green";
+    console.log("Edit mode: "+ this.editMode +" " + this.color)
   }
 
   
