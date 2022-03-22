@@ -21,14 +21,11 @@ export class SkillsComponent implements OnInit {
   
   ngOnInit(): void { 
     this.servPortfolio.getPortfolio().subscribe(data =>{
-      console.log(data);
       this.skillsList = data.skills; 
     });
     setTimeout(()=>{                         
       this.getCharts();
     }, 500);
-
-    console.log(Object.values(this.skillsList));
   }
 
   getCharts(){
@@ -44,7 +41,6 @@ export class SkillsComponent implements OnInit {
         this.chartFactory();          
       });        
     });
-    //console.log(this.charts);
   }  
 
   createChart(id:number, name:string, score:number, color:string): any{
@@ -89,7 +85,15 @@ export class SkillsComponent implements OnInit {
     });
   }
 
+  onDelete(skill: Skill){
+    console.log("Delete");
+  }
 
+  onUpdate(skill: Skill){
+    console.log("Update ", skill.id);
+  }
+
+/*
   getChartBarra(){
     var data = {
       labels: [".NET", "Java", "HTML", "CSS", "JavaScript", "Angular", "SpringBoot"],
@@ -130,14 +134,8 @@ export class SkillsComponent implements OnInit {
       data: data
     });   
     
-  }
+  }*/
 
-  onDelete(skill: Skill){
-    console.log("Delete");
-  }
-
-  onUpdate(skill: Skill){
-    console.log("Update ", skill.id);
-  }
+  
 
 }

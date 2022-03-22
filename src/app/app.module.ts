@@ -14,7 +14,7 @@ import { HttpClientModule } from '@angular/common/http'
 import { Chart } from 'chart.js';
 import { NgChartsModule } from 'ng2-charts';
 import { ButtonComponent } from './components/button/button.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { PortfolioComponent } from './components/portfolio/portfolio.component';
@@ -50,6 +50,8 @@ const routes: Routes = [
     NgChartsModule,
     FormsModule,
     ColorPickerModule,
+    FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot(routes, {enableTracing: true})
   ],
   providers: [],

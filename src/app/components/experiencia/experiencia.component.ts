@@ -1,5 +1,6 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, NgIterable } from '@angular/core';
 import { Experience } from 'src/app/models/experience';
+import { Portfolio } from 'src/app/models/portfolio';
 import { PortfolioService } from 'src/app/servicios/portfolio.service';
 
 @Component({
@@ -8,13 +9,19 @@ import { PortfolioService } from 'src/app/servicios/portfolio.service';
   styleUrls: ['../../../styles.css']
 })
 export class ExperienciaComponent implements OnInit {
+  @Input()
+  list: NgIterable<any> = [];
   @Output() onUpdateExperience: EventEmitter<Experience> = new EventEmitter();
   @Output() onInsertExperience: EventEmitter<Experience> = new EventEmitter();
   @Output() onDeleteExperience: EventEmitter<Experience> = new EventEmitter();
 
   title="";
+  color="";
   newExperience: boolean = false;
   experienceList: any;
+  editMode: boolean= false;
+  
+
   experiencia: Experience =  {
     id:0,
     position:"",
@@ -27,7 +34,7 @@ export class ExperienciaComponent implements OnInit {
     ubication:""
   }
 
-  constructor(private servPortfolio: PortfolioService, ) { }
+  constructor(private servPortfolio: PortfolioService) { }
 
   ngOnInit(): void {
     /*this.servPortfolio.getPortfolio().subscribe(data =>{      
@@ -36,7 +43,17 @@ export class ExperienciaComponent implements OnInit {
     this.servPortfolio.getExperiencia().subscribe(data =>{       
       this.experienceList = data;
     });
+    setTimeout(()=>{                         
+      console.log(this.list);
+    }, 500);
   }
+
+  toggleEdit(experience: Experience){
+    this.editMode=!this.editMode;
+    this.editMode ?  this.color="#D4EFDF": this.color="green";
+    //console.log("Edit mode experience: "+ this.editMode +" " + this.color)
+  }
+
 
   onDelete(experience: Experience){    
     console.log("Delete");

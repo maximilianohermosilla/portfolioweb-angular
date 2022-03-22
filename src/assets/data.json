@@ -181,7 +181,7 @@
     {
       "id": "2",
       "position": "Data Entry",
-      "company": "AdeA SA",
+      "company": "AdeA Administradora de archivos SA",
       "img": "/assets/adea.gif",
       "mode": "Jornada Completa",
       "start": "2013-07-24",
@@ -192,7 +192,7 @@
     {
       "id": "21",
       "position": "Electricista",
-      "company": "IDEK",
+      "company": "IDEK Electricidad",
       "img": "/assets/adea.gif",
       "mode": "Jornada Completa",
       "start": "2011-01-01",
@@ -203,24 +203,13 @@
     {
       "id": "RAe9gqR",
       "position": "Atencion al cliente",
-      "company": "Locutorio La Plaza",
+      "company": "Cybercafe Locutorio La Plaza",
       "img": "/assets/adea.gif",
       "mode": "Jornada Completa",
       "start": "2010-01-01",
       "end": "2011-01-01",
       "timeElapsed": "1 año",
       "ubication": "Buenos Aires (Argentina)"
-    },
-    {
-      "id": "LM3aC8r",
-      "position": "",
-      "company": "",
-      "img": "",
-      "mode": "",
-      "start": "",
-      "end": "",
-      "timeElapsed": "",
-      "ubication": ""
     }
   ],
   "education": [

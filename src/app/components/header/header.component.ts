@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { Portfolio } from 'src/app/models/portfolio';
 import { PortfolioService } from 'src/app/servicios/portfolio.service';
+import { UiServiceService } from 'src/app/servicios/ui-service.service';
 import { ButtonComponent } from '../button/button.component';
 
 
@@ -9,19 +12,41 @@ import { ButtonComponent } from '../button/button.component';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  miPortfolio: any;
+  miPortfolio: Portfolio = {
+    name: '',
+    profilePhoto: '',
+    image: '',
+    position: '',
+    ubication: '',
+    about: '',
+    company: {name:'', img:'', url:''},
+    school: {name:'', img:'', url:''},
+    experience: [],
+    education: [],
+    skills: [],
+    projects: []
+  };
+  showLogin: boolean = false;
+  subscription? : Subscription;
 
-  constructor(private servPortfolio: PortfolioService) { }
+  constructor(private servPortfolio: PortfolioService, private uiService: UiServiceService) {
+    this.subscription = this.uiService.onToggleSession().subscribe( data =>
+        this.showLogin = data   
+      );
+   }
 
   ngOnInit(): void {
     this.servPortfolio.obtenerDatos().subscribe(data =>{
-      //console.log(data);
-      this.miPortfolio = data;
+      this.miPortfolio = data;      
     });
   }
 
   startLogin(){
     console.log("button click!");
+  }
+
+  toggleLogin(){
+    this.uiService.toggleSession();
   }
 
 }

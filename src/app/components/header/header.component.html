@@ -30,14 +30,45 @@
         </svg>
       </a>-->
       <a aria-label="YouTube" target="_blank" rel="noopener" href="https://www.youtube.com/channel/UCNJsVAeFoJXx_2bBiePAxIA" title="YouTube">
-        <svg id="youtube-logo" height="24" width="24" data-name="Logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#fff">
+        <svg id="youtube-logo" height="24" width="48" data-name="Logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#fff">
           <path d="M0 0h24v24H0V0z" fill="none"/>
           <path d="M21.58 7.19c-.23-.86-.91-1.54-1.77-1.77C18.25 5 12 5 12 5s-6.25 0-7.81.42c-.86.23-1.54.91-1.77 1.77C2 8.75 2 12 2 12s0 3.25.42 4.81c.23.86.91 1.54 1.77 1.77C5.75 19 12 19 12 19s6.25 0 7.81-.42c.86-.23 1.54-.91 1.77-1.77C22 15.25 22 12 22 12s0-3.25-.42-4.81zM10 15V9l5.2 3-5.2 3z"/>
         </svg>
       </a>
-      <a href="#modalLogin" aria-label="Logine" target="_blank" rel="noopener" title="Login" style="margin-right:10px; width:125px">
-         <!-- <button class="btn btn-success btn" style="height: 40px; width:120px">Iniciar Sesion</button>  -->
-        <app-button text="Iniciar Sesion" ></app-button>
-      </a>      
+      <!-- <a href="#modalLogin" aria-label="Logine" target="_blank" rel="noopener" title="Login" style="margin-right:10px; width:125px"> -->
+        <!-- <button class="btn btn-success btn" style="height: 40px; width:120px" data-bs-toggle="loginModal" data-bs-target="#loginModal">Iniciar Sesion</button> -->
+        <!-- <app-button text="Iniciar Sesion" ></app-button>
+      </a>       -->
+      <app-button style="margin-right: 10px;"
+        icon = "{{showLogin ? 'btn-warning btn-lg': 'btn-success btn-lg'}}"
+        color="white"
+        text="{{showLogin ? 'Cerrar Sesion': 'Iniciar Sesion'}}"
+        type="button"
+        data-bs-toggle="modal" data-bs-target="#loginModal"
+      >
+
+      </app-button>
   </div>
+
+  <!-- MODAL -->
+<div class="modal" id="loginModal" >
+    
+  <div class="modal-dialog" >
+      <div class="modal-content">
+          <div class="modal-header">            
+              <h5 class="modal-title" id="staticBackdropLabel">Iniciar Sesión</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      
+          <div class="modal-body">
+
+            <app-login></app-login>
+
+          </div>
+          
+      </div>
+
+  </div>
+
+</div>
 

@@ -9,7 +9,20 @@ import { LoginComponent } from '../login/login.component';
   styleUrls: ['./acerca-de.component.css']
 })
 export class AcercaDeComponent implements OnInit {
-  miPortfolio: any;
+  miPortfolio: Portfolio = {
+    name: '',
+    profilePhoto: '',
+    image: '',
+    position: '',
+    ubication: '',
+    about: '',
+    company: {name:'', img:'', url:''},
+    school: {name:'', img:'', url:''},
+    experience: [],
+    education: [],
+    skills: [],
+    projects: []
+  };
   editMode: boolean= false;
   color="";
 
@@ -22,7 +35,6 @@ export class AcercaDeComponent implements OnInit {
   }
 
   onUpdate(portfolio: Portfolio){
-    console.log("Editando datos "+portfolio.id);
     return this.servPortfolio.updatePortfolio(portfolio);
     
   }
@@ -30,7 +42,6 @@ export class AcercaDeComponent implements OnInit {
   toggleEdit(portfolio: Portfolio){
     this.editMode=!this.editMode;
     this.editMode ?  this.color="#D4EFDF": this.color="green";
-    console.log("Edit mode: "+ this.editMode +" " + this.color)
   }
 
   
