@@ -1,8 +1,14 @@
 <div class="row" style="margin:50px">
     <div class="col">
         <h1 class="rounded float-start"><i class="bi bi-mortarboard" style="color: rgb(51, 146, 230)"></i> Educación</h1>            
-        <span class="rounded float-end"><i class="bi bi-plus-square" style="color:green;"></i></span>
-        <span class="rounded float-end"><i class="bi bi-pencil-square" style="color:green"></i></span>
+        <span class="rounded float-end"><i class="bi bi-plus-square"
+                                        style="color:green;"
+                                        (click) = "clearEducation()"
+                                        data-bs-toggle="modal" data-bs-target="#educationModal"
+                                        ></i></span>
+        <span class="rounded float-end"><i class="bi bi-pencil-square"
+                                        style="color:green"                                                                                
+                                        ></i></span>
     </div>
 </div>
 
@@ -23,7 +29,8 @@
                     <div class="contenedor">
                         <i class="bi bi-pencil-fill"
                              style="margin-right: 10px"
-                              (click) = "onUpdate(education)"
+                              (click) = "setEducation(education)"
+                              data-bs-toggle="modal" data-bs-target="#educationModal"
                               ></i>
                             <i class="bi bi-trash-fill"
                              style="color:red"
@@ -36,3 +43,97 @@
     </div>
 </li>
 </ul>
+
+<div class="modal" id="educationModal" >
+                
+    <div class="modal-dialog" >
+        <div class="modal-content">
+            <div class="modal-header">            
+                <h5 class="modal-title" id="staticBackdropLabel">{{newEducation ? 'Nueva Educación': 'Editar Educación'}}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        
+            <div class="modal-body">
+                
+                <form [formGroup]="formGroup"
+                    (ngSubmit)="onSubmit(educacion)"
+                    >
+                    <div class="form-group">
+                        <label for="school">Institución</label>
+                        <input class="form-control"
+                            type="text" 
+                            formControlName="school" 
+                            id="school" 
+                            placeholder="{{educacion.school}}"
+                            [(ngModel)]="educacion.school"
+                        />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="title">Título</label>
+                        <input class="form-control"
+                            type="title" 
+                            formControlName="title" 
+                            id="title" 
+                            placeholder="{{educacion.title}}"
+                            [(ngModel)]="educacion.title"
+                        />
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="career">Carrera</label>
+                        <input class="form-control"
+                            type="text" 
+                            formControlName="career" 
+                            id="career" 
+                            placeholder="{{educacion.career}}" 
+                            [(ngModel)]="educacion.career"
+                        />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="score">Promedio</label>
+                        <input class="form-control"
+                            type="text" 
+                            formControlName="score" 
+                            id="score" 
+                            placeholder="{{educacion.score}}" 
+                            [(ngModel)]="educacion.score"
+                        />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="start">Desde</label>
+                        <input class="form-control"
+                            type="text" 
+                            formControlName="start" 
+                            id="start" 
+                            placeholder="{{educacion.start}}"
+                            [(ngModel)]="educacion.start"
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label for="end">Hasta</label>
+                        <input class="form-control"
+                            type="text" 
+                            formControlName="end" 
+                            id="end" 
+                            placeholder="{{educacion.end}}"
+                            [(ngModel)]="educacion.end"
+                        />
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Guardar</button>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Salir</button>
+                    </div>
+                </form> 
+            
+
+            </div>
+
+            
+        </div>
+
+</div>
+</div>

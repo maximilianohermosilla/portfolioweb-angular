@@ -1,6 +1,6 @@
 export interface Education{
     id?: number,
-    name: string,
+    school: string,
     title: string,
     image: string,
     career: string,

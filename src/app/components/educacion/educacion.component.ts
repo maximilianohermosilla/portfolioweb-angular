@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Education } from 'src/app/models/education';
 import { PortfolioService } from 'src/app/servicios/portfolio.service';
 
@@ -8,9 +9,23 @@ import { PortfolioService } from 'src/app/servicios/portfolio.service';
   styleUrls: ['../../../styles.css']
 })
 export class EducacionComponent implements OnInit {
+  formGroup: FormGroup;
   educationList: any;
+  title: string = "";
+  newEducation: boolean = false;
+  educacion: Education = this.clearEducation();
 
-  constructor(private servPortfolio: PortfolioService) { }
+  constructor(private servPortfolio: PortfolioService, private formBuilder: FormBuilder) { 
+    this.formGroup = this.formBuilder.group({
+      school: ['',[]],
+      title: ['',[]],
+      image: ['',[]],
+      career: ['',[]],
+      score: ['',[]],
+      start: ['',[]],
+      end: ['',[]]
+    })
+  }
 
   ngOnInit(): void {
     this.servPortfolio.obtenerDatos().subscribe(data =>{      
@@ -18,11 +33,39 @@ export class EducacionComponent implements OnInit {
     });
   }
 
+  onSubmit(education: Education){
+
+  }
+
   onDelete(education: Education){
     console.log("Delete");
   }
 
-  onUpdate(education: Education){
-    console.log("Update");
+  setEducation(education: Education){ 
+    this.educacion={
+      school: education.school,
+      title: education.title,
+      image: education.image,
+      career: education.career,
+      score: education.score,
+      start: education.start,
+      end: education.end
+    }  
+    this.newEducation = false;    
+  }
+
+  clearEducation(): Education{
+    this.educacion =  {
+      school: '',
+      title: '',
+      image: '',
+      career: '',
+      score: '',
+      start: '',
+      end: ''
+    }
+    this.newEducation = true;
+    return this.educacion;
+
   }
 }
