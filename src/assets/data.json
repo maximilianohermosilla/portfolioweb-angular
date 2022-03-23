@@ -1,10 +1,10 @@
 {
   "portfolio": {
     "id": "1",
-    "name": "Hermosilla Andrés Maximiliano",
+    "name": "Hermosilla Andres Maximiliano",
     "profilePhoto": "https://argentinaprograma.inti.gob.ar/pluginfile.php/4011/user/icon/moove/f1?rev=54850",
     "image": "https://www.unaj.edu.ar/wp-content/uploads/2016/06/logo-unaj-2016-01.jpg",
-    "position": "Full Stack Developer Jr.",
+    "position": "Full Stack Developer Jr",
     "ubication": "Florencio Varela, Buenos Aires (Argentina)",
     "about": "Full Stack Developer Jr",
     "company": {
@@ -203,7 +203,7 @@
     {
       "id": "RAe9gqR",
       "position": "Atencion al cliente",
-      "company": "Cybercafe Locutorio La Plaza",
+      "company": "Locutorio La Plaza",
       "img": "/assets/adea.gif",
       "mode": "Jornada Completa",
       "start": "2010-01-01",
@@ -258,20 +258,20 @@
     {
       "id": "1",
       "name": ".NET",
-      "score": "87",
-      "color": "blue"
+      "score": "88",
+      "color": "#1460e3"
     },
     {
       "id": "2",
       "name": "Java",
-      "score": "70",
-      "color": "green"
+      "score": "73",
+      "color": "#22b049"
     },
     {
       "id": "3",
       "name": "SQL",
-      "score": "80",
-      "color": "yellow"
+      "score": "83",
+      "color": "#ffdc50"
     },
     {
       "id": "4",
@@ -282,32 +282,32 @@
     {
       "id": "6",
       "name": "Python",
-      "score": "30",
-      "color": "lightblue"
+      "score": "43",
+      "color": "#0c867c"
     },
     {
       "id": "7",
       "name": "Javascript",
-      "score": "70",
-      "color": "orange"
+      "score": "78",
+      "color": "#b20038"
     },
     {
       "id": "9",
       "name": "HTML",
       "score": "65",
-      "color": "pink"
+      "color": "#710000"
     },
     {
       "id": "11",
       "name": "CSS",
-      "score": "55",
+      "score": "59",
       "color": "limegreen"
     },
     {
       "id": "12",
       "name": "MySQL",
-      "score": "75",
-      "color": "orange"
+      "score": "77",
+      "color": "#17a6cb"
     },
     {
       "id": "13",

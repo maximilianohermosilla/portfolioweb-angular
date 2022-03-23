@@ -54,21 +54,37 @@
 <div class="modal" id="loginModal" >
     
   <div class="modal-dialog" >
-      <div class="modal-content">
+      <div class="modal-content" [ngSwitch]="showLogin">
           <div class="modal-header">            
-              <h5 class="modal-title" id="staticBackdropLabel">Iniciar Sesión</h5>
+              <h5 class="modal-title" id="staticBackdropLabel">{{showLogin ? 'Cerrar Sesión': 'Iniciar Sesión'}}</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      
-          <div class="modal-body">
-
-            <app-login></app-login>
-
           </div>
+
+          <div class="modal-body" *ngSwitchCase="true" style="margin-bottom:100px">
+            <form
+            (ngSubmit)="toggleLogin()" 
+            >
+              <div class="form-group">
+                <div class="content">
+                  <h3>¿Desea cerrar la sesión?</h3>   
+                  <h1></h1>       
+                <button type="submit" class="btn-success btn-lg" data-bs-dismiss="modal">Confirmar</button>    
+                </div>
+              </div>
+            </form> 
+          </div>
+      
+          <div class="modal-body" *ngSwitchCase="false">
+            <app-login
+              (btnSubmit) = "toggleLogin()"
+              data-bs-dismiss="modal"
+            ></app-login>
+          </div>
+
+          
+
           
       </div>
-
   </div>
-
 </div>
 

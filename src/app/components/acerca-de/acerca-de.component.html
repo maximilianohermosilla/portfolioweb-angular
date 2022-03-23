@@ -105,8 +105,53 @@
         </div>
         
             <div class="modal-body">
-                
-                <form
+                <form [formGroup]="formGroup"
+                    (ngSubmit)="onUpdate(miPortfolio)"
+                    >
+                    <div class="form-group">
+                        <label for="name">Nombre y Apellido</label>
+                        <input class="form-control"
+                            type="text" 
+                            formControlName = "name"
+                            placeholder="Ingrese Nombre" 
+                            [(ngModel)]="miPortfolio.name"
+                        />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="position">Posicion</label>
+                        <input class="form-control"
+                            type="text" 
+                            formControlName="position" 
+                            placeholder="Ingrese Ocupación"
+                            [(ngModel)]="miPortfolio.position"
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label for="ubication">Ubicacion</label>
+                        <input class="form-control"
+                            type="text" 
+                            formControlName="ubication" 
+                            placeholder="Ingrese Ubicacion"
+                            [(ngModel)]="miPortfolio.ubication"
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label for="about">Descripcion</label>
+                        <input class="form-control"
+                            type="text" 
+                            formControlName="about" 
+                            placeholder="Descripcion"
+                            [(ngModel)]="miPortfolio.about"
+                        />
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Guardar</button>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Salir</button>
+                    </div>
+                </form>
+                <!--<form
                     (ngSubmit)="onUpdate(miPortfolio)"
                     >
                     <div class="form-group">
@@ -151,7 +196,7 @@
                         <button type="submit" class="btn btn-success">Guardar</button>
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Salir</button>
                     </div>
-                </form> 
+                </form> -->
             
 
             </div>

@@ -1,5 +1,7 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnDestroy, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Chart } from 'chart.js';
+import { Subscription } from 'rxjs';
 import { Skill } from 'src/app/models/skill';
 import { PortfolioService } from 'src/app/servicios/portfolio.service';
 
@@ -9,19 +11,41 @@ import { PortfolioService } from 'src/app/servicios/portfolio.service';
   templateUrl: './skills.component.html',
   styleUrls: ['./skills.component.css']
 })
-export class SkillsComponent implements OnInit {
-  skillsList: any;
+export class SkillsComponent implements OnInit, OnDestroy {
+  formGroup: FormGroup;
+  subscription: Subscription = new Subscription();
+
+  skillsList: Skill[] = [];
+  skillItem: Skill={
+    name: '',
+    score: 0,
+    color: ''
+  }
   charts: any[] = [];
   myChart;
   nombre;
   _data;
   _options;
 
-  constructor(private servPortfolio: PortfolioService) {  }
+  constructor(private servPortfolio: PortfolioService, private formBuilder: FormBuilder) {  
+    this.formGroup = this.formBuilder.group({
+      name: ['',[]],
+      score: ['',[]],
+      color: ['',[]],
+    })
+  }
   
   ngOnInit(): void { 
-    this.servPortfolio.getPortfolio().subscribe(data =>{
-      this.skillsList = data.skills; 
+    this.getSkills();
+  }
+
+  ngOnDestroy(): void{
+    this.subscription.unsubscribe();
+  }
+
+  getSkills(){
+    this.servPortfolio.getSkills().subscribe(data =>{
+      this.skillsList = data; 
     });
     setTimeout(()=>{                         
       this.getCharts();
@@ -30,20 +54,22 @@ export class SkillsComponent implements OnInit {
 
   getCharts(){
     var i=0;
-    this.servPortfolio.obtenerDatos().subscribe(data =>{
-      data.skills.forEach(element => {
-        this.charts.push(this.createChart(element.id, element.name, element.score, element.color));
+    this.servPortfolio.getSkills().subscribe(data =>{
+      data.forEach(element => {
+        this.charts.push(this.createChart(element.name, element.score, element.color, element.id));
         this._data = this.charts[i].data;
         this._options = this.charts[i].option;
         this.nombre="chart"+element.id;
         i++;
-
         this.chartFactory();          
       });        
     });
   }  
 
-  createChart(id:number, name:string, score:number, color:string): any{
+  createChart(name:string, score:number, color:string, id?:number): any{
+    if (this.myChart instanceof Chart) {
+      this.myChart.destroy();
+    }
     var data;
     var option;
     data = {
@@ -63,11 +89,7 @@ export class SkillsComponent implements OnInit {
     option = {
       responsive: true,
     };    
-    var nombre="chart"+id;
-
-    if (this.myChart) {
-      this.myChart.destroy();
-    }
+    var nombre="chart"+id;   
 
     var datos = { data, option }
     return datos;
@@ -90,8 +112,14 @@ export class SkillsComponent implements OnInit {
   }
 
   onUpdate(skill: Skill){
-    console.log("Update ", skill.id);
+    this.servPortfolio.updateSkill(skill).subscribe();       
+    this.ngOnInit();  
+    window.location.reload(); 
   }
+
+  onClick(skill: Skill){
+    this.skillItem = skill;
+  }  
 
 /*
   getChartBarra(){

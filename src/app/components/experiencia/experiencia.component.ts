@@ -46,6 +46,7 @@ export class ExperienciaComponent implements OnInit {
     setTimeout(()=>{                         
       console.log(this.list);
     }, 500);
+    console.log(this.experienceList>0);
   }
 
   toggleEdit(experience: Experience){

@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subject, } from 'rxjs';
 import { Chart } from 'chart.js';
 import { Portfolio } from '../models/portfolio';
 import { PORTFOLIOS } from '../models/mock-portfolio';
 import { Skill } from '../models/skill';
 import { Experience } from '../models/experience';
+import { tap } from 'rxjs/operators'
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -18,32 +19,46 @@ const httpOptions = {
 })
 export class PortfolioService {
 
+  private _refresh$ = new Subject<void>();
+
   private url= 'https:localhost:5001/'
   private apiUrl = 'http://localhost:5001/portfolio'
   private urlExperience = 'http://localhost:5001/experience'
+  private urlEducacion = 'http://localhost:5001/educacion'
+  private urlSkills = 'http://localhost:5001/skills'
+  private urlProjects = 'http://localhost:5001/projects'
+
 
   constructor(private http:HttpClient) { }
 
+  get refresh$(){
+    return this._refresh$;
+  }
+
   obtenerDatos(): Observable<any>{
-    return this.http.get(this.apiUrl);
+    return this.http.get(this.apiUrl).pipe(
+      tap(() => {
+         this._refresh$.next();       
+      })
+    )
   }
 
   getPortfolio(): Observable<Portfolio>{
-    return this.http.get<Portfolio>(this.apiUrl);
+    return this.http.get<Portfolio>(this.apiUrl).pipe(
+      tap(() => {
+         this._refresh$.next();       
+      })
+    )
   }
 
   updatePortfolio(portfolio: Portfolio): Observable<Portfolio>{
-    //const url = `${this.apiUrl}/${portfolio.id}`
-    return this.http.post<Portfolio>(this.apiUrl, portfolio, httpOptions);
+    const url = `${this.apiUrl}/${portfolio.id}`
+    return this.http.put<Portfolio>(this.apiUrl, portfolio, httpOptions);
   }
 
   getExperiencia(): Observable<Experience[]>{
     return this.http.get<Experience[]>(this.urlExperience);
-  }
-
-  getSkills(): Observable<Skill[]>{
-    return this.http.get<Skill[]>(this.url+'skills');
-  }
+  } 
 
   updateExperience(experience: Experience): Observable<Experience>{
     const updateUrl = `${this.urlExperience}/${experience.id}`
@@ -58,4 +73,24 @@ export class PortfolioService {
     const deleteUrl = `${this.urlExperience}/${experience.id}`
     return this.http.delete<Experience>(deleteUrl);
   }
+
+
+
+
+  getSkills(): Observable<Skill[]>{
+    return this.http.get<Skill[]>(this.urlSkills);
+  }
+
+  updateSkill(skill: Skill){
+    const updateUrl = `${this.urlSkills}/${skill.id}`
+    return this.http.put<Skill>(updateUrl, skill, httpOptions).pipe(
+        tap(() => {
+           this._refresh$.next();       
+        })
+      )
+  }
+
+
+
+
 }

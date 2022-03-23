@@ -31,7 +31,7 @@ export class HeaderComponent implements OnInit {
 
   constructor(private servPortfolio: PortfolioService, private uiService: UiServiceService) {
     this.subscription = this.uiService.onToggleSession().subscribe( data =>
-        this.showLogin = data   
+        this.showLogin = data
       );
    }
 
@@ -45,7 +45,7 @@ export class HeaderComponent implements OnInit {
     console.log("button click!");
   }
 
-  toggleLogin(){
+  toggleLogin(){    
     this.uiService.toggleSession();
   }
 

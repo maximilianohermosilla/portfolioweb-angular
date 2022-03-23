@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { Portfolio } from 'src/app/models/portfolio';
 import { PortfolioService } from 'src/app/servicios/portfolio.service';
 import { LoginComponent } from '../login/login.component';
@@ -9,6 +11,8 @@ import { LoginComponent } from '../login/login.component';
   styleUrls: ['./acerca-de.component.css']
 })
 export class AcercaDeComponent implements OnInit {
+  formGroup: FormGroup;
+
   miPortfolio: Portfolio = {
     name: '',
     profilePhoto: '',
@@ -26,16 +30,28 @@ export class AcercaDeComponent implements OnInit {
   editMode: boolean= false;
   color="";
 
-  constructor(private servPortfolio: PortfolioService) { }
+  constructor(private servPortfolio: PortfolioService, private formBuilder: FormBuilder) {
+    this.formGroup = this.formBuilder.group({
+      name : ['',[]],
+      position : ['',[]],
+      ubication : ['',[]],
+      about : ['',[]]      
+    })
+   }
 
   ngOnInit(): void {
+    this.getPortfolio();
+  }
+
+  getPortfolio(){
     this.servPortfolio.obtenerDatos().subscribe(data =>{
       this.miPortfolio = data;
     });
   }
 
   onUpdate(portfolio: Portfolio){
-    return this.servPortfolio.updatePortfolio(portfolio);
+    this.servPortfolio.updatePortfolio(portfolio).subscribe();   
+    this.miPortfolio = portfolio;
     
   }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
@@ -7,7 +7,9 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  @Output() btnSubmit = new EventEmitter();
   form: FormGroup;
+  
 
   constructor(private formBuilder: FormBuilder) { 
     this.form = this.formBuilder.group({
@@ -20,7 +22,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(){
-
+    this.btnSubmit.emit();    
   }
 
 }
