@@ -72,14 +72,14 @@
                     
                         <div class="modal-body">
                             
-                            <form
+                            <form [formGroup]="formGroup"
                                 (ngSubmit)="onSubmit(experiencia)"
                                 >
                                 <div class="form-group">
                                     <label for="company">Empresa</label>
                                     <input class="form-control"
                                         type="text" 
-                                        name="company" 
+                                        formControlName="company" 
                                         id="company" 
                                         placeholder="{{experiencia.company}}"
                                         [(ngModel)]="experiencia.company"
@@ -90,7 +90,7 @@
                                     <label for="ubication">Ubicacion</label>
                                     <input class="form-control"
                                         type="text" 
-                                        name="ubication" 
+                                        formControlName="ubication" 
                                         id="ubication" 
                                         placeholder="{{experiencia.ubication}}"
                                         [(ngModel)]="experiencia.ubication"
@@ -102,7 +102,7 @@
                                     <label for="position">Posición</label>
                                     <input class="form-control"
                                         type="text" 
-                                        name="position" 
+                                        formControlName="position" 
                                         id="position" 
                                         placeholder="{{experiencia.position}}" 
                                         [(ngModel)]="experiencia.position"
@@ -113,7 +113,7 @@
                                     <label for="start">Desde</label>
                                     <input class="form-control"
                                         type="text" 
-                                        name="start" 
+                                        formControlName="start" 
                                         id="start" 
                                         placeholder="{{experiencia.start}}"
                                         [(ngModel)]="experiencia.start"
@@ -123,7 +123,7 @@
                                     <label for="end">Hasta</label>
                                     <input class="form-control"
                                         type="text" 
-                                        name="end" 
+                                        formControlName="end" 
                                         id="end" 
                                         placeholder="{{experiencia.end}}"
                                         [(ngModel)]="experiencia.end"
@@ -133,7 +133,7 @@
                                     <label for="timeElapsed">Tiempo Estimado</label>
                                     <input class="form-control"
                                         type="text" 
-                                        name="timeElapsed" 
+                                        formControlName="timeElapsed" 
                                         id="entimeElapsedd" 
                                         placeholder="{{experiencia.timeElapsed}}"
                                         [(ngModel)]="experiencia.timeElapsed"

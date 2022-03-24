@@ -57,8 +57,10 @@
     background-color: #03146a;
     background-size:100%;
     color: white;
+    
+    outline: 1px solid #111;
     font-weight: 600;
-    border-bottom:5px;
+    border-bottom:4px solid white;
     min-width: 664px;
     z-index: 100;
   }

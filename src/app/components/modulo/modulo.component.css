@@ -1,8 +1,7 @@
 .modulo{
     border: 1px solid rgba(0, 0, 0, 1);
     border-radius: 20px;
-    margin: 5px;
-    margin-bottom: 1em;
+    margin: 1em 0;    
     min-width: 640px;
     max-width: 100%;
     background-color: #FFF;

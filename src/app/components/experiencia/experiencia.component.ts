@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, Input, NgIterable } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Experience } from 'src/app/models/experience';
 import { Portfolio } from 'src/app/models/portfolio';
 import { PortfolioService } from 'src/app/servicios/portfolio.service';
@@ -9,32 +10,32 @@ import { PortfolioService } from 'src/app/servicios/portfolio.service';
   styleUrls: ['../../../styles.css']
 })
 export class ExperienciaComponent implements OnInit {
-  @Input()
-  list: NgIterable<any> = [];
+  @Input() list: NgIterable<any> = [];
   @Output() onUpdateExperience: EventEmitter<Experience> = new EventEmitter();
   @Output() onInsertExperience: EventEmitter<Experience> = new EventEmitter();
   @Output() onDeleteExperience: EventEmitter<Experience> = new EventEmitter();
+
+  formGroup: FormGroup;
 
   title="";
   color="";
   newExperience: boolean = false;
   experienceList: any;
-  editMode: boolean= false;
-  
+  editMode: boolean= false;  
+  experiencia: Experience = this.clearExperience();
 
-  experiencia: Experience =  {
-    id:0,
-    position:"",
-    company:"",
-    img:"",
-    mode:"",
-    start:"",
-    end:"",
-    timeElapsed:"",
-    ubication:""
-  }
-
-  constructor(private servPortfolio: PortfolioService) { }
+  constructor(private servPortfolio: PortfolioService, private formBuilder: FormBuilder) {
+    this.formGroup = this.formBuilder.group({
+      position : ['',[]],
+      company : ['',[]],
+      img : ['',[]],
+      mode : ['',[]],
+      start : ['',[]],
+      end : ['',[]],
+      timeElapsed : ['',[]],
+      ubication : ['',[]]            
+    })
+   }
 
   ngOnInit(): void {
     /*this.servPortfolio.getPortfolio().subscribe(data =>{      
@@ -43,30 +44,11 @@ export class ExperienciaComponent implements OnInit {
     this.servPortfolio.getExperiencia().subscribe(data =>{       
       this.experienceList = data;
     });
-    setTimeout(()=>{                         
-      console.log(this.list);
-    }, 500);
-    console.log(this.experienceList>0);
   }
 
   toggleEditMode(){
     this.editMode=!this.editMode;
     this.editMode ?  this.color="#D4EFDF": this.color="green";
-  }
-
-
-  onDelete(experience: Experience){    
-    console.log("Delete");
-    this.onDeleteExperience.emit(experience);
-    this.servPortfolio.deleteExperience(experience)
-      .subscribe(()=> {return (this.experienceList = this.experienceList.filter((t) => (t.id !== experience.id))
-          );
-        })
-  }
-
-  onSubmit(experience: Experience){
-    this.newExperience ? this.onInsert(experience): this.onUpdate(experience)
-    console.log(this.newExperience);
   }
 
   setExperience(experience: Experience){
@@ -99,7 +81,7 @@ export class ExperienciaComponent implements OnInit {
       ubication:""
     }
     this.title="Nueva Experiencia";
-    console.log("Clear: ", this.experiencia);
+    return this.experiencia;
   }
 
   onUpdate(experience: Experience){
@@ -127,5 +109,19 @@ export class ExperienciaComponent implements OnInit {
     this.servPortfolio.insertExperience(experience).subscribe((experience)=>(
       this.experienceList.push(experience)
     ))
+  }
+
+  onDelete(experience: Experience){    
+    console.log("Delete");
+    this.onDeleteExperience.emit(experience);
+    this.servPortfolio.deleteExperience(experience)
+      .subscribe(()=> {return (this.experienceList = this.experienceList.filter((t) => (t.id !== experience.id))
+          );
+        })
+  }
+
+  onSubmit(experience: Experience){
+    this.newExperience ? this.onInsert(experience): this.onUpdate(experience)
+    console.log(this.newExperience);
   }
 }

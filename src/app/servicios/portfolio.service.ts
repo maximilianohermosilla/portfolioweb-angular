@@ -7,6 +7,7 @@ import { PORTFOLIOS } from '../models/mock-portfolio';
 import { Skill } from '../models/skill';
 import { Experience } from '../models/experience';
 import { tap } from 'rxjs/operators'
+import { Education } from '../models/education';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -24,7 +25,7 @@ export class PortfolioService {
   private url= 'https:localhost:5001/'
   private apiUrl = 'http://localhost:5001/portfolio'
   private urlExperience = 'http://localhost:5001/experience'
-  private urlEducacion = 'http://localhost:5001/educacion'
+  private urlEducation = 'http://localhost:5001/education'
   private urlSkills = 'http://localhost:5001/skills'
   private urlProjects = 'http://localhost:5001/projects'
 
@@ -75,6 +76,26 @@ export class PortfolioService {
   }
 
 
+  getEducation(): Observable<Education[]>{
+    return this.http.get<Education[]>(this.urlEducation);
+  } 
+
+  updateEducation(education: Education): Observable<Education>{
+    console.log("servicio update: ", education);
+    const updateUrlEducation = `${this.urlEducation}/${education.id}`
+    return this.http.put<Education>(updateUrlEducation, education, httpOptions);
+  }
+
+  insertEducation(education: Education): Observable<Education>{
+    return this.http.post<Education>(this.urlEducation, education, httpOptions);
+  }
+
+  deleteEducation(education: Education): Observable<Education>{
+    const deleteUrl = `${this.urlEducation}/${education.id}`
+    return this.http.delete<Education>(deleteUrl);
+  }
+
+
 
 
   getSkills(): Observable<Skill[]>{
@@ -88,6 +109,15 @@ export class PortfolioService {
            this._refresh$.next();       
         })
       )
+  }
+
+  insertSkill(skill: Skill): Observable<Skill>{
+    return this.http.post<Skill>(this.urlSkills, skill, httpOptions);
+  }
+
+  deleteSkill(skill: Skill): Observable<Skill>{
+    const deleteUrl = `${this.urlSkills}/${skill.id}`
+    return this.http.delete<Skill>(deleteUrl);
   }
 
 

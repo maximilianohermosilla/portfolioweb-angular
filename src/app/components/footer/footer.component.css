@@ -50,6 +50,7 @@
     display: flex;
     align-items: center;
     line-height: 20px;
+    color: white;
   }
 
   footer a {

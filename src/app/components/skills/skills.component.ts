@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, OnDestroy, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Chart } from 'chart.js';
 import { Subscription } from 'rxjs';
@@ -12,6 +12,10 @@ import { PortfolioService } from 'src/app/servicios/portfolio.service';
   styleUrls: ['./skills.component.css']
 })
 export class SkillsComponent implements OnInit, OnDestroy {
+  @Output() onUpdateSkilln: EventEmitter<Skill> = new EventEmitter();
+  @Output() onInsertSkill: EventEmitter<Skill> = new EventEmitter();
+  @Output() onDeleteSkill: EventEmitter<Skill> = new EventEmitter();
+
   formGroup: FormGroup;
   subscription: Subscription = new Subscription();
   editMode: boolean = false;
@@ -25,6 +29,7 @@ export class SkillsComponent implements OnInit, OnDestroy {
   nombre;
   _data;
   _options;
+
 
   constructor(private servPortfolio: PortfolioService, private formBuilder: FormBuilder) {  
     this.formGroup = this.formBuilder.group({
@@ -104,17 +109,7 @@ export class SkillsComponent implements OnInit, OnDestroy {
       options: this._options,
       data: this._data
     });
-  }
-
-  onDelete(skill: Skill){
-    console.log("Delete");
-  }
-
-  onUpdate(skill: Skill){
-    this.servPortfolio.updateSkill(skill).subscribe();       
-    this.ngOnInit();  
-    window.location.reload(); 
-  }
+  }  
   
   toggleEditMode(){
     this.editMode = !this.editMode;
@@ -123,6 +118,7 @@ export class SkillsComponent implements OnInit, OnDestroy {
 
   clearSkill(): Skill{
     this.skillItem = {
+      id : 0,
       name: '',
       score: 0,
       color: ''
@@ -135,5 +131,35 @@ export class SkillsComponent implements OnInit, OnDestroy {
     this.skillItem = skill;
     this.newSkill = false;
   } 
+
+  onInsert(skill: Skill){
+    this.setSkill(skill);
+    skill.id=0;
+    //this.onInsertExperience.emit(experience);
+    this.servPortfolio.insertSkill(skill).subscribe((element)=>(
+      this.skillsList.push(element)
+    ))
+  }
+
+  onUpdate(skill: Skill){
+    this.servPortfolio.updateSkill(skill).subscribe();       
+    this.ngOnInit();  
+    window.location.reload(); 
+  }
+
+  onDelete(skill: Skill){  
+    this.onDeleteSkill.emit(skill);
+    this.servPortfolio.deleteSkill(skill)
+      .subscribe(()=> {return (this.skillsList = this.skillsList.filter((t) => (t.id !== skill.id))
+          );
+        })
+  }
+
+  onSubmit(skill: Skill){
+    this.newSkill ? this.onInsert(skill): this.onUpdate(skill)
+    console.log(this.newSkill);
+  }
+
+  
 
 }
