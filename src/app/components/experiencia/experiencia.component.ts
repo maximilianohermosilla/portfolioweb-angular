@@ -1,8 +1,10 @@
 import { Component, OnInit, Output, EventEmitter, Input, NgIterable } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { Experience } from 'src/app/models/experience';
 import { Portfolio } from 'src/app/models/portfolio';
 import { PortfolioService } from 'src/app/servicios/portfolio.service';
+import { UiServiceService } from 'src/app/servicios/ui-service.service';
 
 @Component({
   selector: 'app-experiencia',
@@ -10,7 +12,7 @@ import { PortfolioService } from 'src/app/servicios/portfolio.service';
   styleUrls: ['../../../styles.css']
 })
 export class ExperienciaComponent implements OnInit {
-  @Input() list: NgIterable<any> = [];
+  @Input() editMode: boolean = false;
   @Output() onUpdateExperience: EventEmitter<Experience> = new EventEmitter();
   @Output() onInsertExperience: EventEmitter<Experience> = new EventEmitter();
   @Output() onDeleteExperience: EventEmitter<Experience> = new EventEmitter();
@@ -21,10 +23,17 @@ export class ExperienciaComponent implements OnInit {
   color="";
   newExperience: boolean = false;
   experienceList: any;
-  editMode: boolean= false;  
+  editModes: boolean= false;  
+  showLogin: boolean = false;  
+  subscription? : Subscription;
+  
   experiencia: Experience = this.clearExperience();
 
-  constructor(private servPortfolio: PortfolioService, private formBuilder: FormBuilder) {
+  constructor(private servPortfolio: PortfolioService, private formBuilder: FormBuilder, private uiService: UiServiceService) {
+    this.subscription = this.uiService.onToggleSession().subscribe( data =>
+        this.showLogin = data
+      );
+      
     this.formGroup = this.formBuilder.group({
       position : ['',[]],
       company : ['',[]],

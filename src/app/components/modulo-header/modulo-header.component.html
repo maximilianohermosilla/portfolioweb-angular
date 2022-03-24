@@ -1,0 +1,16 @@
+<div class="row" style="margin:50px">
+    <div class="col">
+        <h1 class="rounded float-start"><i class={{icon}} style="color: rgb(51, 146, 230)"></i>{{title}}</h1>                    
+        
+        <span class="rounded float-end">
+            <i class="bi bi-pencil-square"
+                *ngIf="showLogin"
+                [ngStyle]="{'color': color}"
+                [ngStyle]="{'background-color': '{{color}}'}"    
+                style="color: green"
+                (click)="onClick()"
+            ></i>
+        </span>
+        
+    </div>
+</div>

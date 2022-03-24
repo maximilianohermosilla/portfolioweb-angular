@@ -41,18 +41,6 @@ export class PortfolioComponent implements OnInit {
     this.subscription = this.uiService.onTogglePortfolio().subscribe( data =>
       this.showPortfolio = data
     );
-    /*this.subscriptionExperience = this.uiService.onToggleExperience().subscribe( data1 =>
-      this.showExperience = data1
-    );
-    this.subscriptionEducation = this.uiService.onToggleEducation().subscribe( data2 =>
-      this.showEducation = data2
-    );
-    this.subscriptionSkills = this.uiService.onToggleSkills().subscribe( data3 =>
-      this.showSkills = data3
-    );
-    this.subscriptionProjects = this.uiService.onToggleProjects().subscribe( data4 =>
-      this.showProjects = data4
-    );*/
    }
 
   ngOnInit(): void {

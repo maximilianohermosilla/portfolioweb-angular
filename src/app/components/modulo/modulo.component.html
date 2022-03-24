@@ -1,18 +1,35 @@
-<div class="modulo">    
+<div class="modulo" *ngIf="showPortfolio">          
     <app-acerca-de></app-acerca-de>
 </div>
-<div class="modulo">
-    <app-experiencia></app-experiencia>
+
+<div class="modulo" *ngIf="showExperience">
+    <app-modulo-header
+    title=" Experiencia"
+    icon="bi bi-briefcase"
+    (btnToggleEditMode)="toggleEditMode()"
+    ></app-modulo-header>  
+    <app-experiencia
+    [editMode]="getEditMode()"
+    ></app-experiencia>
 </div>
 
-<div class="modulo">
+<div class="modulo" *ngIf="showEducation">
+    <app-modulo-header
+    title=" Educación"
+    ></app-modulo-header>
     <app-educacion></app-educacion>
 </div>
 
-<div class="modulo">
+<div class="modulo" *ngIf="showSkills">
+    <app-modulo-header
+    title=" Experiencia"
+    ></app-modulo-header>
     <app-skills></app-skills>
 </div>
 
-<div class="modulo">
+<div class="modulo" *ngIf="showProjects">
+    <app-modulo-header
+    title=" Experiencia"
+    ></app-modulo-header>
     <app-proyectos></app-proyectos>
 </div>

@@ -49,4 +49,12 @@ export class HeaderComponent implements OnInit {
     this.uiService.toggleSession();
   }
 
+  togglePortfolio(){    
+    this.uiService.togglePortfolio();
+  }
+
+  toggleExperience(){    
+    this.uiService.toggleExperience();
+  }
+
 }

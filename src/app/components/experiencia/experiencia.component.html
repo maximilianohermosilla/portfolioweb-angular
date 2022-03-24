@@ -1,23 +1,12 @@
-<div class="row" style="margin:50px">
+<div class="row" style="margin-left:40px">
     <div class="col">
-        <h1 class="rounded float-start"><i class="bi bi-briefcase" style="color: rgb(51, 146, 230)"></i> Experiencia</h1>                    
         
-        <span class="rounded float-end">
-            <i class="bi bi-pencil-square"
-                [ngStyle]="{'color': color}"
-                [ngStyle]="{'background-color': '{{color}}'}"    
-                style="color: green"
-                (click)="toggleEditMode()"
-            ></i>
-        </span>
-        
-        <span class="rounded float-end">
-            <i class="bi bi-plus-square-fill"
+        <span class="rounded float-start" style="margin-bottom:40px">
+            <button class="btn btn-success btn-lg"
                 *ngIf = "editMode"
-                style="color:green;"
                 data-bs-toggle="modal" data-bs-target="#experienceModal"
                 (click)="clearExperience()"
-            ></i>
+            >Nueva Experiencia</button>
         </span>
         
     </div>

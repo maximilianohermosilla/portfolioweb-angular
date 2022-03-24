@@ -20,7 +20,7 @@ import { ColorPickerModule } from 'ngx-color-picker';
 import { PortfolioComponent } from './components/portfolio/portfolio.component';
 import { ModuloComponent } from './components/modulo/modulo.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { ModuloItemComponent } from './components/modulo-item/modulo-item.component';
+import { ModuloHeaderComponent } from './components/modulo-header/modulo-header.component';
 
 const routes: Routes = [
   {path: '', component:HeaderComponent },
@@ -42,7 +42,7 @@ const routes: Routes = [
     PortfolioComponent,
     ModuloComponent,
     FooterComponent,
-    ModuloItemComponent
+    ModuloHeaderComponent,
   ],
   imports: [
     BrowserModule,
