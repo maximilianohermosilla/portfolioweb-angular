@@ -51,7 +51,7 @@
     top: 0;
     left: 0;
     right: 0;
-    height: 80px;
+    height: 85px;
     display: flex;
     align-items: center;
     background-color: #03146a;
@@ -104,4 +104,9 @@
 
   svg.material-icons:not(:last-child) {
     margin-right: 8px;
+  }
+
+  #btnLogin{    
+    margin: 1em;
+    width: 155px;
   }

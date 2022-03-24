@@ -8,6 +8,7 @@ import { Skill } from '../models/skill';
 import { Experience } from '../models/experience';
 import { tap } from 'rxjs/operators'
 import { Education } from '../models/education';
+import { Project } from '../models/project';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -44,6 +45,8 @@ export class PortfolioService {
     )
   }
 
+  //---PORTFOLIO---//
+
   getPortfolio(): Observable<Portfolio>{
     return this.http.get<Portfolio>(this.apiUrl).pipe(
       tap(() => {
@@ -56,6 +59,8 @@ export class PortfolioService {
     const url = `${this.apiUrl}/${portfolio.id}`
     return this.http.put<Portfolio>(this.apiUrl, portfolio, httpOptions);
   }
+
+  //---EXPERIENCIA---//
 
   getExperiencia(): Observable<Experience[]>{
     return this.http.get<Experience[]>(this.urlExperience);
@@ -75,13 +80,14 @@ export class PortfolioService {
     return this.http.delete<Experience>(deleteUrl);
   }
 
+  //---EDUCATION---//
+
 
   getEducation(): Observable<Education[]>{
     return this.http.get<Education[]>(this.urlEducation);
   } 
 
   updateEducation(education: Education): Observable<Education>{
-    console.log("servicio update: ", education);
     const updateUrlEducation = `${this.urlEducation}/${education.id}`
     return this.http.put<Education>(updateUrlEducation, education, httpOptions);
   }
@@ -96,6 +102,7 @@ export class PortfolioService {
   }
 
 
+  //---SKILLS---//
 
 
   getSkills(): Observable<Skill[]>{
@@ -122,6 +129,26 @@ export class PortfolioService {
   }
 
 
+  //---PROJECTS---//
+
+
+  getProjects(): Observable<Project[]>{
+    return this.http.get<Project[]>(this.urlProjects);
+  } 
+
+  updateProject(project: Project): Observable<Project>{
+    const updateUrlProjects = `${this.urlProjects}/${project.id}`
+    return this.http.put<Project>(updateUrlProjects, project, httpOptions);
+  }
+
+  insertProject(project: Project): Observable<Project>{
+    return this.http.post<Project>(this.urlProjects, project, httpOptions);
+  }
+
+  deleteProject(project: Project): Observable<Project>{
+    const deleteUrl = `${this.urlProjects}/${project.id}`
+    return this.http.delete<Project>(deleteUrl);
+  }
 
 
 }

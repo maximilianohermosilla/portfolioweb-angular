@@ -79,7 +79,7 @@
             <div class="modal-body">
                 
                 <form [formGroup]="formGroup"
-                    (ngSubmit)="onUpdate(projectItem)"
+                    (ngSubmit)="onSubmit(projectItem)"
                     >
                     <div class="form-group">
                         <label for="name">Nombre</label>
@@ -96,7 +96,6 @@
                         <input class="form-control"
                             type="text" 
                             formControlName="start" 
-                            id="start" 
                             placeholder="{{projectItem.start}}"
                             [(ngModel)]="projectItem.start"
                         />
@@ -107,7 +106,6 @@
                         <input class="form-control"
                             type="text" 
                             formControlName="description" 
-                            id="description" 
                             placeholder="{{projectItem.description}}"
                             [(ngModel)]="projectItem.description"
                         />

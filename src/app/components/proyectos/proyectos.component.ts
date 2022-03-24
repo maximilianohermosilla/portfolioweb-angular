@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Project } from 'src/app/models/project';
 import { PortfolioService } from 'src/app/servicios/portfolio.service';
@@ -9,6 +9,11 @@ import { PortfolioService } from 'src/app/servicios/portfolio.service';
   styleUrls: ['../../../styles.css']
 })
 export class ProyectosComponent implements OnInit {
+  @Output() onUpdateProject: EventEmitter<Project> = new EventEmitter();
+  @Output() onInsertProject: EventEmitter<Project> = new EventEmitter();
+  @Output() onDeleteProject: EventEmitter<Project> = new EventEmitter();
+
+
   formGroup: FormGroup;
   projectsList: any;
   projectItem: Project = this.clearProject();
@@ -16,7 +21,7 @@ export class ProyectosComponent implements OnInit {
   editMode: boolean = false;
   color: string = "";
 
-  constructor(private servPortfolio: PortfolioService, private formBuilder: FormBuilder) {
+  constructor(private servPortfolio: PortfolioService, private formBuilder: FormBuilder) {    
     this.formGroup = this.formBuilder.group({
       name: ['',[]],
       start: ['',[]],
@@ -27,9 +32,8 @@ export class ProyectosComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.servPortfolio.obtenerDatos().subscribe(data =>{
-      //console.log(data.education);
-      this.projectsList = data.projects;
+    this.servPortfolio.getProjects().subscribe(data =>{
+      this.projectsList = data;
     });
   }
 
@@ -40,6 +44,7 @@ export class ProyectosComponent implements OnInit {
 
   clearProject(): Project{
     this.projectItem = {
+      id: 0,
       name: '',
       start: '',
       description: '',
@@ -52,25 +57,43 @@ export class ProyectosComponent implements OnInit {
 
   setProject(project: Project){ 
     this.projectItem={
+      id: project.id,
       name: project.name,
       start: project.start,
       description: project.description,
       url: project.url,
       img: project.img
-    }  
+    }
     this.newProject = false;    
-  }
-  
-  onDelete(project: Project){
-    console.log("Delete");
   }
 
   onUpdate(project: Project){
-    console.log("Update");
+    this.servPortfolio.updateProject(project).subscribe();  
+    this.projectsList = this.projectsList;
+    this.ngOnInit();     
+    //this.onUpdateExperience.emit(experience);
+  }
+  
+  onInsert(project: Project){
+    this.setProject(project);
+    project.id=0;
+    //this.onInsertExperience.emit(experience);
+    this.servPortfolio.insertProject(project).subscribe((educacion)=>(
+      this.projectsList.push(project)
+    ))
+  }
+
+  onDelete(project: Project){  
+    this.onDeleteProject.emit(project);
+    this.servPortfolio.deleteProject(project)
+      .subscribe(()=> {return (this.projectsList = this.projectsList.filter((t) => (t.id !== project.id))
+          );
+        })
   }
 
   onSubmit(project: Project){
-
+    this.newProject ? this.onInsert(project): this.onUpdate(project)
+    console.log(this.newProject);
   }
 
 
