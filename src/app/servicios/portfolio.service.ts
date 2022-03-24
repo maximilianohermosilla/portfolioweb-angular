@@ -112,6 +112,7 @@ export class PortfolioService {
   }
 
   insertSkill(skill: Skill): Observable<Skill>{
+    console.log("insert servicio", skill);
     return this.http.post<Skill>(this.urlSkills, skill, httpOptions);
   }
 

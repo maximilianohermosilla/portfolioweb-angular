@@ -136,9 +136,12 @@ export class SkillsComponent implements OnInit, OnDestroy {
     this.setSkill(skill);
     skill.id=0;
     //this.onInsertExperience.emit(experience);
+    console.log("insert component", skill);
     this.servPortfolio.insertSkill(skill).subscribe((element)=>(
       this.skillsList.push(element)
     ))
+     
+    window.location.reload(); 
   }
 
   onUpdate(skill: Skill){
@@ -156,6 +159,7 @@ export class SkillsComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(skill: Skill){
+    
     this.newSkill ? this.onInsert(skill): this.onUpdate(skill)
     console.log(this.newSkill);
   }
