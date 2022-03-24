@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Experience } from 'src/app/models/experience';
 import { Portfolio } from 'src/app/models/portfolio';
+import { Subscription } from 'rxjs';
 import { PortfolioService } from 'src/app/servicios/portfolio.service';
+import { UiServiceService } from 'src/app/servicios/ui-service.service';
 
 @Component({
   selector: 'app-portfolio',
@@ -18,11 +20,40 @@ export class PortfolioComponent implements OnInit {
   skillsList: any;
   projectsList: any;
 
+  subscription? : Subscription;
+  subscriptionPortfolio? : Subscription;
+  subscriptionExperience? : Subscription;
+  subscriptionEducation? : Subscription;
+  subscriptionSkills? : Subscription;
+  subscriptionProjects? : Subscription;
+
+  showLogin: boolean = false;
+  showPortfolio: boolean = true;
+  showExperience: boolean = true; 
+  showEducation: boolean = true; 
+  showSkills: boolean = true; 
+  showProjects: boolean = true; 
 
   editMode: boolean= false;
   color="";
 
-  constructor(private servPortfolio: PortfolioService) { }
+  constructor(private servPortfolio: PortfolioService, private uiService: UiServiceService) {
+    this.subscription = this.uiService.onTogglePortfolio().subscribe( data =>
+      this.showPortfolio = data
+    );
+    /*this.subscriptionExperience = this.uiService.onToggleExperience().subscribe( data1 =>
+      this.showExperience = data1
+    );
+    this.subscriptionEducation = this.uiService.onToggleEducation().subscribe( data2 =>
+      this.showEducation = data2
+    );
+    this.subscriptionSkills = this.uiService.onToggleSkills().subscribe( data3 =>
+      this.showSkills = data3
+    );
+    this.subscriptionProjects = this.uiService.onToggleProjects().subscribe( data4 =>
+      this.showProjects = data4
+    );*/
+   }
 
   ngOnInit(): void {
     this.servPortfolio.obtenerDatos().subscribe(data =>{
@@ -38,4 +69,10 @@ export class PortfolioComponent implements OnInit {
       console.log(this.experienceList.length>0);
     }, 500);
   }
+
+  toggleExperience(){
+    this.uiService.onToggleExperience();
+    console.log(this.showExperience);
+  }
+
 }

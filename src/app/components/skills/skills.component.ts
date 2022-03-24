@@ -14,13 +14,12 @@ import { PortfolioService } from 'src/app/servicios/portfolio.service';
 export class SkillsComponent implements OnInit, OnDestroy {
   formGroup: FormGroup;
   subscription: Subscription = new Subscription();
+  editMode: boolean = false;
+  color: string = "";
 
   skillsList: Skill[] = [];
-  skillItem: Skill={
-    name: '',
-    score: 0,
-    color: ''
-  }
+  skillItem: Skill = this.clearSkill();
+  newSkill: boolean = true;
   charts: any[] = [];
   myChart;
   nombre;
@@ -116,54 +115,25 @@ export class SkillsComponent implements OnInit, OnDestroy {
     this.ngOnInit();  
     window.location.reload(); 
   }
-
-  onClick(skill: Skill){
-    this.skillItem = skill;
-  }  
-
-/*
-  getChartBarra(){
-    var data = {
-      labels: [".NET", "Java", "HTML", "CSS", "JavaScript", "Angular", "SpringBoot"],
-      datasets: [
-        {
-          label: "Lenguajes programación",
-          backgroundColor: "rgba(90,218,36,100.2)",
-          borderColor: "rgba(90,100,36,1.2)",
-          borderWidth: 2,
-          hoverBackgroundColor: "rgba(90,100,36,0.2)",
-          hoverBorderColor: "rgba(90,100,36,1.2)",
-          data: [65, 59, 20, 81, 56, 55, 40]
-        }
-      ]
-    };
-
-    var option = {
-      responsive: false,
-      scales: {
-        y: {
-          stacked: true,
-          grid: {
-            display: true,
-            color: "rgba(255,99,132,0.2)"
-          }
-        },
-        x: {
-          grid: {
-            display: false
-          }
-        }
-      }
-    };
-
-    new Chart("chart_0", {
-      type: "bar",
-      options: option,
-      data: data
-    });   
-    
-  }*/
-
   
+  toggleEditMode(){
+    this.editMode = !this.editMode;
+    this.editMode ?  this.color="#D4EFDF": this.color="green";
+  }
+
+  clearSkill(): Skill{
+    this.skillItem = {
+      name: '',
+      score: 0,
+      color: ''
+    }
+    this.newSkill = true;
+    return this.skillItem;
+  }
+
+  setSkill(skill: Skill){
+    this.skillItem = skill;
+    this.newSkill = false;
+  } 
 
 }

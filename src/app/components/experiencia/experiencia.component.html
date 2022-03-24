@@ -1,16 +1,25 @@
 <div class="row" style="margin:50px">
     <div class="col">
-        <h1 class="rounded float-start"><i class="bi bi-briefcase" style="color: rgb(51, 146, 230)"></i> Experiencia</h1>            
-        <span class="rounded float-end"><i class="bi bi-plus-square" style="color:green;"
-                                        data-bs-toggle="modal" data-bs-target="#experienceModal"
-                                        (click)="clearExperience()"
-                                        ></i></span>
-        <span class="rounded float-end"><i class="bi bi-pencil-square"
-                                        [ngStyle]="{'color': color}"
-                                        [ngStyle]="{'background-color': '{{color}}'}"    
-                                        style="color: green"
-                                        (click)="toggleEdit(experienceList)"
-                                         ></i></span>
+        <h1 class="rounded float-start"><i class="bi bi-briefcase" style="color: rgb(51, 146, 230)"></i> Experiencia</h1>                    
+        
+        <span class="rounded float-end">
+            <i class="bi bi-pencil-square"
+                [ngStyle]="{'color': color}"
+                [ngStyle]="{'background-color': '{{color}}'}"    
+                style="color: green"
+                (click)="toggleEditMode()"
+            ></i>
+        </span>
+        
+        <span class="rounded float-end">
+            <i class="bi bi-plus-square-fill"
+                *ngIf = "editMode"
+                style="color:green;"
+                data-bs-toggle="modal" data-bs-target="#experienceModal"
+                (click)="clearExperience()"
+            ></i>
+        </span>
+        
     </div>
 </div>
 
@@ -36,9 +45,7 @@
                     </div>          
                     </div>
                     <div class="col-sm">
-                        <div class="contenedor"
-                        *ngIf="editMode"
-                        >
+                        <div class="contenedor" *ngIf="editMode">
                             <i class="bi bi-pencil-fill"
                              style="
                               margin-right: 10px"

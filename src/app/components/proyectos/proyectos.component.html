@@ -1,8 +1,25 @@
 <div class="row" style="margin:50px">
     <div class="col">
             <h1 class="rounded float-start"><i class="bi bi-code-square" style="color: rgb(51, 146, 230)"></i> Proyectos</h1>            
-            <span class="rounded float-end"><i class="bi bi-plus-square" style="color:green;"></i></span>
-            <span class="rounded float-end"><i class="bi bi-pencil-square" style="color:green"></i></span>
+            
+            <span class="rounded float-end">
+                <i class="bi bi-pencil-square"
+                    [ngStyle]="{'color': color}"
+                    [ngStyle]="{'background-color': '{{color}}'}"  
+                    style="color:green"                   
+                    (click)="toggleEditMode()"                                                                               
+                ></i>
+            </span>
+    
+            <span class="rounded float-end">
+                <i class="bi bi-plus-square-fill"
+                    *ngIf = "editMode"  
+                    style="color:green"               
+                    data-bs-toggle="modal" data-bs-target="#projectsModal"
+                    (click)="clearProject()"
+                ></i>
+            </span>
+
     </div>
 </div>
 
@@ -25,10 +42,11 @@
                     
                 </div>
                 <div class="col-sm">
-                    <div class="contenedor">
+                    <div class="contenedor" *ngIf = "editMode">
                         <i class="bi bi-pencil-fill"
                              style="margin-right: 10px"
-                              (click) = "onUpdate(projects)"
+                              (click) = "setProject(projects)"
+                              data-bs-toggle="modal" data-bs-target="#projectsModal"
                               ></i>
                             <i class="bi bi-trash-fill"
                              style="color:red"
@@ -36,10 +54,76 @@
                              ></i>
                     </div> 
                 </div>            
+                
+                <!-- MODAL -->
+            
+
+
             </div>        
         </div>
-    </div>
+    </div> 
+
 </li>
 </ul>
 
 
+<div class="modal" id="projectsModal" >
+                
+    <div class="modal-dialog" >
+        <div class="modal-content">
+            <div class="modal-header">            
+                <h5 class="modal-title" id="staticBackdropLabel">Editar Aptitud</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+        
+            <div class="modal-body">
+                
+                <form [formGroup]="formGroup"
+                    (ngSubmit)="onUpdate(projectItem)"
+                    >
+                    <div class="form-group">
+                        <label for="name">Nombre</label>
+                        <input class="form-control"
+                            type="text" 
+                            formControlName="name" 
+                            placeholder="{{projectItem.name}}" 
+                            [(ngModel)]="projectItem.name"
+                        />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="start">Fecha Inicio</label>
+                        <input class="form-control"
+                            type="text" 
+                            formControlName="start" 
+                            id="start" 
+                            placeholder="{{projectItem.start}}"
+                            [(ngModel)]="projectItem.start"
+                        />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">Descripción</label>
+                        <input class="form-control"
+                            type="text" 
+                            formControlName="description" 
+                            id="description" 
+                            placeholder="{{projectItem.description}}"
+                            [(ngModel)]="projectItem.description"
+                        />
+                    </div>
+                    
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Guardar</button>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Salir</button>
+                    </div>
+                </form> 
+            
+
+            </div>
+
+            
+        </div>
+
+    </div>
+</div>

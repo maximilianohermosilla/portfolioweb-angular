@@ -14,6 +14,8 @@ export class EducacionComponent implements OnInit {
   title: string = "";
   newEducation: boolean = false;
   educacion: Education = this.clearEducation();
+  editMode: boolean = false;
+  color: string ="";
 
   constructor(private servPortfolio: PortfolioService, private formBuilder: FormBuilder) { 
     this.formGroup = this.formBuilder.group({
@@ -67,5 +69,10 @@ export class EducacionComponent implements OnInit {
     this.newEducation = true;
     return this.educacion;
 
+  }
+
+  toggleEditMode(){
+    this.editMode = !this.editMode;
+    this.editMode ?  this.color="#D4EFDF": this.color="green";
   }
 }

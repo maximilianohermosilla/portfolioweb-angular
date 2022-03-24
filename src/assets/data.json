@@ -264,7 +264,7 @@
     {
       "id": "2",
       "name": "Java",
-      "score": "73",
+      "score": "70",
       "color": "#22b049"
     },
     {
@@ -289,13 +289,13 @@
       "id": "7",
       "name": "Javascript",
       "score": "78",
-      "color": "#b20038"
+      "color": "#fa6091"
     },
     {
       "id": "9",
       "name": "HTML",
       "score": "65",
-      "color": "#710000"
+      "color": "#ff7b7b"
     },
     {
       "id": "11",

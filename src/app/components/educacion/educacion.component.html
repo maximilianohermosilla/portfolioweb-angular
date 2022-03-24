@@ -1,14 +1,25 @@
 <div class="row" style="margin:50px">
     <div class="col">
         <h1 class="rounded float-start"><i class="bi bi-mortarboard" style="color: rgb(51, 146, 230)"></i> Educación</h1>            
-        <span class="rounded float-end"><i class="bi bi-plus-square"
-                                        style="color:green;"
-                                        (click) = "clearEducation()"
-                                        data-bs-toggle="modal" data-bs-target="#educationModal"
-                                        ></i></span>
-        <span class="rounded float-end"><i class="bi bi-pencil-square"
-                                        style="color:green"                                                                                
-                                        ></i></span>
+
+        <span class="rounded float-end">
+            <i class="bi bi-pencil-square"
+                [ngStyle]="{'color': color}"
+                [ngStyle]="{'background-color': '{{color}}'}"    
+                style="color:green" 
+                (click)="toggleEditMode()"                                                                               
+            ></i>
+        </span>
+
+        <span class="rounded float-end">
+            <i class="bi bi-plus-square-fill"
+                *ngIf = "editMode"
+                style="color:green;"
+                data-bs-toggle="modal" data-bs-target="#educationModal"
+                (click)="clearEducation()"
+            ></i>
+        </span>
+        
     </div>
 </div>
 
@@ -26,7 +37,7 @@
                     <h6><time>{{education.start}}</time> - <time>{{education.end}}</time></h6>
                 </div>
                 <div class="col-sm">
-                    <div class="contenedor">
+                    <div class="contenedor" *ngIf = "editMode">
                         <i class="bi bi-pencil-fill"
                              style="margin-right: 10px"
                               (click) = "setEducation(education)"

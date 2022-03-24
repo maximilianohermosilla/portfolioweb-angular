@@ -49,10 +49,9 @@ export class ExperienciaComponent implements OnInit {
     console.log(this.experienceList>0);
   }
 
-  toggleEdit(experience: Experience){
+  toggleEditMode(){
     this.editMode=!this.editMode;
     this.editMode ?  this.color="#D4EFDF": this.color="green";
-    //console.log("Edit mode experience: "+ this.editMode +" " + this.color)
   }
 
 

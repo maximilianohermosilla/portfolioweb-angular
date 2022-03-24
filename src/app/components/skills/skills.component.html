@@ -3,8 +3,25 @@
 </div><div class="row" style="margin:50px">
     <div class="col">
         <h1 class="rounded float-start"><i class="bi bi-clipboard-check" style="color: rgb(51, 146, 230)"></i> Aptitudes</h1>            
-        <span class="rounded float-end"><i class="bi bi-plus-square" style="color:green;"></i></span>
-        <span class="rounded float-end"><i class="bi bi-pencil-square" style="color:green"></i></span>
+        
+        <span class="rounded float-end">
+            <i class="bi bi-pencil-square"
+                [ngStyle]="{'color': color}"
+                [ngStyle]="{'background-color': '{{color}}'}"   
+                style="color:green"                  
+                (click)="toggleEditMode()"                                                                               
+            ></i>
+        </span>
+
+        <span class="rounded float-end">
+            <i class="bi bi-plus-square-fill"
+                *ngIf = "editMode"       
+                style="color:green"          
+                data-bs-toggle="modal" data-bs-target="#skillModal"
+                (click)="clearSkill()"
+            ></i>
+        </span>
+
     </div>
 </div>
 
@@ -22,12 +39,12 @@
                     <canvas id="chart{{skill.id}}"> </canvas>
                 </div>
 
-                <div id="buttons">
+                <div id="buttons" *ngIf = "editMode">
                     <i class="bi bi-pencil-fill"
                         style="color:#65cd23;
                          margin-right: 4em"
                         data-bs-toggle="modal" data-bs-target="#skillModal"
-                        (click)="onClick(skill)"
+                        (click)="setSkill(skill)"
                     ></i>
                     <i class="bi bi-trash-fill"
                         style="color:red"
@@ -35,7 +52,7 @@
                     ></i>                    
                 </div>
 
-                <!-- MODAL -->
+            <!-- MODAL -->
             <div class="modal" id="skillModal" >
                 
                 <div class="modal-dialog" >
