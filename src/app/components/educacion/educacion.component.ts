@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Education } from 'src/app/models/education';
 import { PortfolioService } from 'src/app/servicios/portfolio.service';
@@ -8,7 +8,8 @@ import { PortfolioService } from 'src/app/servicios/portfolio.service';
   templateUrl: './educacion.component.html',
   styleUrls: ['../../../styles.css']
 })
-export class EducacionComponent implements OnInit {
+export class EducacionComponent implements OnInit {  
+  @Input() editMode: boolean = false;
   @Output() onUpdateEducation: EventEmitter<Education> = new EventEmitter();
   @Output() onInsertEducation: EventEmitter<Education> = new EventEmitter();
   @Output() onDeleteEducation: EventEmitter<Education> = new EventEmitter();
@@ -20,7 +21,7 @@ export class EducacionComponent implements OnInit {
   color: string ="";
   newEducation: boolean = false;
   educacion: Education = this.clearEducation();
-  editMode: boolean = false; 
+  editModes: boolean = false; 
 
   constructor(private servPortfolio: PortfolioService, private formBuilder: FormBuilder) { 
     this.formGroup = this.formBuilder.group({

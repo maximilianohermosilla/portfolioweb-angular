@@ -13,6 +13,11 @@ export class UiServiceService {
   private showSkills: boolean = true; 
   private showProjects: boolean = true; 
 
+  private editExperience: boolean = false; 
+  private editEducation: boolean = false; 
+  private editSkills: boolean = false; 
+  private editProjects: boolean = false; 
+
   private subject$ = new Subject<any>();
   private subjectPortfolio$ = new Subject<any>();
   private subjectExperience$ = new Subject<any>();
@@ -26,6 +31,7 @@ export class UiServiceService {
     this.showLogin = !this.showLogin;
     this.subject$.next(this.showLogin);
   }
+
 
 
   togglePortfolio(): void{
@@ -53,10 +59,48 @@ export class UiServiceService {
     this.subjectProjects$.next(this.showProjects);
   }
 
+
+
+  toggleEditExperience(){
+    this.editExperience = !this.editExperience;
+  }
+
+  toggleEditEducation(): void{
+    this.editEducation = !this.editEducation;
+  }
+
+  toggleEditSkills(): void{
+    this.editSkills = !this.editSkills;
+  }
+
+  toggleEditProjects(): void{
+    this.editProjects = !this.editProjects;
+  }
+
+
+
+
+  public get getEditExperience(): boolean {
+    return this.editExperience;
+  }
+
+  public get getEditEducation(): boolean {
+    return this.editEducation;
+  }
+
+  public get getEditSkills(): boolean {
+    return this.editSkills;
+  }
+
+  public get getEditProjects(): boolean {
+    return this.editProjects;
+  }
+  
+
+
   onToggleSession(): Observable<any>{
     return this.subject$.asObservable();
   }
-  
 
   onTogglePortfolio(): Observable<any>{
     return this.subjectPortfolio$.asObservable();
@@ -77,6 +121,8 @@ export class UiServiceService {
   onToggleProjects(): Observable<any>{
     return this.subjectProjects$.asObservable();
   }
+
+
 
   
 }

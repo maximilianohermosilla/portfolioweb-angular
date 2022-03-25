@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Project } from 'src/app/models/project';
 import { PortfolioService } from 'src/app/servicios/portfolio.service';
@@ -9,6 +9,7 @@ import { PortfolioService } from 'src/app/servicios/portfolio.service';
   styleUrls: ['../../../styles.css']
 })
 export class ProyectosComponent implements OnInit {
+  @Input() editMode: boolean = false;
   @Output() onUpdateProject: EventEmitter<Project> = new EventEmitter();
   @Output() onInsertProject: EventEmitter<Project> = new EventEmitter();
   @Output() onDeleteProject: EventEmitter<Project> = new EventEmitter();
@@ -18,7 +19,7 @@ export class ProyectosComponent implements OnInit {
   projectsList: any;
   projectItem: Project = this.clearProject();
   newProject: boolean = false;
-  editMode: boolean = false;
+  editModes: boolean = false;
   color: string = "";
 
   constructor(private servPortfolio: PortfolioService, private formBuilder: FormBuilder) {    

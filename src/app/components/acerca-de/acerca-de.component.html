@@ -1,25 +1,26 @@
 <div class="banner">
     <div class="banner-background" role="banner"> </div> 
   </div>
-<div class="contenedor">
-    
-    
+
+<div class="contenedor">       
     <img [src]="miPortfolio.profilePhoto"> 
     <i class="bi bi-upload" id="lapiz"    
          (click)="onUpdate(miPortfolio)"
          *ngIf="editMode"
          ></i>
+
     <div class="content">
         <i class="bi bi-pencil-square"
+        *ngIf="getSession()"
         [ngStyle]="{'color': color}"
-         [ngStyle]="{'background-color': '{{color}}'}"    
-         style="color: green"
-         (click)="toggleEdit(miPortfolio)"
-         ></i>
+        [ngStyle]="{'background-color': '{{color}}'}"    
+        style="color: green"
+        (click)="toggleEditMode()"
+        ></i>
     </div>     
 </div>
 <div class="row" style="padding-right: 30px; padding-left: 30px">
-    <div class="col-5">
+    <div class="col-5" style="margin-bottom: 3em">
         
             <h1>{{miPortfolio.name}}</h1>
             <h3>{{miPortfolio.position}}</h3>
@@ -35,7 +36,7 @@
             data-bs-toggle="modal" data-bs-target="#dataModal"
                              style="
                               margin-right: 10px"
-                              (click) = "onUpdate(miPortfolio)"
+                              (click)="onUpdate(miPortfolio)"
                               *ngIf="editMode"
                               ></i>
          </div>               
@@ -57,7 +58,7 @@
                     <div class="contenedor">
                         <i class="bi bi-pencil-fill"
                         style="margin-right: 10px"
-                        (click) = "onUpdate(miPortfolio)"
+                        (click)="onUpdate(miPortfolio)"
                         *ngIf="editMode"
                         ></i>  
                     </div>                    
@@ -74,7 +75,7 @@
                     <div class="contenedor">
                         <i class="bi bi-pencil-fill"
                         style="margin-right: 10px"
-                        (click) = "onUpdate(miPortfolio)"
+                        (click)="onUpdate(miPortfolio)"
                         *ngIf="editMode"
                         ></i>  
                     </div>  
@@ -87,7 +88,7 @@
 
 </div>
 
-<div class="botonera">
+<div class="botonera"  *ngIf="editMode">
     <!-- <button class="btn btn-primary btn">Tengo interes en</button> -->
     <button class="btn btn-success">Añadir Seccion</button>
     <button class="btn btn-primary">Mas</button>
@@ -102,9 +103,10 @@
             <div class="modal-header">            
                 <h5 class="modal-title" id="staticBackdropLabel">Editar Datos Personales</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
+            </div>
         
             <div class="modal-body">
+
                 <form [formGroup]="formGroup"
                     (ngSubmit)="onUpdate(miPortfolio)"
                     >
@@ -150,60 +152,9 @@
                         <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Guardar</button>
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Salir</button>
                     </div>
-                </form>
-                <!--<form
-                    (ngSubmit)="onUpdate(miPortfolio)"
-                    >
-                    <div class="form-group">
-                        <label for="name">Nombre y Apellido</label>
-                        <input class="form-control"
-                            type="text" 
-                            name="name" 
-                            id="name" 
-                            placeholder="Ingrese Nombre" 
-                        />
-                    </div>
+                </form>               
 
-                    <div class="form-group">
-                        <label for="position">Posicion</label>
-                        <input class="form-control"
-                            type="text" 
-                            name="position" 
-                            id="position" 
-                            placeholder="Ingrese Ocupación"
-                        />
-                    </div>
-                    <div class="form-group">
-                        <label for="ubication">Ubicacion</label>
-                        <input class="form-control"
-                            type="text" 
-                            name="ubication" 
-                            id="ubication" 
-                            placeholder="Ingrese Ubicacion"
-                        />
-                    </div>
-                    <div class="form-group">
-                        <label for="about">Descripcion</label>
-                        <input class="form-control"
-                            type="text" 
-                            name="about" 
-                            id="about" 
-                            placeholder="Descripcion"
-                        />
-                    </div>
-
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-success">Guardar</button>
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Salir</button>
-                    </div>
-                </form> -->
-            
-
-            </div>
-
-            
+            </div>            
         </div>
-
-</div>
-
+    </div>
 </div>

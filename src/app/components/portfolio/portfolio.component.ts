@@ -63,4 +63,13 @@ export class PortfolioComponent implements OnInit {
     console.log(this.showExperience);
   }
 
+  toggleEditMode(){
+    this.editMode = !this.editMode;
+    this.editMode ?  this.color="#D4EFDF": this.color="green";
+  }
+
+  toggleLogin(){
+    this.showLogin = !this.showLogin;
+  }
+
 }

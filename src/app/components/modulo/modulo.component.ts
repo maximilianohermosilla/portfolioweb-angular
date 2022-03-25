@@ -54,9 +54,40 @@ export class ModuloComponent implements OnInit {
     this.btnToggleEdit.emit();
   }
 
+  toggleEditExperience(){
+    this.uiService.toggleEditExperience();
+  }
+  toggleEditEducation(){
+    this.uiService.toggleEditEducation();
+  }
+  toggleEditSkills(){
+    this.uiService.toggleEditSkills();
+  }
+  toggleEditProjects(){
+    this.uiService.toggleEditProjects();
+  }
+
   getEditMode(){
     return this.editMode;
   }
+
+  getEditExperience(){
+    return this.uiService.getEditExperience;
+  }
+
+  getEditEducation(){
+    return this.uiService.getEditEducation;
+  }
+
+  getEditSkills(){
+    return this.uiService.getEditSkills;
+  }
+
+  getEditProjects(){
+    return this.uiService.getEditProjects;
+  }
+
+  
   
 
 }

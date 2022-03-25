@@ -6,30 +6,42 @@
     <app-modulo-header
     title=" Experiencia"
     icon="bi bi-briefcase"
-    (btnToggleEditMode)="toggleEditMode()"
+    (btnToggleEditMode)="toggleEditExperience()"
     ></app-modulo-header>  
     <app-experiencia
-    [editMode]="getEditMode()"
+    [editMode]="getEditExperience()"
     ></app-experiencia>
 </div>
 
 <div class="modulo" *ngIf="showEducation">
     <app-modulo-header
     title=" Educación"
-    ></app-modulo-header>
-    <app-educacion></app-educacion>
+    icon="bi bi-mortarboard"
+    (btnToggleEditMode)="toggleEditEducation()"
+    ></app-modulo-header>  
+    <app-educacion
+    [editMode]="getEditEducation()"
+    ></app-educacion>
 </div>
 
 <div class="modulo" *ngIf="showSkills">
     <app-modulo-header
-    title=" Experiencia"
-    ></app-modulo-header>
-    <app-skills></app-skills>
+    title=" Aptitudes"
+    icon="bi bi-clipboard-check"
+    (btnToggleEditMode)="toggleEditSkills()"
+    ></app-modulo-header>  
+    <app-skills
+    [editMode]="getEditSkills()"
+    ></app-skills>
 </div>
 
 <div class="modulo" *ngIf="showProjects">
     <app-modulo-header
-    title=" Experiencia"
-    ></app-modulo-header>
-    <app-proyectos></app-proyectos>
+    title=" Proyectos"
+    icon="bi bi-code-square"
+    (btnToggleEditMode)="toggleEditProjects()"
+    ></app-modulo-header>  
+    <app-proyectos
+    [editMode]="getEditProjects()"
+    ></app-proyectos>
 </div>

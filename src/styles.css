@@ -201,3 +201,7 @@
     position: absolute;
     display: relative;
   }
+
+  span>button{
+    margin: 1em 0em 1em;
+  }

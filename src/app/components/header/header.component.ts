@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Portfolio } from 'src/app/models/portfolio';
+import { AuthService } from 'src/app/servicios/auth.service';
 import { PortfolioService } from 'src/app/servicios/portfolio.service';
 import { UiServiceService } from 'src/app/servicios/ui-service.service';
 import { ButtonComponent } from '../button/button.component';
@@ -12,6 +13,7 @@ import { ButtonComponent } from '../button/button.component';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+  @Output() btnToggleLogin = new EventEmitter();
   miPortfolio: Portfolio = {
     name: '',
     profilePhoto: '',
@@ -29,7 +31,7 @@ export class HeaderComponent implements OnInit {
   showLogin: boolean = false;
   subscription? : Subscription;
 
-  constructor(private servPortfolio: PortfolioService, private uiService: UiServiceService) {
+  constructor(private servPortfolio: PortfolioService, private uiService: UiServiceService, private authService: AuthService) {
     this.subscription = this.uiService.onToggleSession().subscribe( data =>
         this.showLogin = data
       );
@@ -41,12 +43,10 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-  startLogin(){
-    console.log("button click!");
-  }
-
   toggleLogin(){    
     this.uiService.toggleSession();
+    this.authService.login();
+    this.btnToggleLogin.emit();
   }
 
   togglePortfolio(){    
@@ -55,6 +55,10 @@ export class HeaderComponent implements OnInit {
 
   toggleExperience(){    
     this.uiService.toggleExperience();
+  }
+
+  getSession(): boolean{
+    return this.authService.logIn;
   }
 
 }

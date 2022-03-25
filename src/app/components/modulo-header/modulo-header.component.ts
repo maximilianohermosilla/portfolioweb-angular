@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { AuthService } from 'src/app/servicios/auth.service';
 import { PortfolioService } from 'src/app/servicios/portfolio.service';
 import { UiServiceService } from 'src/app/servicios/ui-service.service';
 
@@ -24,7 +25,7 @@ export class ModuloHeaderComponent implements OnInit {
   editMode: boolean= false;
   color: string ="";
 
-  constructor(private servPortfolio: PortfolioService, private uiService: UiServiceService) {
+  constructor(private servPortfolio: PortfolioService, private uiService: UiServiceService, private authService: AuthService) {
     this.subscription = this.uiService.onToggleSession().subscribe( data =>
         this.showLogin = data
       );
@@ -41,6 +42,10 @@ export class ModuloHeaderComponent implements OnInit {
   onClick(){
     this.toggleEditMode();
     this.btnToggleEditMode.emit();
+  }
+
+  getSession(): boolean{
+    return this.authService.logIn;
   }
 
 }

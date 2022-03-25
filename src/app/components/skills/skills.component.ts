@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnDestroy, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Chart } from 'chart.js';
 import { Subscription } from 'rxjs';
@@ -12,13 +12,14 @@ import { PortfolioService } from 'src/app/servicios/portfolio.service';
   styleUrls: ['./skills.component.css']
 })
 export class SkillsComponent implements OnInit, OnDestroy {
+  @Input() editMode: boolean = false;
   @Output() onUpdateSkilln: EventEmitter<Skill> = new EventEmitter();
   @Output() onInsertSkill: EventEmitter<Skill> = new EventEmitter();
   @Output() onDeleteSkill: EventEmitter<Skill> = new EventEmitter();
 
   formGroup: FormGroup;
   subscription: Subscription = new Subscription();
-  editMode: boolean = false;
+  editModes: boolean = false;
   color: string = "";
 
   skillsList: Skill[] = [];

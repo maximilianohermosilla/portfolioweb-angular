@@ -106,7 +106,8 @@
     margin-right: 8px;
   }
 
-  #btnLogin{    
+  #btnLogin{   
+    box-sizing: border-box;
     margin: 1em;
     width: 155px;
   }

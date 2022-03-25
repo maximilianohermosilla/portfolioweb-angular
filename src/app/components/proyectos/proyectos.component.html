@@ -1,28 +1,16 @@
-<div class="row" style="margin:50px">
+<div class="row" style="margin-left:40px">
     <div class="col">
-            <h1 class="rounded float-start"><i class="bi bi-code-square" style="color: rgb(51, 146, 230)"></i> Proyectos</h1>            
-            
-            <span class="rounded float-end">
-                <i class="bi bi-pencil-square"
-                    [ngStyle]="{'color': color}"
-                    [ngStyle]="{'background-color': '{{color}}'}"  
-                    style="color:green"                   
-                    (click)="toggleEditMode()"                                                                               
-                ></i>
-            </span>
-    
-            <span class="rounded float-end">
-                <i class="bi bi-plus-square-fill"
-                    *ngIf = "editMode"  
-                    style="color:green"               
-                    data-bs-toggle="modal" data-bs-target="#projectsModal"
-                    (click)="clearProject()"
-                ></i>
-            </span>
-
+        
+        <span class="rounded float-start">
+            <button class="btn btn-success btn-lg"
+                *ngIf = "editMode"
+                data-bs-toggle="modal" data-bs-target="#projectsModal"
+                (click)="clearProject()"
+            >Añadir</button>
+        </span>
+        
     </div>
 </div>
-
 <ul>
 <li *ngFor="let projects of projectsList" style="list-style-type: none;">
     <div class="card-container">
