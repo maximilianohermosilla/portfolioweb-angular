@@ -69,7 +69,6 @@
                                     <input class="form-control"
                                         type="text" 
                                         formControlName="company" 
-                                        id="company" 
                                         placeholder="{{experiencia.company}}"
                                         [(ngModel)]="experiencia.company"
                                     />
@@ -80,7 +79,6 @@
                                     <input class="form-control"
                                         type="text" 
                                         formControlName="ubication" 
-                                        id="ubication" 
                                         placeholder="{{experiencia.ubication}}"
                                         [(ngModel)]="experiencia.ubication"
                                     />
@@ -92,7 +90,6 @@
                                     <input class="form-control"
                                         type="text" 
                                         formControlName="position" 
-                                        id="position" 
                                         placeholder="{{experiencia.position}}" 
                                         [(ngModel)]="experiencia.position"
                                     />
@@ -103,7 +100,6 @@
                                     <input class="form-control"
                                         type="text" 
                                         formControlName="start" 
-                                        id="start" 
                                         placeholder="{{experiencia.start}}"
                                         [(ngModel)]="experiencia.start"
                                     />
@@ -113,7 +109,6 @@
                                     <input class="form-control"
                                         type="text" 
                                         formControlName="end" 
-                                        id="end" 
                                         placeholder="{{experiencia.end}}"
                                         [(ngModel)]="experiencia.end"
                                     />
@@ -123,9 +118,18 @@
                                     <input class="form-control"
                                         type="text" 
                                         formControlName="timeElapsed" 
-                                        id="entimeElapsedd" 
                                         placeholder="{{experiencia.timeElapsed}}"
                                         [(ngModel)]="experiencia.timeElapsed"
+                                    />
+                                </div>
+                                <div class="form-group">
+                                    <label for="img">Imagen</label>
+                                    <input class="form-control"
+                                        type="file" 
+                                        formControlName="img"                            
+                                        placeholder="{{experiencia.img}}"
+                                        [(ngModel)]="experiencia.img"
+                                        (change)="onSelectNewFile($event)"
                                     />
                                 </div>
                                 <div class="modal-footer">
@@ -133,8 +137,6 @@
                                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Salir</button>
                                 </div>
                             </form> 
-                        
-            
                         </div>
             
                         

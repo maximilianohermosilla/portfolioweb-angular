@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { DomSanitizer } from '@angular/platform-browser';
 import { Education } from 'src/app/models/education';
 import { PortfolioService } from 'src/app/servicios/portfolio.service';
 
@@ -23,7 +24,11 @@ export class EducacionComponent implements OnInit {
   educacion: Education = this.clearEducation();
   editModes: boolean = false; 
 
-  constructor(private servPortfolio: PortfolioService, private formBuilder: FormBuilder) { 
+  base64: string = 'Base64...";'
+  fileSelected?: Blob;
+  imageUrl?: string;
+
+  constructor(private servPortfolio: PortfolioService, private formBuilder: FormBuilder, private sant: DomSanitizer) { 
     this.formGroup = this.formBuilder.group({
       school: ['',[]],
       title: ['',[]],
@@ -104,6 +109,27 @@ export class EducacionComponent implements OnInit {
 
   onSubmit(educacion: Education){
     this.newEducation ? this.onInsert(educacion): this.onUpdate(educacion)
-    console.log(this.newEducation);
+    //console.log(this.newEducation);
+  }
+
+  onSelectNewFile(event: Event): void{
+    const target= event.target as HTMLInputElement;
+    this.fileSelected = (target.files as FileList)[0];
+    this.imageUrl= this.sant.bypassSecurityTrustUrl( window.URL.createObjectURL(this.fileSelected)) as string;    
+    this.base64="Base64...";
+    this.convertFileToBase64();
+    
+  }  
+
+  convertFileToBase64(): void{
+    let reader= new FileReader();
+    reader.readAsDataURL(this.fileSelected as Blob);
+    reader.onloadend=()=>{
+      this.base64=reader.result as string;
+    }
+    //console.log("Imagen: ", this.imageUrl);
+    setTimeout(()=>{                         
+      this.educacion.image=this.base64;
+    }, 500);    
   }
 }

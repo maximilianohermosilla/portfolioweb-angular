@@ -86,8 +86,6 @@ export class ModuloComponent implements OnInit {
   getEditProjects(){
     return this.uiService.getEditProjects;
   }
-
-  
   
 
 }

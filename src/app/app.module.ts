@@ -23,9 +23,9 @@ import { FooterComponent } from './components/footer/footer.component';
 import { ModuloHeaderComponent } from './components/modulo-header/modulo-header.component';
 
 const routes: Routes = [
-  {path: '', component:HeaderComponent },
-  //{path: 'login', component:LoginComponent },
-  {path: 'portfolio', component:AppComponent },
+  {path: '', component:PortfolioComponent },
+  {path: 'login', component:LoginComponent },
+  {path: 'portfolio', component:PortfolioComponent },
 ];
 
 @NgModule({

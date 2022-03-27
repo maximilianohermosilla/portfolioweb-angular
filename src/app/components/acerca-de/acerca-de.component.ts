@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { DomSanitizer } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
 import { Portfolio } from 'src/app/models/portfolio';
 import { AuthService } from 'src/app/servicios/auth.service';
@@ -20,7 +21,11 @@ export class AcercaDeComponent implements OnInit {
   subscription? : Subscription;
   color="";
 
-  constructor(private servPortfolio: PortfolioService, private formBuilder: FormBuilder, private uiService: UiServiceService, private authService: AuthService) {
+  base64: string = 'Base64...";'
+  fileSelected?: Blob;
+  imageUrl?: string;
+
+  constructor(private servPortfolio: PortfolioService, private formBuilder: FormBuilder, private uiService: UiServiceService, private authService: AuthService, private sant: DomSanitizer) {
     this.subscription = this.uiService.onToggleSession().subscribe( data =>
         this.showLogin = data
       );      
@@ -28,7 +33,8 @@ export class AcercaDeComponent implements OnInit {
       name : ['',[]],
       position : ['',[]],
       ubication : ['',[]],
-      about : ['',[]]      
+      about : ['',[]],
+      profilePhoto : ['',[]]       
     })
    }
 
@@ -74,6 +80,27 @@ export class AcercaDeComponent implements OnInit {
 
   getSession(): boolean{
     return this.authService.logIn;
+  }
+
+  onSelectNewFile(event: Event): void{
+    const target= event.target as HTMLInputElement;
+    this.fileSelected = (target.files as FileList)[0];
+    this.imageUrl= this.sant.bypassSecurityTrustUrl( window.URL.createObjectURL(this.fileSelected)) as string;    
+    this.base64="Base64...";
+    this.convertFileToBase64();
+    
+  }  
+
+  convertFileToBase64(): void{
+    let reader= new FileReader();
+    reader.readAsDataURL(this.fileSelected as Blob);
+    reader.onloadend=()=>{
+      this.base64=reader.result as string;
+    }
+    //console.log("Imagen: ", this.imageUrl);
+    setTimeout(()=>{                         
+      this.miPortfolio.profilePhoto=this.base64;
+    }, 500);    
   }
 
   

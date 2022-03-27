@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Chart } from 'chart.js';
 import { Subscription } from 'rxjs';
 import { Skill } from 'src/app/models/skill';
@@ -35,7 +35,7 @@ export class SkillsComponent implements OnInit, OnDestroy {
   constructor(private servPortfolio: PortfolioService, private formBuilder: FormBuilder) {  
     this.formGroup = this.formBuilder.group({
       name: ['',[]],
-      score: ['',[]],
+      score: ['',[Validators.max(100)]],
       color: ['',[]],
     })
   }
@@ -165,6 +165,16 @@ export class SkillsComponent implements OnInit, OnDestroy {
     console.log(this.newSkill);
   }
 
-  
+  get Name(){
+    return this.formGroup.get('name');
+  }
+
+  get Score(){
+    return this.formGroup.get('score');
+  }
+
+  get Color(){
+    return this.formGroup.get('color');
+  }
 
 }
