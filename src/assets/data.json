@@ -339,5 +339,9 @@
       "url": "#",
       "img": "/assets/upa10.jpg"
     }
-  ]
+  ],
+  "authenticate": {
+    "user": "admin",
+    "password": "CLAve123**"
+  }
 }

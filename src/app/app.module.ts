@@ -10,7 +10,7 @@ import { SkillsComponent } from './components/skills/skills.component';
 import { ProyectosComponent } from './components/proyectos/proyectos.component';
 import { LoginComponent } from './components/login/login.component';
 import { PortfolioService } from './servicios/portfolio.service';
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { Chart } from 'chart.js';
 import { NgChartsModule } from 'ng2-charts';
 import { ButtonComponent } from './components/button/button.component';
@@ -21,6 +21,7 @@ import { PortfolioComponent } from './components/portfolio/portfolio.component';
 import { ModuloComponent } from './components/modulo/modulo.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ModuloHeaderComponent } from './components/modulo-header/modulo-header.component';
+import { InterceptorService } from './servicios/interceptor.service';
 
 const routes: Routes = [
   {path: '', component:PortfolioComponent },
@@ -54,7 +55,9 @@ const routes: Routes = [
     ReactiveFormsModule,
     RouterModule.forRoot(routes, {enableTracing: true})
   ],
-  providers: [],
+  providers: [PortfolioService, 
+  { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true},
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

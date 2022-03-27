@@ -1,5 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/servicios/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -11,10 +13,10 @@ export class LoginComponent implements OnInit {
   form: FormGroup;
   
 
-  constructor(private formBuilder: FormBuilder) { 
+  constructor(private formBuilder: FormBuilder, private authService: AuthService, private route: Router) { 
     this.form = this.formBuilder.group({
-      user: ['',[]],
-      password: ['',[]]
+      user: ['',[Validators.required, Validators.minLength(5)]],
+      password: ['',[Validators.required, Validators.minLength(8)]]
     })
   }
 
@@ -23,6 +25,22 @@ export class LoginComponent implements OnInit {
 
   onSubmit(){
     this.btnSubmit.emit();    
+  }
+
+  get User(){
+    return this.form.get('user');
+  }
+
+  get Password(){
+    return this.form.get('password');
+  }
+
+  onLogin(event: Event){
+    event.preventDefault;
+    this.authService.iniciarSesion(this.form.value).subscribe(data=>{
+      console.log("Data: " + JSON.stringify(data));
+      this.route.navigate(['/portfolio']);
+    })
   }
 
 }
