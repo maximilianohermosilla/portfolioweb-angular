@@ -1,6 +1,5 @@
 <div class="banner">
     <div class="banner-background" role="banner">
-        <img src="miPortfolio.profilePhoto" alt="">
      </div> 
 </div>
 
@@ -119,7 +118,6 @@
                             type="text" 
                             formControlName = "name"
                             placeholder="Ingrese Nombre" 
-                            [(ngModel)]="miPortfolio.name"
                         />
                     </div>
 
@@ -129,7 +127,6 @@
                             type="text" 
                             formControlName="position" 
                             placeholder="Ingrese Ocupación"
-                            [(ngModel)]="miPortfolio.position"
                         />
                     </div>
                     <div class="form-group">
@@ -138,7 +135,6 @@
                             type="text" 
                             formControlName="ubication" 
                             placeholder="Ingrese Ubicacion"
-                            [(ngModel)]="miPortfolio.ubication"
                         />
                     </div>
                     <div class="form-group">
@@ -147,7 +143,6 @@
                             type="text" 
                             formControlName="about" 
                             placeholder="Descripcion"
-                            [(ngModel)]="miPortfolio.about"
                         />
                     </div>
 
@@ -157,7 +152,6 @@
                             type="file" 
                             formControlName="profilePhoto"                            
                             placeholder="{{miPortfolio.profilePhoto}}"
-                            [(ngModel)]="miPortfolio.profilePhoto"
                             (change)="onSelectNewFile($event)"
                         />
                     </div>

@@ -53,9 +53,9 @@ export class PortfolioComponent implements OnInit {
       this.company = data.company;
       this.school = data.school;
     });   
-    /*setTimeout(()=>{                         
+    setTimeout(()=>{                         
       console.log(this.experienceList.length>0);
-    }, 500);*/
+    }, 500);
   }
 
   toggleExperience(){

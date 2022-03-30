@@ -6,7 +6,7 @@ import { Portfolio } from '../models/portfolio';
 import { PORTFOLIOS } from '../models/mock-portfolio';
 import { Skill } from '../models/skill';
 import { Experience } from '../models/experience';
-import { tap } from 'rxjs/operators'
+import { map, tap } from 'rxjs/operators'
 import { Education } from '../models/education';
 import { Project } from '../models/project';
 
@@ -23,12 +23,16 @@ export class PortfolioService {
 
   private _refresh$ = new Subject<void>();
 
-  private url= 'https:localhost:5001/'
+  private url= 'https://localhost:5001/'
   private apiUrl = 'http://localhost:5001/portfolio'
-  private urlExperience = 'http://localhost:5001/experience'
+  private apiSpringUrl = 'http://localhost:8080/portfolio/traerPersona'
+  private urlExperience = 'http://localhost:5001/experience'  
   private urlEducation = 'http://localhost:5001/education'
   private urlSkills = 'http://localhost:5001/skills'
   private urlProjects = 'http://localhost:5001/projects'
+
+  private apiExperience = 'http://localhost:8080/experience'
+  private apiEducation = 'http://localhost:8080/education'
 
 
   constructor(private http:HttpClient) { }
@@ -39,6 +43,14 @@ export class PortfolioService {
 
   obtenerDatos(): Observable<any>{
     return this.http.get(this.apiUrl).pipe(
+      tap(() => {
+         this._refresh$.next();       
+      })
+    )
+  }
+
+  obtenerPortfolio(): Observable<any>{
+    return this.http.get(this.apiSpringUrl).pipe(
       tap(() => {
          this._refresh$.next();       
       })
@@ -63,42 +75,54 @@ export class PortfolioService {
   //---EXPERIENCIA---//
 
   getExperiencia(): Observable<Experience[]>{
-    return this.http.get<Experience[]>(this.urlExperience);
+    //return this.http.get<Experience[]>(this.urlExperience);
+    return this.http.get<Experience[]>(this.apiExperience).pipe(
+      tap(() => {
+         this._refresh$.next();       
+      })
+    )
   } 
 
   updateExperience(experience: Experience): Observable<Experience>{
-    const updateUrl = `${this.urlExperience}/${experience.id}`
-    return this.http.put<Experience>(updateUrl, experience, httpOptions);
+    const updateUrl = `${this.apiExperience}/${experience.id}`
+    return this.http.put<Experience>(updateUrl, experience, {responseType: "text" as "json"}).pipe(
+      tap(() => {
+         this.refresh$.next();       
+      })
+    );
   }
 
   insertExperience(experience: Experience): Observable<Experience>{
-    return this.http.post<Experience>(this.urlExperience, experience, httpOptions);
+    return this.http.post<Experience>(this.apiExperience, experience);
   }
 
-  deleteExperience(experience: Experience): Observable<Experience>{
-    const deleteUrl = `${this.urlExperience}/${experience.id}`
-    return this.http.delete<Experience>(deleteUrl);
+  deleteExperience(experience: Experience): Observable<any>{
+    const deleteUrl = `${this.apiExperience}/${experience.id}`
+    return this.http.delete<Experience>(deleteUrl, {responseType: "text" as "json"});
   }
 
   //---EDUCATION---//
 
 
   getEducation(): Observable<Education[]>{
-    return this.http.get<Education[]>(this.urlEducation);
+    //return this.http.get<Education[]>(this.urlEducation);
+    return this.http.get<Education[]>(this.apiEducation).pipe(
+      map(response => response)
+    )
   } 
 
   updateEducation(education: Education): Observable<Education>{
-    const updateUrlEducation = `${this.urlEducation}/${education.id}`
-    return this.http.put<Education>(updateUrlEducation, education, httpOptions);
+    const updateUrlEducation = `${this.apiEducation}/${education.id}`
+    return this.http.put<Education>(updateUrlEducation, education, {responseType: "text" as "json"});
   }
 
   insertEducation(education: Education): Observable<Education>{
-    return this.http.post<Education>(this.urlEducation, education, httpOptions);
+    return this.http.post<Education>(this.apiEducation, education);
   }
 
   deleteEducation(education: Education): Observable<Education>{
-    const deleteUrl = `${this.urlEducation}/${education.id}`
-    return this.http.delete<Education>(deleteUrl);
+    const deleteUrl = `${this.apiEducation}/${education.id}`
+    return this.http.delete<Education>(deleteUrl, {responseType: "text" as "json"});
   }
 
 

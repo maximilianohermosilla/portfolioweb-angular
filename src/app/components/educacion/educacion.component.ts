@@ -32,7 +32,7 @@ export class EducacionComponent implements OnInit {
     this.formGroup = this.formBuilder.group({
       school: ['',[]],
       title: ['',[]],
-      image: ['',[]],
+      image: [null,[]],
       career: ['',[]],
       score: ['',[]],
       start: ['',[]],
@@ -41,9 +41,6 @@ export class EducacionComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.servPortfolio.obtenerDatos().subscribe(data =>{      
-    //   this.educationList = data.education;
-    // });
     this.servPortfolio.getEducation().subscribe(data =>{       
       this.educationList = data;
     });
@@ -65,10 +62,12 @@ export class EducacionComponent implements OnInit {
       start: education.start,
       end: education.end
     }  
+    this.title="Editar Educación";
     this.newEducation = false;    
   }
 
   clearEducation(): Education{
+    this.newEducation = true;
     this.educacion =  {
       id: 0,
       school: '',
@@ -79,8 +78,13 @@ export class EducacionComponent implements OnInit {
       start: '',
       end: ''
     }
-    this.newEducation = true;
+    this.title="Nueva Educación";
     return this.educacion;
+  }
+
+  onSubmit(educacion: Education){
+    this.newEducation ? this.onInsert(educacion): this.onUpdate(educacion)
+    //console.log(this.newEducation);
   }
   
   onUpdate(education: Education){
@@ -105,12 +109,7 @@ export class EducacionComponent implements OnInit {
       .subscribe(()=> {return (this.educationList = this.educationList.filter((t) => (t.id !== educacion.id))
           );
         })
-  }
-
-  onSubmit(educacion: Education){
-    this.newEducation ? this.onInsert(educacion): this.onUpdate(educacion)
-    //console.log(this.newEducation);
-  }
+  }  
 
   onSelectNewFile(event: Event): void{
     const target= event.target as HTMLInputElement;
