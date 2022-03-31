@@ -4,6 +4,7 @@ import { Chart } from 'chart.js';
 import { Subscription } from 'rxjs';
 import { Skill } from 'src/app/models/skill';
 import { PortfolioService } from 'src/app/servicios/portfolio.service';
+import { SkillsService } from 'src/app/servicios/skills.service';
 
 
 @Component({
@@ -32,7 +33,7 @@ export class SkillsComponent implements OnInit, OnDestroy {
   _options;
 
 
-  constructor(private servPortfolio: PortfolioService, private formBuilder: FormBuilder) {  
+  constructor(private servPortfolio: SkillsService, private formBuilder: FormBuilder) {  
     this.formGroup = this.formBuilder.group({
       name: ['',[]],
       score: ['',[Validators.max(100)]],

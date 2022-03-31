@@ -60,7 +60,6 @@
                                         type="text" 
                                         formControlName="name" 
                                         placeholder="Ingrese Nombre" 
-                                        [(ngModel)]="skillItem.name"
                                     />
                                 </div>
             
@@ -71,7 +70,6 @@
                                         formControlName="score" 
                                         id="score" 
                                         placeholder="Ingrese un entre 0 y 100"
-                                        [(ngModel)]="skillItem.score"
                                     />
                                 </div>
                                 <div *ngIf="Score?.errors && Score?.touched">
@@ -83,7 +81,6 @@
                                         ng-model="skill.color"
                                         type="text" 
                                         formControlName="color"
-                                        [(ngModel)]="skillItem.color"
                                         style="width:100px"
                                     />                              
                                     <div colorpicker ng-model="your_model"></div>      
