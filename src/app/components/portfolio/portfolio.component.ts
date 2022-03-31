@@ -44,7 +44,7 @@ export class PortfolioComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.servPortfolio.obtenerDatos().subscribe(data =>{
+    this.servPortfolio.getPortfolio().subscribe(data =>{
       this.miPortfolio = data;
       this.experienceList = data.experience;
       this.educationList = data.education;
@@ -52,10 +52,12 @@ export class PortfolioComponent implements OnInit {
       this.projectsList = data.projects;
       this.company = data.company;
       this.school = data.school;
+      console.log(data);
     });   
     setTimeout(()=>{                         
-      console.log(this.experienceList.length>0);
+      //console.log(this.experienceList.length>0);
     }, 500);
+    
   }
 
   toggleExperience(){

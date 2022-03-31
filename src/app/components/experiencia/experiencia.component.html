@@ -36,8 +36,7 @@
                     <div class="col-sm">
                         <div class="contenedor" *ngIf="editMode">
                             <i class="bi bi-pencil-fill"
-                             style="
-                              margin-right: 10px"
+                             style="margin-right: 10px"
                               data-bs-toggle="modal" data-bs-target="#experienceModal"
                               (click)="setExperience(experience)"
                               ></i>
@@ -118,14 +117,19 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="img">Imagen</label>
-                                    <input class="form-control"
-                                        type="file"                     
-                                        placeholder="{{experiencia.img}}"
-                                        (change)="onSelectNewFile($event)"
-                                    />
-                                </div>
+                                    <div class="input-group mb-3">
+                                        <input class="form-control"
+                                        type="file" 
+                                        (change)="onSelectNewFile($event)"                            
+                                    /><div class="input-group-append">
+                                        <button class="btn btn-outline-danger" *ngIf="sizeImage" (click)="clearImage(experiencia.img)" type="button">Limpiar</button>
+                                      </div>
+                                    </div>
+                                                           
+                                </div>                    
+                                    <p *ngIf="sizeImage" class="text-danger">El tamaño de la imagen es demasiado grande</p> 
                                 <div class="modal-footer">
-                                    <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Guardar</button>
+                                    <button type="submit" class="btn btn-success" [disabled]="sizeImage" data-bs-dismiss="modal">Guardar</button>
                                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Salir</button>
                                 </div>
                             </form> 

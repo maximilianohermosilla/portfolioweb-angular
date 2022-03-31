@@ -205,3 +205,8 @@
   span>button{
     margin: 1em 0em 1em;
   }
+
+  .btn-outline-danger{
+    margin-left:5px;
+    box-shadow: 3px 1px 5px 6px rgba(165, 31, 31, 0.3);
+  }

@@ -64,7 +64,6 @@
                             type="text" 
                             formControlName="school" 
                             placeholder="{{educacion.school}}"
-                            [(ngModel)]="educacion.school"
                         />
                     </div>
 
@@ -74,7 +73,6 @@
                             type="title" 
                             formControlName="title" 
                             placeholder="{{educacion.title}}"
-                            [(ngModel)]="educacion.title"
                         />
                     </div>
 
@@ -85,7 +83,6 @@
                             type="text" 
                             formControlName="career" 
                             placeholder="{{educacion.career}}" 
-                            [(ngModel)]="educacion.career"
                         />
                     </div>
 
@@ -95,7 +92,6 @@
                             type="text" 
                             formControlName="score" 
                             placeholder="{{educacion.score}}" 
-                            [(ngModel)]="educacion.score"
                         />
                     </div>
 
@@ -105,7 +101,6 @@
                             type="text" 
                             formControlName="start" 
                             placeholder="{{educacion.start}}"
-                            [(ngModel)]="educacion.start"
                         />
                     </div>
                     <div class="form-group">
@@ -115,21 +110,24 @@
                             formControlName="end" 
                             id="end" 
                             placeholder="{{educacion.end}}"
-                            [(ngModel)]="educacion.end"
                         />
                     </div>
                     <div class="form-group">
                         <label for="image">Imagen</label>
-                        <input class="form-control"
+                        <div class="input-group mb-3">
+                            <input class="form-control"
                             type="file" 
-                            formControlName="image"                            
-                            placeholder="{{educacion.image}}"
-                            [(ngModel)]="educacion.image"
-                            (change)="onSelectNewFile($event)"
-                        />
-                    </div>
+                            formControlName="image"  
+                            (change)="onSelectNewFile($event)"                            
+                        /><div class="input-group-append">
+                            <button class="btn btn-outline-danger" *ngIf="sizeImage" (click)="clearImage(educacion.image)" type="button">Limpiar</button>
+                          </div>
+                        </div>
+                                               
+                    </div>                    
+                        <p *ngIf="sizeImage" class="text-danger">El tamaño de la imagen es demasiado grande</p>                        
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Guardar</button>
+                        <button type="submit" class="btn btn-success" [disabled]="sizeImage" data-bs-dismiss="modal">Guardar</button>
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Salir</button>
                     </div>
                 </form> 

@@ -31,9 +31,10 @@ export class ExperienciaComponent implements OnInit {
   experiencia: Experience = this.emptyExperience();
 
   
-  base64: string = 'Base64...";'
+  base64: string = ''
   fileSelected?: Blob;
-  imageUrl?: string;
+  imageUrl?: string;  
+  sizeImage: boolean = false;
 
   constructor(private servPortfolio: PortfolioService, private formBuilder: FormBuilder, private uiService: UiServiceService, private experienceServ: ExperienceService, private sant: DomSanitizer) { 
     this.subscription = this.uiService.onToggleSession().subscribe( data =>
@@ -54,9 +55,6 @@ export class ExperienciaComponent implements OnInit {
 
   ngOnInit(): void {
     this.getExperienceList();
-    /*this.experienceServ.refresh$.subscribe(response => {
-      this.getExperienceList();
-    })*/
   }
 
   getExperienceList(){
@@ -138,11 +136,12 @@ export class ExperienciaComponent implements OnInit {
 
 
   onSubmit(experience: Experience){
+    this.base64 = this.base64.length>0? this.base64: this.experiencia.img;
     experience = {
       id: experience.id,
       position: this.formGroup.value.position,
       company: this.formGroup.value.company,
-      img: this.experiencia.img,
+      img: this.base64,
       mode: this.formGroup.value.mode,
       start: this.formGroup.value.start,
       end: this.formGroup.value.end,
@@ -160,8 +159,8 @@ export class ExperienciaComponent implements OnInit {
 
   onUpdate(experience: Experience){
     this.experienceServ.updateExperience(experience).subscribe(result=>{this.ngOnInit();});  
-    //this.experienceList = this.experienceList;
-    this.getExperienceList();     
+    this.getExperienceList();  
+    this.base64="";   
     //this.onUpdateExperience.emit(experience);
   }
 
@@ -172,6 +171,7 @@ export class ExperienciaComponent implements OnInit {
     this.experienceServ.insertExperience(experience).subscribe((experience)=>(
       this.experienceList.push(experience)
     ))
+    this.base64="";
   }
 
   onDelete(experience: Experience){    
@@ -191,7 +191,9 @@ export class ExperienciaComponent implements OnInit {
     this.fileSelected = (target.files as FileList)[0];
     this.imageUrl= this.sant.bypassSecurityTrustUrl( window.URL.createObjectURL(this.fileSelected)) as string;    
     this.base64="Base64...";
+    this.formGroup.value.img=this.fileSelected;
     this.convertFileToBase64();
+
     
   }  
 
@@ -200,10 +202,24 @@ export class ExperienciaComponent implements OnInit {
     reader.readAsDataURL(this.fileSelected as Blob);
     reader.onloadend=()=>{
       this.base64=reader.result as string;
-    }
-    //console.log("Imagen: ", this.imageUrl);
-    setTimeout(()=>{                         
-      this.experiencia.img=this.base64;
+    }    
+    setTimeout(()=>{           
+      this.bigImage();
     }, 500);    
+  }
+
+  get Image(){
+    return this.formGroup.get('img');
+  }
+
+  bigImage(){
+    this.sizeImage = (this.base64.length > 50000);
+    console.log("Imagen base64 length: ", this.base64.length);
+  }
+
+  clearImage(experienceImg: string){
+    this.base64=experienceImg;
+    this.formGroup.value.img='';
+    this.bigImage();
   }
 }

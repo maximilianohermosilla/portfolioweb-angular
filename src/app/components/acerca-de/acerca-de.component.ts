@@ -43,8 +43,8 @@ export class AcercaDeComponent implements OnInit {
   }
 
   getPortfolio(){
-    this.servPortfolio.obtenerDatos().subscribe(data =>{
-      this.miPortfolio = data;
+    this.servPortfolio.getPortfolio().subscribe(data =>{
+      this.miPortfolio = data[0];
     });
   }
 

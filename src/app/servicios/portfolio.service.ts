@@ -25,12 +25,13 @@ export class PortfolioService {
 
   private url= 'https://localhost:5001/'
   private apiUrl = 'http://localhost:5001/portfolio'
-  private apiSpringUrl = 'http://localhost:8080/portfolio/traerPersona'
+  private apiSpringUrl = 'http://localhost:8080/portfolio'
   private urlExperience = 'http://localhost:5001/experience'  
   private urlEducation = 'http://localhost:5001/education'
   private urlSkills = 'http://localhost:5001/skills'
   private urlProjects = 'http://localhost:5001/projects'
 
+  private apiPortfolio = 'http://localhost:8080/portfolio'
   private apiExperience = 'http://localhost:8080/experience'
   private apiEducation = 'http://localhost:8080/education'
 
@@ -60,12 +61,12 @@ export class PortfolioService {
   //---PORTFOLIO---//
 
   getPortfolio(): Observable<Portfolio>{
-    return this.http.get<Portfolio>(this.apiUrl).pipe(
+    return this.http.get<Portfolio>(this.apiPortfolio).pipe(
       tap(() => {
          this._refresh$.next();       
       })
     )
-  }
+  } 
 
   updatePortfolio(portfolio: Portfolio): Observable<Portfolio>{
     const url = `${this.apiUrl}/${portfolio.id}`
@@ -107,13 +108,19 @@ export class PortfolioService {
   getEducation(): Observable<Education[]>{
     //return this.http.get<Education[]>(this.urlEducation);
     return this.http.get<Education[]>(this.apiEducation).pipe(
-      map(response => response)
+      tap(() => {
+         this._refresh$.next();       
+      })
     )
   } 
 
   updateEducation(education: Education): Observable<Education>{
     const updateUrlEducation = `${this.apiEducation}/${education.id}`
-    return this.http.put<Education>(updateUrlEducation, education, {responseType: "text" as "json"});
+    return this.http.put<Education>(updateUrlEducation, education, {responseType: "text" as "json"}).pipe(
+      tap(() => {
+         this.refresh$.next();       
+      })
+    );
   }
 
   insertEducation(education: Education): Observable<Education>{
