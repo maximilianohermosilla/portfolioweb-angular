@@ -32,6 +32,7 @@ export class PortfolioService {
   private urlProjects = 'http://localhost:5001/projects'
 
   private apiPortfolio = 'http://localhost:8080/portfolio'
+  private apiPortfolioFull = 'http://localhost:8080/portfolioFull/1'
   private apiExperience = 'http://localhost:8080/experience'
   private apiEducation = 'http://localhost:8080/education'
 
@@ -62,6 +63,14 @@ export class PortfolioService {
 
   getPortfolio(): Observable<Portfolio>{
     return this.http.get<Portfolio>(this.apiPortfolio).pipe(
+      tap(() => {
+         this._refresh$.next();       
+      })
+    )
+  } 
+
+  getPortfolioFull(): Observable<Portfolio>{
+    return this.http.get<Portfolio>(this.apiPortfolioFull).pipe(
       tap(() => {
          this._refresh$.next();       
       })

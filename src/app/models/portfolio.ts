@@ -14,8 +14,8 @@ export interface Portfolio{
     ubication: string,
     about: string,
 
-    company: Company,
-    school: School,
+    company: Experience,
+    school: Education,
     experience: Experience[],
     education: Education[],
     skills: Skill[],

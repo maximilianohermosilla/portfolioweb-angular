@@ -43,8 +43,11 @@ export class AcercaDeComponent implements OnInit {
   }
 
   getPortfolio(){
-    this.servPortfolio.getPortfolio().subscribe(data =>{
-      this.miPortfolio = data[0];
+    this.servPortfolio.getPortfolioFull().subscribe(data =>{
+      this.miPortfolio = data;
+      this.miPortfolio.company = data.experience[0];
+      this.miPortfolio.school = data.education[0];
+      console.log(data);
     });
   }
 
@@ -56,8 +59,8 @@ export class AcercaDeComponent implements OnInit {
       position: '',
       ubication: '',
       about: '',
-      company: {name:'', img:'', url:''},
-      school: {name:'', img:'', url:''},
+      company: {company:'', img:'', position:'', mode:'', start:'', end:'', timeElapsed:'', ubication:''},
+      school: {school:'', image:'', title:'', career:'', score:'', start:'', end:'',},
       experience: [],
       education: [],
       skills: [],
