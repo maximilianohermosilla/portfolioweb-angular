@@ -11,6 +11,9 @@ export class EducationService {
   private _refresh$ = new Subject<void>();
 
     private apiEducation = 'http://localhost:8080/education'
+    private apiEducationFull = 'http://localhost:8080/educationFull'
+    private apiEducationPersona = 'http://localhost:8080/educationPersona'
+    private apiInsertEducation = 'http://localhost:8080/education/'
 
   constructor(private http:HttpClient) { }
 
@@ -19,8 +22,24 @@ export class EducationService {
   }
 
   getEducation(): Observable<Education[]>{
-    //return this.http.get<Education[]>(this.urlEducation);
     return this.http.get<Education[]>(this.apiEducation).pipe(
+      tap(() => {
+         this._refresh$.next();       
+      })
+    )
+  }   
+
+  getEducationPortfolio(idPersona: Number): Observable<Education[]>{
+    return this.http.get<Education[]>(this.apiEducationPersona+"/"+idPersona).pipe(
+      tap(() => {
+         this._refresh$.next();       
+      })
+    )
+  } 
+
+  getEducationFull(): Observable<Education[]>{
+    //return this.http.get<Education[]>(this.urlEducation);
+    return this.http.get<Education[]>(this.apiEducationFull).pipe(
       tap(() => {
          this._refresh$.next();       
       })
@@ -38,6 +57,10 @@ export class EducationService {
 
   insertEducation(education: Education): Observable<Education>{
     return this.http.post<Education>(this.apiEducation, education);
+  }
+
+  insertEducationPersona(idPersona: number, education: Education): Observable<Education>{
+    return this.http.post<Education>(this.apiEducationPersona+"/"+idPersona, education);
   }
 
   deleteEducation(education: Education): Observable<Education>{

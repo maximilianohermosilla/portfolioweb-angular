@@ -25,8 +25,10 @@ export class AcercaDeComponent implements OnInit {
   editMode: boolean= false;
   subscription? : Subscription;
   color="";
+  
   miSchool: Education = {    school: '',    title: '',    image: '',    career: '',    score: '',    start: '',    end: ''  };
   miCompany: Experience = {    position: '',    company: '',    img: '',    mode: '',    start: '',    end: '',    timeElapsed: '',    ubication: ''  };
+  
   base64: string = 'Base64...";'
   fileSelected?: Blob;
   imageUrl?: string;
@@ -47,15 +49,18 @@ export class AcercaDeComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPortfolio();
+    console.log("Portfolio: ", this.miPortfolio);
+    console.log(this.experienceList);
+    console.log(this.educationList);
   }
 
   getPortfolio(){
     this.servPortfolio.getPortfolioFull().subscribe(data =>{
       this.miPortfolio = data;
-      this.miPortfolio.company = data.experience[0];
-      this.miPortfolio.school = data.education[0];
-      this.miSchool = data.education[0];
-      this.miCompany = data.experience[0];
+      //this.miPortfolio.company = data.experience[0];
+      //this.miPortfolio.school = data.education[0];
+      this.miSchool = data.school;
+      this.miCompany = data.company;
       data.experience.forEach(element => {
         const exp: Experience = element;
         this.experienceList.push(exp);
@@ -65,8 +70,7 @@ export class AcercaDeComponent implements OnInit {
         this.educationList.push(edu);
       });
     });
-    console.log(this.experienceList);
-    console.log(this.educationList);
+    
   }
 
   setPortfolio(){
@@ -122,7 +126,7 @@ export class AcercaDeComponent implements OnInit {
     const target= event.target as HTMLInputElement;
     this.fileSelected = (target.files as FileList)[0];
     this.imageUrl= this.sant.bypassSecurityTrustUrl( window.URL.createObjectURL(this.fileSelected)) as string;    
-    this.base64="Base64...";
+    this.base64="";
     this.convertFileToBase64();
     
   }  
@@ -152,11 +156,20 @@ export class AcercaDeComponent implements OnInit {
   }  
 
   chooseCompany(portfolio: Portfolio){
-
   }
 
-  chooseSchool(education: Education){    
-    
+  chooseSchool(portfolio: Portfolio, education: Education, experience: Experience){ 
+    console.log("portfolio: ", portfolio);       
+    console.log("education: ", education);
+    console.log("esperience: ",experience);
+
+    this.miPortfolio.company = experience;
+    this.miPortfolio.school = education;
+
+    console.log("Despues miPortfolio: ", this.miPortfolio);
+
+    //this.servPortfolio.updateSchool(education);
+    this.servPortfolio.updateCompany(experience);
   }
 
   

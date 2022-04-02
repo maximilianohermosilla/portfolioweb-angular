@@ -11,6 +11,7 @@ export class ExperienceService {
   private _refresh$ = new Subject<void>();
 
     private apiExperience = 'http://localhost:8080/experience'
+    private apiExperiencePersona = 'http://localhost:8080/experiencePersona'
 
   constructor(private http:HttpClient) { }
 
@@ -27,6 +28,14 @@ export class ExperienceService {
     )
   } 
 
+  getExperienciaPortfolio(idPersona: Number): Observable<Experience[]>{
+    return this.http.get<Experience[]>(this.apiExperiencePersona+"/"+idPersona).pipe(
+      tap(() => {
+         this._refresh$.next();       
+      })
+    )
+  } 
+
   updateExperience(experience: Experience): Observable<Experience>{
     const updateUrl = `${this.apiExperience}/${experience.id}`
     return this.http.put<Experience>(updateUrl, experience, {responseType: "text" as "json"}).pipe(
@@ -36,8 +45,8 @@ export class ExperienceService {
     );
   }
 
-  insertExperience(experience: Experience): Observable<Experience>{
-    return this.http.post<Experience>(this.apiExperience, experience);
+  insertExperience(idPersona: number, experience: Experience): Observable<Experience>{
+    return this.http.post<Experience>(this.apiExperiencePersona+"/"+idPersona, experience);
   }
 
   deleteExperience(experience: Experience): Observable<any>{

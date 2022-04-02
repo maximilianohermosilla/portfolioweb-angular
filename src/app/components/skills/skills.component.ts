@@ -18,6 +18,7 @@ export class SkillsComponent implements OnInit, OnDestroy {
   @Output() onInsertSkill: EventEmitter<Skill> = new EventEmitter();
   @Output() onDeleteSkill: EventEmitter<Skill> = new EventEmitter();
 
+  idPersona = 1;
   formGroup: FormGroup;
 
   subscription: Subscription = new Subscription();
@@ -57,7 +58,7 @@ export class SkillsComponent implements OnInit, OnDestroy {
   }
 
   getSkills(){
-    this.servPortfolio.getSkills().subscribe(data =>{
+    this.servPortfolio.getSkillsPortfolio(this.idPersona).subscribe(data =>{
       this.skillsList = data; 
     });
     setTimeout(()=>{                         
@@ -179,19 +180,21 @@ export class SkillsComponent implements OnInit, OnDestroy {
 
   onInsert(skill: Skill){
     //this.setSkill(skill);
-    this.servPortfolio.insertSkill(skill).subscribe((element)=>(
-      this.skillsList.push(element)
+    this.servPortfolio.insertSkill(this.idPersona, skill).subscribe((element)=>(
+      this.ngOnInit()
     ))  
-      
     
     location.reload(); 
   }
 
   onUpdate(skill: Skill){
     //this.clearCharts();
-    this.servPortfolio.updateSkill(skill).subscribe(result=>{
-      this.ngOnDestroy();
-      this.ngOnInit();}); 
+    console.log(this.skillItem);
+    console.log(this.formGroup);
+    console.log(skill);
+    this.servPortfolio.updateSkill(skill).subscribe(result=>{      
+      console.log("deleted" , result);
+      this.ngOnInit()}); 
     this.ngOnInit();  
     location.reload(); 
   }
@@ -202,8 +205,9 @@ export class SkillsComponent implements OnInit, OnDestroy {
     this.servPortfolio.deleteSkill(skill)
     .subscribe(data => {
       console.log("deleted" , data);
-      this.ngOnInit();
+      this.ngOnInit()
       });
+      this.ngOnInit();
     location.reload(); 
   }
 

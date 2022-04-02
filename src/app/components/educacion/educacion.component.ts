@@ -18,6 +18,7 @@ export class EducacionComponent implements OnInit {
   @Output() onInsertEducation: EventEmitter<Education> = new EventEmitter();
   @Output() onDeleteEducation: EventEmitter<Education> = new EventEmitter();
   
+  idPersona = 1;
   formGroup: FormGroup;
 
   educationList: any;
@@ -55,9 +56,10 @@ export class EducacionComponent implements OnInit {
   }
 
   getEducationList(){    
-    this.servPortfolio.getEducation().subscribe(data =>{       
+    this.servPortfolio.getEducationPortfolio(this.idPersona).subscribe(data =>{       
       this.educationList = data;
     });
+    console.log(this.educationList);
   }
 
   toggleEditMode(){
@@ -153,8 +155,9 @@ export class EducacionComponent implements OnInit {
   }
 
   onInsert(education: Education){
-    this.servPortfolio.insertEducation(education).subscribe((educacion)=>(
-      this.educationList.push(educacion)
+    this.servPortfolio.insertEducationPersona(this.idPersona,education).subscribe((educacion)=>(
+      //this.educationList.push(educacion)
+      this.ngOnInit()
     ))
     this.base64="";
   }
@@ -164,7 +167,6 @@ export class EducacionComponent implements OnInit {
     this.onDeleteEducation.emit(educacion);
     this.servPortfolio.deleteEducation(educacion)
       .subscribe(data => {
-        console.log("deleted" , data);
         this.ngOnInit();
         });        
   }  

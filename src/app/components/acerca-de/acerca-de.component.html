@@ -78,7 +78,7 @@
                         <select name="miSchool" id="" [(ngModel)]="miSchool">
                             <option value="">- No mostrar -</option>
                             <option *ngFor="let education of educationList" 
-                                [ngValue]="education" 
+                                [ngValue]="education"                                 
                                 >
                             {{education.school}}
                             </option>
@@ -88,7 +88,7 @@
                 
             </div>
             <div class="row align-items-center" id="card" style="min-height: 64px">
-                <button class="btn btn-success rounded float-end" *ngIf="editMode" (click)="toggleEditMode()" style="opacity: 0.9"> <i class="bi bi-check-square"> </i> Guardar Cambios</button>                
+                <button class="btn btn-success rounded float-end" *ngIf="editMode" (click)="chooseSchool(miPortfolio, miSchool, miCompany)" style="opacity: 0.9"> <i class="bi bi-check-square"> </i> Guardar Cambios</button>                
             </div>
         
     </div>

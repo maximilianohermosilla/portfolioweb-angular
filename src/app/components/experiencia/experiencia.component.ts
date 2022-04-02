@@ -18,6 +18,7 @@ export class ExperienciaComponent implements OnInit {
   @Output() onInsertExperience: EventEmitter<Experience> = new EventEmitter();
   @Output() onDeleteExperience: EventEmitter<Experience> = new EventEmitter();
 
+  idPersona = 1;
   formGroup: FormGroup;
 
   title="";
@@ -58,7 +59,7 @@ export class ExperienciaComponent implements OnInit {
   }
 
   getExperienceList(){
-    this.experienceServ.getExperiencia().subscribe(data =>{       
+    this.experienceServ.getExperienciaPortfolio(this.idPersona).subscribe(data =>{       
       this.experienceList = data;
     });
   }
@@ -168,8 +169,8 @@ export class ExperienciaComponent implements OnInit {
     //this.onInsertExperience.emit(experience);
     console.log(experience);
     console.log(this.experiencia);
-    this.experienceServ.insertExperience(experience).subscribe((experience)=>(
-      this.experienceList.push(experience)
+    this.experienceServ.insertExperience(this.idPersona, experience).subscribe((experience)=>(
+      this.ngOnInit()
     ))
     this.base64="";
   }

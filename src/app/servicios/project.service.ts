@@ -11,6 +11,7 @@ export class ProjectService {
   private _refresh$ = new Subject<void>();
 
   private urlProjects = 'http://localhost:8080/project'
+  private urlProjectsPersona = 'http://localhost:8080/projectPersona'
 
 
   constructor(private http:HttpClient) { }
@@ -27,6 +28,15 @@ export class ProjectService {
     )
   } 
 
+  getProjectPortfolio(idPersona: Number): Observable<Project[]>{
+    //return this.http.get<Education[]>(this.urlEducation);
+    return this.http.get<Project[]>(this.urlProjectsPersona+"/"+idPersona).pipe(
+      tap(() => {
+         this._refresh$.next();       
+      })
+    )
+  } 
+
   updateProject(project: Project): Observable<Project>{
     const updateUrlProjects = `${this.urlProjects}/${project.id}`
     return this.http.put<Project>(updateUrlProjects, project, {responseType: "text" as "json"}).pipe(
@@ -36,8 +46,8 @@ export class ProjectService {
     );
   }
 
-  insertProject(project: Project): Observable<Project>{
-    return this.http.post<Project>(this.urlProjects, project);
+  insertProject(idPersona: number, project: Project): Observable<Project>{
+    return this.http.post<Project>(this.urlProjectsPersona+"/"+idPersona, project);
   }
 
   deleteProject(project: Project): Observable<Project>{

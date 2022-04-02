@@ -11,6 +11,7 @@ export class SkillsService {
   private _refresh$ = new Subject<void>();
 
   private urlSkills = 'http://localhost:8080/skill'
+  private urlSkillsPersona = 'http://localhost:8080/skillPersona'
 
 
   constructor(private http:HttpClient) { }
@@ -21,6 +22,14 @@ export class SkillsService {
 
   getSkills(): Observable<Skill[]>{
     return this.http.get<Skill[]>(this.urlSkills).pipe(
+      tap(() => {
+         this._refresh$.next();       
+      })
+    )
+  } 
+
+  getSkillsPortfolio(idPersona: Number): Observable<Skill[]>{
+    return this.http.get<Skill[]>(this.urlSkillsPersona+"/"+idPersona).pipe(
       tap(() => {
          this._refresh$.next();       
       })
@@ -37,9 +46,9 @@ export class SkillsService {
     );
   }
 
-  insertSkill(skill: Skill): Observable<Skill>{
+  insertSkill(idPersona: number, skill: Skill): Observable<Skill>{
     console.log("insert servicio", skill);
-    return this.http.post<Skill>(this.urlSkills, skill);
+    return this.http.post<Skill>(this.urlSkillsPersona+"/"+idPersona, skill);
   }
 
   deleteSkill(skill: Skill): Observable<Skill>{

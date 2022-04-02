@@ -18,6 +18,7 @@ export class ProyectosComponent implements OnInit {
   @Output() onInsertProject: EventEmitter<Project> = new EventEmitter();
   @Output() onDeleteProject: EventEmitter<Project> = new EventEmitter();
 
+  idPersona = 1;
   formGroup: FormGroup;
 
   projectsList: any;
@@ -53,7 +54,7 @@ export class ProyectosComponent implements OnInit {
   }
 
   getProjectList(){
-    this.servPortfolio.getProjects().subscribe(data =>{
+    this.servPortfolio.getProjectPortfolio(this.idPersona).subscribe(data =>{
       this.projectsList = data;
     });
   }
@@ -140,8 +141,8 @@ export class ProyectosComponent implements OnInit {
   }
   
   onInsert(project: Project){
-    this.servPortfolio.insertProject(project).subscribe((project)=>(
-      this.projectsList.push(project)
+    this.servPortfolio.insertProject(this.idPersona, project).subscribe((project)=>(
+      this.ngOnInit()
     ))
     this.base64="";
   }
