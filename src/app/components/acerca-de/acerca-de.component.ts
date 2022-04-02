@@ -3,10 +3,12 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
 import { Portfolio } from 'src/app/models/portfolio';
+import { Experience } from 'src/app/models/experience';
 import { AuthService } from 'src/app/servicios/auth.service';
 import { PortfolioService } from 'src/app/servicios/portfolio.service';
 import { UiServiceService } from 'src/app/servicios/ui-service.service';
 import { LoginComponent } from '../login/login.component';
+import { Education } from 'src/app/models/education';
 
 @Component({
   selector: 'app-acerca-de',
@@ -17,11 +19,14 @@ export class AcercaDeComponent implements OnInit {
   formGroup: FormGroup;
 
   miPortfolio: Portfolio = this.clearPortfolio();
+  experienceList: Experience[] = [];
+  educationList: Education[] = [];
   showLogin: boolean= false;
   editMode: boolean= false;
   subscription? : Subscription;
   color="";
-
+  miSchool: Education = {    school: '',    title: '',    image: '',    career: '',    score: '',    start: '',    end: ''  };
+  miCompany: Experience = {    position: '',    company: '',    img: '',    mode: '',    start: '',    end: '',    timeElapsed: '',    ubication: ''  };
   base64: string = 'Base64...";'
   fileSelected?: Blob;
   imageUrl?: string;
@@ -49,8 +54,19 @@ export class AcercaDeComponent implements OnInit {
       this.miPortfolio = data;
       this.miPortfolio.company = data.experience[0];
       this.miPortfolio.school = data.education[0];
-      //console.log(data);
+      this.miSchool = data.education[0];
+      this.miCompany = data.experience[0];
+      data.experience.forEach(element => {
+        const exp: Experience = element;
+        this.experienceList.push(exp);
+      });
+      data.education.forEach(element => {
+        const edu: Education = element;
+        this.educationList.push(edu);
+      });
     });
+    console.log(this.experienceList);
+    console.log(this.educationList);
   }
 
   setPortfolio(){
@@ -139,7 +155,7 @@ export class AcercaDeComponent implements OnInit {
 
   }
 
-  chooseSchool(portfolio: Portfolio){
+  chooseSchool(education: Education){    
     
   }
 
