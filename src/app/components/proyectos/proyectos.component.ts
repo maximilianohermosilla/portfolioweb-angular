@@ -1,8 +1,11 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Subscription } from 'rxjs';
 import { Project } from 'src/app/models/project';
 import { PortfolioService } from 'src/app/servicios/portfolio.service';
+import { ProjectService } from 'src/app/servicios/project.service';
+import { UiServiceService } from 'src/app/servicios/ui-service.service';
 
 @Component({
   selector: 'app-proyectos',
@@ -15,29 +18,41 @@ export class ProyectosComponent implements OnInit {
   @Output() onInsertProject: EventEmitter<Project> = new EventEmitter();
   @Output() onDeleteProject: EventEmitter<Project> = new EventEmitter();
 
-
   formGroup: FormGroup;
+
   projectsList: any;
-  projectItem: Project = this.clearProject();
+  title: string = "";
+  color: string = "";
+  projectItem: Project = this.emptyProject();
   newProject: boolean = false;
   editModes: boolean = false;
-  color: string = "";
+  showLogin: boolean = false;
+  subscription? : Subscription;
 
   base64: string = 'Base64...";'
   fileSelected?: Blob;
   imageUrl?: string;
+  sizeImage: boolean = false;
 
-  constructor(private servPortfolio: PortfolioService, private formBuilder: FormBuilder, private sant: DomSanitizer) {    
+  constructor(private servPortfolio: ProjectService, private formBuilder: FormBuilder, private sant: DomSanitizer, private uiService: UiServiceService) {    
+    this.subscription = this.uiService.onToggleSession().subscribe( data =>
+      this.showLogin = data
+    );
+
     this.formGroup = this.formBuilder.group({
       name: ['',[]],
       start: ['',[]],
       description: ['',[]],
       url: ['',[]],
-      img: ['',[]],
+      img: [null,[]],
     })
    }
 
   ngOnInit(): void {
+    this.getProjectList();
+  }
+
+  getProjectList(){
     this.servPortfolio.getProjects().subscribe(data =>{
       this.projectsList = data;
     });
@@ -46,19 +61,6 @@ export class ProyectosComponent implements OnInit {
   toggleEditMode(){
     this.editMode = !this.editMode;
     this.editMode ?  this.color="#D4EFDF": this.color="green";
-  }
-
-  clearProject(): Project{
-    this.projectItem = {
-      id: 0,
-      name: '',
-      start: '',
-      description: '',
-      url: '',
-      img: ''
-    }
-    this.newProject = true;
-    return this.projectItem;
   }
 
   setProject(project: Project){ 
@@ -70,38 +72,90 @@ export class ProyectosComponent implements OnInit {
       url: project.url,
       img: project.img
     }
-    this.newProject = false;    
-  }
-
-  onUpdate(project: Project){
-    this.servPortfolio.updateProject(project).subscribe();  
-    this.projectsList = this.projectsList;
-    this.ngOnInit();     
-    //this.onUpdateExperience.emit(experience);
-  }
-  
-  onInsert(project: Project){
-    this.setProject(project);
-    project.id=0;
+    this.base64 = project.img;
+    this.formGroup.controls['name'].setValue(project.name);
+    this.formGroup.controls['start'].setValue(project.start);
+    this.formGroup.controls['description'].setValue(project.description);
+    this.formGroup.controls['url'].setValue(project.url);
     
-    //this.onInsertExperience.emit(experience);
-    this.servPortfolio.insertProject(project).subscribe((educacion)=>(
-      this.projectsList.push(project)
-    ))
+    this.title="Editar Proyecto";
+    this.newProject = false;    
+    console.log("Set project: ", this.projectItem);
   }
 
-  onDelete(project: Project){  
-    this.onDeleteProject.emit(project);
-    this.servPortfolio.deleteProject(project)
-      .subscribe(()=> {return (this.projectsList = this.projectsList.filter((t) => (t.id !== project.id))
-          );
-        })
+  emptyProject(): Project{
+    this.projectItem = {
+      id: 0,
+      name: '',
+      start: '',
+      description: '',
+      url: '',
+      img: ''
+    }
+    this.title="Nuevo Proyecto";
+    this.newProject = true;
+    return this.projectItem;
+  }
+
+  clearProject(): Project{
+    this.projectItem = {
+      id: 0,
+      name: '',
+      start: '',
+      description: '',
+      url: '',
+      img: ''
+    }
+    this.formGroup.controls['name'].setValue('');
+    this.formGroup.controls['start'].setValue('');
+    this.formGroup.controls['description'].setValue('');
+    this.formGroup.controls['url'].setValue('');
+    this.newProject = true;
+
+    this.title="Nuevo Proyecto";
+    return this.projectItem;
   }
 
   onSubmit(project: Project){
-    this.newProject ? this.onInsert(project): this.onUpdate(project)
-    console.log(this.newProject);
+    this.base64 = this.base64.length>0? this.base64: this.projectItem.img;
+    project = {
+      id : project.id,
+      name : this.formGroup.value.name,
+      start : this.formGroup.value.start,
+      img : this.base64,
+      description : this.formGroup.value.description,
+      url : this.formGroup.value.url,
+    }
+
+    console.log(this.formGroup);
+    console.log("project param: ", project);
+    console.log("this projectItem: ", this.projectItem);
+    this.newProject ? this.onInsert(project): this.onUpdate(project)    
   }
+
+  onUpdate(project: Project){
+    this.servPortfolio.updateProject(project).subscribe(result=>{this.ngOnInit();}); 
+    this.getProjectList();
+    this.base64='';    
+  }
+  
+  onInsert(project: Project){
+    this.servPortfolio.insertProject(project).subscribe((project)=>(
+      this.projectsList.push(project)
+    ))
+    this.base64="";
+  }
+
+  onDelete(project: Project){  
+    console.log("Delete: " , project);
+    this.onDeleteProject.emit(project);
+    this.servPortfolio.deleteProject(project)
+      .subscribe(data => {
+        console.log("deleted" , data);
+        this.ngOnInit();
+        });        
+  }  
+  
 
 
   onSelectNewFile(event: Event): void{
@@ -119,10 +173,26 @@ export class ProyectosComponent implements OnInit {
     reader.onloadend=()=>{
       this.base64=reader.result as string;
     }
-    //console.log("Imagen: ", this.imageUrl);
+    console.log("Imagen url: ", this.imageUrl);
+
     setTimeout(()=>{                         
-      this.projectItem.img=this.base64;
+      this.bigImage();
     }, 500);    
+  }
+
+  get Image(){
+    return this.formGroup.get('img');
+  }
+
+  bigImage(){
+    this.sizeImage = (this.base64.length > 50000);
+    console.log("Imagen base64 length: ", this.base64.length);
+  }
+
+  clearImage(educationImg: string){
+    console.log("conservar: " , educationImg);
+    this.base64=educationImg;
+    this.bigImage();
   }
 
 

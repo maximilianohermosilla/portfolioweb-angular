@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs';
 import { Skill } from 'src/app/models/skill';
 import { PortfolioService } from 'src/app/servicios/portfolio.service';
 import { SkillsService } from 'src/app/servicios/skills.service';
-
+import { UiServiceService } from 'src/app/servicios/ui-service.service';
 
 @Component({
   selector: 'app-skills',
@@ -19,21 +19,28 @@ export class SkillsComponent implements OnInit, OnDestroy {
   @Output() onDeleteSkill: EventEmitter<Skill> = new EventEmitter();
 
   formGroup: FormGroup;
+
   subscription: Subscription = new Subscription();
-  editModes: boolean = false;
+  title: string = "";
   color: string = "";
+  editModes: boolean = false;
+  showLogin: boolean = false;
 
   skillsList: Skill[] = [];
-  skillItem: Skill = this.clearSkill();
+  skillItem: Skill = this.emptySkill();
   newSkill: boolean = true;
   charts: any[] = [];
-  myChart;
+  chartsFactory: any[] = [];
   nombre;
   _data;
   _options;
 
 
-  constructor(private servPortfolio: SkillsService, private formBuilder: FormBuilder) {  
+  constructor(private servPortfolio: SkillsService, private formBuilder: FormBuilder, private uiService: UiServiceService) {  
+    this.subscription = this.uiService.onToggleSession().subscribe( data =>
+      this.showLogin = data
+    );
+
     this.formGroup = this.formBuilder.group({
       name: ['',[]],
       score: ['',[Validators.max(100)]],
@@ -73,9 +80,6 @@ export class SkillsComponent implements OnInit, OnDestroy {
   }  
 
   createChart(name:string, score:number, color:string, id?:number): any{
-    if (this.myChart instanceof Chart) {
-      this.myChart.destroy();
-    }
     var data;
     var option;
     data = {
@@ -103,19 +107,40 @@ export class SkillsComponent implements OnInit, OnDestroy {
 
 
   chartFactory(){
-    if (this.myChart) {
-      this.myChart.destroy();
-    }
-    new Chart(this.nombre, {
+    const chart = new Chart(this.nombre, {
       type: "doughnut",
       options: this._options,
       data: this._data
     });
+    this.chartsFactory.push(chart);
   }  
   
   toggleEditMode(){
     this.editMode = !this.editMode;
     this.editMode ?  this.color="#D4EFDF": this.color="green";
+  }
+
+  setSkill(skill: Skill){
+    this.skillItem = skill;
+
+    this.formGroup.controls['name'].setValue(skill.name);
+    this.formGroup.controls['score'].setValue(skill.score);
+    this.formGroup.controls['color'].setValue(skill.color);
+
+    this.title="Editar Aptitud";
+    this.newSkill = false;
+  } 
+
+  emptySkill(): Skill{
+    this.skillItem = {
+      id : 0,
+      name: '',
+      score: 0,
+      color: ''
+    }
+    this.title="Nueva Aptitud";
+    this.newSkill = true;
+    return this.skillItem;
   }
 
   clearSkill(): Skill{
@@ -125,46 +150,86 @@ export class SkillsComponent implements OnInit, OnDestroy {
       score: 0,
       color: ''
     }
+    this.formGroup.controls['name'].setValue('');
+    this.formGroup.controls['score'].setValue('');
+    this.formGroup.controls['color'].setValue('');
+
+    this.title="Nueva Aptitud";
     this.newSkill = true;
     return this.skillItem;
+  }  
+
+  onSubmit(skill: Skill){    
+    skill = {
+      id: skill.id,
+      name: this.formGroup.value.name,
+      score: this.formGroup.value.score,
+      color: this.skillItem.color
+    }
+
+    console.log(this.formGroup);
+    console.log("skill param: " , skill);
+    console.log("this skillItem: ", this.skillItem);
+    console.log("chartsFactory list: ", this.chartsFactory);
+    console.log("charts list: ", this.charts);    
+    console.log("chartsFactory list: ", this.chartsFactory);
+    //this.chartsFactory=[];
+    this.newSkill ? this.onInsert(skill): this.onUpdate(skill)
   }
 
-  setSkill(skill: Skill){
-    this.skillItem = skill;
-    this.newSkill = false;
-  } 
-
   onInsert(skill: Skill){
-    this.setSkill(skill);
-    skill.id=0;
-    //this.onInsertExperience.emit(experience);
-    console.log("insert component", skill);
+    //this.setSkill(skill);
     this.servPortfolio.insertSkill(skill).subscribe((element)=>(
       this.skillsList.push(element)
-    ))
-     
-    window.location.reload(); 
+    ))  
+      
+    
+    location.reload(); 
   }
 
   onUpdate(skill: Skill){
-    this.servPortfolio.updateSkill(skill).subscribe();       
+    //this.clearCharts();
+    this.servPortfolio.updateSkill(skill).subscribe(result=>{
+      this.ngOnDestroy();
+      this.ngOnInit();}); 
     this.ngOnInit();  
-    window.location.reload(); 
+    location.reload(); 
   }
 
   onDelete(skill: Skill){  
+    console.log("Delete: " , skill);
     this.onDeleteSkill.emit(skill);
     this.servPortfolio.deleteSkill(skill)
-      .subscribe(()=> {return (this.skillsList = this.skillsList.filter((t) => (t.id !== skill.id))
-          );
-        })
+    .subscribe(data => {
+      console.log("deleted" , data);
+      this.ngOnInit();
+      });
+    location.reload(); 
   }
 
-  onSubmit(skill: Skill){
-    
-    this.newSkill ? this.onInsert(skill): this.onUpdate(skill)
-    console.log(this.newSkill);
+
+  clearCharts(){
+    console.log("Initial list: ", this.chartsFactory);
+    this.chartsFactory.forEach(element => {
+        console.log(element);
+        console.log(element.canvas.id);
+        const elem = document.getElementById('canvas');
+        console.log(elem);
+        if (elem){
+          console.log("not null");
+          elem.remove(); 
+        }    
+        console.log(elem);
+    });
+    if (this.chartsFactory && this.chartsFactory.length > 0) this.chartsFactory.forEach(chart => chart.destroy());
+    const elem = document.getElementById('canvas');
+    this.chartsFactory=[];
+    this.charts=[];
+    console.log("Final list: ", this.chartsFactory);
+    console.log("Final list: ", this.charts);
   }
+
+  
 
   get Name(){
     return this.formGroup.get('name');

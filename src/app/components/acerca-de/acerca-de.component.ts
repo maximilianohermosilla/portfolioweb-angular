@@ -15,6 +15,7 @@ import { LoginComponent } from '../login/login.component';
 })
 export class AcercaDeComponent implements OnInit {
   formGroup: FormGroup;
+
   miPortfolio: Portfolio = this.clearPortfolio();
   showLogin: boolean= false;
   editMode: boolean= false;
@@ -24,6 +25,7 @@ export class AcercaDeComponent implements OnInit {
   base64: string = 'Base64...";'
   fileSelected?: Blob;
   imageUrl?: string;
+  sizeImage: boolean = false;
 
   constructor(private servPortfolio: PortfolioService, private formBuilder: FormBuilder, private uiService: UiServiceService, private authService: AuthService, private sant: DomSanitizer) {
     this.subscription = this.uiService.onToggleSession().subscribe( data =>
@@ -47,8 +49,18 @@ export class AcercaDeComponent implements OnInit {
       this.miPortfolio = data;
       this.miPortfolio.company = data.experience[0];
       this.miPortfolio.school = data.education[0];
-      console.log(data);
+      //console.log(data);
     });
+  }
+
+  setPortfolio(){
+    this.formGroup.controls['name'].setValue(this.miPortfolio.name);
+    this.formGroup.controls['position'].setValue(this.miPortfolio.position);
+    this.formGroup.controls['ubication'].setValue(this.miPortfolio.ubication);
+    this.formGroup.controls['about'].setValue(this.miPortfolio.about); 
+    this.base64 = this.miPortfolio.profilePhoto;
+    console.log(this.formGroup);
+    console.log(this.miPortfolio);
   }
 
   clearPortfolio(): Portfolio{
@@ -70,9 +82,14 @@ export class AcercaDeComponent implements OnInit {
   }
 
   onUpdate(portfolio: Portfolio){
-    this.servPortfolio.updatePortfolio(portfolio).subscribe();   
-    this.miPortfolio = portfolio;
-    
+    portfolio.name=this.formGroup.value.name;
+    portfolio.position=this.formGroup.value.position;
+    portfolio.ubication=this.formGroup.value.ubication;
+    portfolio.about=this.formGroup.value.about;
+    if(this.base64!=''){portfolio.profilePhoto=this.base64;}    
+    this.servPortfolio.updatePortfolio(portfolio).subscribe(result=>{this.ngOnInit();});  
+    this.getPortfolio();
+    this.base64="";    
   }
 
   toggleEditMode(){
@@ -101,9 +118,29 @@ export class AcercaDeComponent implements OnInit {
       this.base64=reader.result as string;
     }
     //console.log("Imagen: ", this.imageUrl);
-    setTimeout(()=>{                         
-      this.miPortfolio.profilePhoto=this.base64;
+    setTimeout(()=>{       
+      this.bigImage();                  
+      //this.miPortfolio.profilePhoto=this.base64;
     }, 500);    
+  }
+
+  bigImage(){
+    this.sizeImage = (this.base64.length > 50000);
+    console.log("Imagen base64 length: ", this.base64.length);
+  }
+
+  clearImage(educationImg: string){
+    console.log("conservar: " , educationImg);
+    this.base64=educationImg;
+    this.bigImage();
+  }  
+
+  chooseCompany(portfolio: Portfolio){
+
+  }
+
+  chooseSchool(portfolio: Portfolio){
+    
   }
 
   

@@ -38,8 +38,8 @@ export class HeaderComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.servPortfolio.obtenerPortfolio().subscribe(data =>{
-      this.miPortfolio = data[0];      
+    this.servPortfolio.getPortfolioFull().subscribe(data =>{
+      this.miPortfolio = data;      
     });
   }
 

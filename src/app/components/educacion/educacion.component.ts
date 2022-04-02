@@ -34,7 +34,7 @@ export class EducacionComponent implements OnInit {
   imageUrl?: string;
   sizeImage: boolean = false;
 
-  constructor(private servPortfolio: PortfolioService, private formBuilder: FormBuilder, private uiService: UiServiceService, private sant: DomSanitizer) { 
+  constructor(private servPortfolio: EducationService, private formBuilder: FormBuilder, private uiService: UiServiceService, private sant: DomSanitizer) { 
     this.subscription = this.uiService.onToggleSession().subscribe( data =>
       this.showLogin = data
     );
@@ -175,7 +175,6 @@ export class EducacionComponent implements OnInit {
     this.imageUrl= this.sant.bypassSecurityTrustUrl( window.URL.createObjectURL(this.fileSelected)) as string;    
     this.base64="Base64...";
     this.convertFileToBase64();
-
     
   }  
 
@@ -207,7 +206,7 @@ export class EducacionComponent implements OnInit {
     console.log("conservar: " , educationImg);
     this.base64=educationImg;
     this.bigImage();
-  }
+  }  
 
 }
 

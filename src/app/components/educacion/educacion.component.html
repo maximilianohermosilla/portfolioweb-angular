@@ -119,7 +119,8 @@
                             type="file" 
                             formControlName="image"  
                             (change)="onSelectNewFile($event)"                            
-                        /><div class="input-group-append">
+                        />
+                        <div class="input-group-append">
                             <button class="btn btn-outline-danger" *ngIf="sizeImage" (click)="clearImage(educacion.image)" type="button">Limpiar</button>
                           </div>
                         </div>

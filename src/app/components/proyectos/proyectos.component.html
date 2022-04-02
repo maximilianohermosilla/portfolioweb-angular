@@ -23,9 +23,9 @@
                     <h6>{{projects.description}}</h6>
                     <a href={{projects.url}}>{{projects.name}}</a>
                 </div>
-                <div class="col-2" >
+                <div class="col-sm" >
                     
-                        <img [src]="projects.img" class="logo" style="max-height: 10em; width:auto">
+                        <img [src]="projects.img" class="logo" style="max-height: 10em; width:100%">
                     
                     
                 </div>
@@ -60,7 +60,7 @@
     <div class="modal-dialog" >
         <div class="modal-content">
             <div class="modal-header">            
-                <h5 class="modal-title" id="staticBackdropLabel">Editar Aptitud</h5>
+                <h5 class="modal-title" id="staticBackdropLabel">{{newProject ? 'Nueva Educación': 'Editar Educación'}}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
         
@@ -75,7 +75,6 @@
                             type="text" 
                             formControlName="name" 
                             placeholder="{{projectItem.name}}" 
-                            [(ngModel)]="projectItem.name"
                         />
                     </div>
 
@@ -85,7 +84,6 @@
                             type="text" 
                             formControlName="start" 
                             placeholder="{{projectItem.start}}"
-                            [(ngModel)]="projectItem.start"
                         />
                     </div>
 
@@ -95,23 +93,25 @@
                             type="text" 
                             formControlName="description" 
                             placeholder="{{projectItem.description}}"
-                            [(ngModel)]="projectItem.description"
                         />
                     </div>
 
                     <div class="form-group">
                         <label for="img">Imagen</label>
+                        <div class="input-group mb-3">
                         <input class="form-control"
-                            type="file" 
-                            formControlName="img"                            
+                            type="file"                     
                             placeholder="{{projectItem.img}}"
-                            [(ngModel)]="projectItem.img"
                             (change)="onSelectNewFile($event)"
                         />
-                    </div>
-                    
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-danger" *ngIf="sizeImage" (click)="clearImage(projectItem.img)" type="button">Limpiar</button>
+                          </div>
+                        </div>
+                    </div>                   
+                        <p *ngIf="sizeImage" class="text-danger">El tamaño de la imagen es demasiado grande</p>                        
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Guardar</button>
+                        <button type="submit" class="btn btn-success" [disabled]="sizeImage" data-bs-dismiss="modal">Guardar</button>
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Salir</button>
                     </div>
                 </form> 
