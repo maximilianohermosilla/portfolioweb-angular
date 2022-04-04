@@ -26,8 +26,8 @@ export class AcercaDeComponent implements OnInit {
   subscription? : Subscription;
   color="";
   
-  miSchool: Education = {    school: '',    title: '',    image: '',    career: '',    score: '',    start: '',    end: ''  };
-  miCompany: Experience = {    position: '',    company: '',    img: '',    mode: '',    start: '',    end: '',    timeElapsed: '',    ubication: ''  };
+  miSchool: Education = this.emptyEducation();
+  miCompany: Experience = this.emptyExperience();
   
   base64: string = 'Base64...";'
   fileSelected?: Blob;
@@ -57,10 +57,10 @@ export class AcercaDeComponent implements OnInit {
   getPortfolio(){
     this.servPortfolio.getPortfolioFull().subscribe(data =>{
       this.miPortfolio = data;
-      //this.miPortfolio.company = data.experience[0];
-      //this.miPortfolio.school = data.education[0];
       this.miSchool = data.school;
       this.miCompany = data.company;
+      this.experienceList = [];
+      this.educationList = [];
       data.experience.forEach(element => {
         const exp: Experience = element;
         this.experienceList.push(exp);
@@ -101,7 +101,7 @@ export class AcercaDeComponent implements OnInit {
     return portfolio;
   }
 
-  onUpdate(portfolio: Portfolio){
+  onUpdate(portfolio: Portfolio){    
     portfolio.name=this.formGroup.value.name;
     portfolio.position=this.formGroup.value.position;
     portfolio.ubication=this.formGroup.value.ubication;
@@ -137,10 +137,8 @@ export class AcercaDeComponent implements OnInit {
     reader.onloadend=()=>{
       this.base64=reader.result as string;
     }
-    //console.log("Imagen: ", this.imageUrl);
     setTimeout(()=>{       
-      this.bigImage();                  
-      //this.miPortfolio.profilePhoto=this.base64;
+      this.bigImage();   
     }, 500);    
   }
 
@@ -155,21 +153,41 @@ export class AcercaDeComponent implements OnInit {
     this.bigImage();
   }  
 
-  chooseCompany(portfolio: Portfolio){
+  emptyEducation(): Education{
+    let education: Education = {    school: '',    title: '',    image: '',    career: '',    score: '',    start: '',    end: ''  };
+    return education;
   }
 
-  chooseSchool(portfolio: Portfolio, education: Education, experience: Experience){ 
-    console.log("portfolio: ", portfolio);       
+  emptyExperience(): Experience{
+    let experience: Experience = {    position: '',    company: '',    img: '',    mode: '',    start: '',    end: '',    timeElapsed: '',    ubication: ''  };
+    return experience;
+  }
+
+  updateCompanySchool(portfolio: Portfolio, education: Education, experience: Experience){ 
+    console.log("portfolio inicial: ", portfolio);       
     console.log("education: ", education);
     console.log("esperience: ",experience);
 
+    if (education.school = ""){
+      console.log("school empty");
+      //portfolio.school = this.emptyEducation();
+    }
+
+    if (experience.company = ""){
+      console.log("company empty");
+      //portfolio.school = this.emptyEducation();
+    }
+
+    console.log("portfolio final: ", portfolio);       
+
     this.miPortfolio.company = experience;
     this.miPortfolio.school = education;
+    this.miCompany=experience;
+    this.miSchool=education;
 
-    console.log("Despues miPortfolio: ", this.miPortfolio);
-
-    //this.servPortfolio.updateSchool(education);
-    this.servPortfolio.updateCompany(experience);
+    this.servPortfolio.updatePortfolio(portfolio).subscribe(result=>{this.ngOnInit();});  
+    this.toggleEditMode();
+    this.getPortfolio();
   }
 
   

@@ -57,12 +57,11 @@
                 <div class="col-7">
                     <h6 *ngIf="!editMode">{{miCompany.company}}</h6>
                     <div class="contenedor" *ngIf="editMode">                        
-                        <select name="miSchool" id="" [(ngModel)]="miCompany">
-                            <option value="">- No mostrar -</option>
+                        <select name="miSchool" id="" [(ngModel)]="miCompany">                            
                             <option *ngFor="let experience of experienceList" 
                                 [ngValue]="experience" 
                                 >
-                            {{experience.company}}
+                                {{experience.id == 0 ? '- No Mostrar -' : experience.company}}
                             </option>
                         </select>                        
                     </div>  
@@ -76,11 +75,10 @@
                     <h6 *ngIf="!editMode">{{miSchool.school}}</h6>
                     <div class="contenedor" *ngIf="editMode">                        
                         <select name="miSchool" id="" [(ngModel)]="miSchool">
-                            <option value="">- No mostrar -</option>
                             <option *ngFor="let education of educationList" 
                                 [ngValue]="education"                                 
                                 >
-                            {{education.school}}
+                                {{education.id == 0 ? '- No Mostrar -' : education.school}}
                             </option>
                         </select>                        
                     </div>  
@@ -88,7 +86,7 @@
                 
             </div>
             <div class="row align-items-center" id="card" style="min-height: 64px">
-                <button class="btn btn-success rounded float-end" *ngIf="editMode" (click)="chooseSchool(miPortfolio, miSchool, miCompany)" style="opacity: 0.9"> <i class="bi bi-check-square"> </i> Guardar Cambios</button>                
+                <button class="btn btn-success rounded float-end" *ngIf="editMode" (click)="updateCompanySchool(miPortfolio, miSchool, miCompany)" style="opacity: 0.9"> <i class="bi bi-check-square"> </i> Guardar Cambios</button>                
             </div>
         
     </div>
