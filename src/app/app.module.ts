@@ -22,11 +22,12 @@ import { ModuloComponent } from './components/modulo/modulo.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ModuloHeaderComponent } from './components/modulo-header/modulo-header.component';
 import { InterceptorService } from './servicios/interceptor.service';
+import { AboutComponent } from './components/about/about.component';
 
-const routes: Routes = [
-  {path: '', component:PortfolioComponent },
+const routes: Routes = [  
   {path: 'login', component:LoginComponent },
   {path: 'portfolio', component:PortfolioComponent },
+  {path: '', component:LoginComponent },
 ];
 
 @NgModule({
@@ -44,6 +45,7 @@ const routes: Routes = [
     ModuloComponent,
     FooterComponent,
     ModuloHeaderComponent,
+    AboutComponent,
   ],
   imports: [
     BrowserModule,

@@ -2,6 +2,15 @@
     <app-acerca-de></app-acerca-de>
 </div>
 
+<div class="modulo" *ngIf="showPortfolio">    
+    <app-modulo-header
+    title=" Acerca de mí"
+    icon="bi bi-briefcase"
+    (btnToggleEditMode)="toggleEditExperience()"
+    ></app-modulo-header>        
+    <app-about></app-about>
+</div>
+
 <div class="modulo" *ngIf="showExperience">
     <app-modulo-header
     title=" Experiencia"
