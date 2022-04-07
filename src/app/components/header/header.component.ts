@@ -1,8 +1,10 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Portfolio } from 'src/app/models/portfolio';
 import { AuthService } from 'src/app/servicios/auth.service';
 import { PortfolioService } from 'src/app/servicios/portfolio.service';
+import { TokenService } from 'src/app/servicios/token.service';
 import { UiServiceService } from 'src/app/servicios/ui-service.service';
 import { ButtonComponent } from '../button/button.component';
 
@@ -31,21 +33,39 @@ export class HeaderComponent implements OnInit {
   showLogin: boolean = false;
   subscription? : Subscription;
 
-  constructor(private servPortfolio: PortfolioService, private uiService: UiServiceService, private authService: AuthService) {
+  constructor(private servPortfolio: PortfolioService, private uiService: UiServiceService, private authService: AuthService, private tokenService: TokenService, private route: Router) {
     this.subscription = this.uiService.onToggleSession().subscribe( data =>
         this.showLogin = data
       );
    }
 
   ngOnInit(): void {
+    this.subscription = this.uiService.onToggleSession().subscribe( data =>
+      this.showLogin = data
+    );
     this.servPortfolio.getPortfolioFull().subscribe(data =>{
       this.miPortfolio = data;      
     });
+    if(this.tokenService.getToken()){
+      console.log("Get Token true");
+      this.showLogin = true;
+    }
+    else{
+      this.showLogin = false;
+    }
   }
 
   toggleLogin(){    
-    this.uiService.toggleSession();
-    this.authService.login();
+    //this.uiService.toggleSession();
+    //this.authService.login();
+    if(this.tokenService.getToken()){
+      this.tokenService.logOut();
+      this.route.navigate(['/login']);
+    }
+    else{
+      this.route.navigate(['/login']);
+      //this.showLogin = false;
+    }
     this.btnToggleLogin.emit();
   }
 

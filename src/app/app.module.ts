@@ -11,11 +11,9 @@ import { ProyectosComponent } from './components/proyectos/proyectos.component';
 import { LoginComponent } from './components/login/login.component';
 import { PortfolioService } from './servicios/portfolio.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
-import { Chart } from 'chart.js';
 import { NgChartsModule } from 'ng2-charts';
 import { ButtonComponent } from './components/button/button.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterModule, Routes } from '@angular/router';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { PortfolioComponent } from './components/portfolio/portfolio.component';
 import { ModuloComponent } from './components/modulo/modulo.component';
@@ -23,12 +21,8 @@ import { FooterComponent } from './components/footer/footer.component';
 import { ModuloHeaderComponent } from './components/modulo-header/modulo-header.component';
 import { InterceptorService } from './servicios/interceptor.service';
 import { AboutComponent } from './components/about/about.component';
+import { AppRoutingModule } from './app-routing.module';
 
-const routes: Routes = [  
-  {path: 'login', component:LoginComponent },
-  {path: 'portfolio', component:PortfolioComponent },
-  {path: '', component:LoginComponent },
-];
 
 @NgModule({
   declarations: [
@@ -55,7 +49,7 @@ const routes: Routes = [
     ColorPickerModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(routes, {enableTracing: true})
+    AppRoutingModule
   ],
   providers: [PortfolioService, 
   { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true},

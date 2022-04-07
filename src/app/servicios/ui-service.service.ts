@@ -6,7 +6,7 @@ import { Observable, Subject } from 'rxjs';
 })
 export class UiServiceService {
 
-  private showLogin: boolean = false;
+  private showLogin: boolean = true;
   private showPortfolio: boolean = true;
   private showExperience: boolean = true; 
   private showEducation: boolean = true; 

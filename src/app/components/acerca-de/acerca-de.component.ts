@@ -9,6 +9,7 @@ import { PortfolioService } from 'src/app/servicios/portfolio.service';
 import { UiServiceService } from 'src/app/servicios/ui-service.service';
 import { LoginComponent } from '../login/login.component';
 import { Education } from 'src/app/models/education';
+import { TokenService } from 'src/app/servicios/token.service';
 
 @Component({
   selector: 'app-acerca-de',
@@ -34,7 +35,7 @@ export class AcercaDeComponent implements OnInit {
   imageUrl?: string;
   sizeImage: boolean = false;
 
-  constructor(private servPortfolio: PortfolioService, private formBuilder: FormBuilder, private uiService: UiServiceService, private authService: AuthService, private sant: DomSanitizer) {
+  constructor(private servPortfolio: PortfolioService, private formBuilder: FormBuilder, private uiService: UiServiceService, private authService: AuthService, private sant: DomSanitizer, private tokenService: TokenService) {
     this.subscription = this.uiService.onToggleSession().subscribe( data =>
         this.showLogin = data
       );      
@@ -119,7 +120,7 @@ export class AcercaDeComponent implements OnInit {
   }
 
   getSession(): boolean{
-    return this.authService.logIn;
+    return (this.tokenService.getToken() != null);
   }
 
   onSelectNewFile(event: Event): void{

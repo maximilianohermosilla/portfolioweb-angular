@@ -2,6 +2,7 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/servicios/auth.service';
 import { PortfolioService } from 'src/app/servicios/portfolio.service';
+import { TokenService } from 'src/app/servicios/token.service';
 import { UiServiceService } from 'src/app/servicios/ui-service.service';
 
 @Component({
@@ -25,13 +26,20 @@ export class ModuloHeaderComponent implements OnInit {
   editMode: boolean= false;
   color: string ="";
 
-  constructor(private servPortfolio: PortfolioService, private uiService: UiServiceService, private authService: AuthService) {
+  constructor(private servPortfolio: PortfolioService, private uiService: UiServiceService, private authService: AuthService, private tokenService: TokenService) {
     this.subscription = this.uiService.onToggleSession().subscribe( data =>
         this.showLogin = data
       );
   }
 
   ngOnInit(): void {
+    if(this.tokenService.getToken()){
+      console.log("Get Token true");
+      this.showLogin = true;
+    }
+    else{
+      this.showLogin = false;
+    }
   }
 
   toggleEditMode(){
@@ -45,7 +53,9 @@ export class ModuloHeaderComponent implements OnInit {
   }
 
   getSession(): boolean{
-    return this.authService.logIn;
+    //return this.authService.logIn;
+    //return (this.tokenService.getToken() != null);
+    return this.showLogin;
   }
 
 }

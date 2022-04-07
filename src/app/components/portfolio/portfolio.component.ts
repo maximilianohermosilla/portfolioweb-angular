@@ -4,6 +4,7 @@ import { Portfolio } from 'src/app/models/portfolio';
 import { Subscription } from 'rxjs';
 import { PortfolioService } from 'src/app/servicios/portfolio.service';
 import { UiServiceService } from 'src/app/servicios/ui-service.service';
+import { TokenService } from 'src/app/servicios/token.service';
 
 @Component({
   selector: 'app-portfolio',
@@ -37,13 +38,22 @@ export class PortfolioComponent implements OnInit {
   editMode: boolean= false;
   color="";
 
-  constructor(private servPortfolio: PortfolioService, private uiService: UiServiceService) {
+  isLogged = false;
+
+  constructor(private servPortfolio: PortfolioService, private uiService: UiServiceService, private tokenService: TokenService) {
     this.subscription = this.uiService.onTogglePortfolio().subscribe( data =>
       this.showPortfolio = data
     );
    }
 
   ngOnInit(): void {
+    if(this.tokenService.getToken()){
+      console.log("Get Token true");
+      this.isLogged = true;
+    }
+    else{
+      this.isLogged = false;
+    }
   /*  this.servPortfolio.getPortfolioFull().subscribe(data =>{
       this.miPortfolio = data;
       this.experienceList = data.experience;

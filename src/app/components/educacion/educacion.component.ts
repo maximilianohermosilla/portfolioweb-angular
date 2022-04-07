@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { Education } from 'src/app/models/education';
 import { EducationService } from 'src/app/servicios/education.service';
 import { PortfolioService } from 'src/app/servicios/portfolio.service';
+import { TokenService } from 'src/app/servicios/token.service';
 import { UiServiceService } from 'src/app/servicios/ui-service.service';
 
 @Component({
@@ -35,7 +36,7 @@ export class EducacionComponent implements OnInit {
   imageUrl?: string;
   sizeImage: boolean = false;
 
-  constructor(private servPortfolio: EducationService, private formBuilder: FormBuilder, private uiService: UiServiceService, private sant: DomSanitizer) { 
+  constructor(private servPortfolio: EducationService, private formBuilder: FormBuilder, private uiService: UiServiceService, private sant: DomSanitizer, private tokenService: TokenService) { 
     this.subscription = this.uiService.onToggleSession().subscribe( data =>
       this.showLogin = data
     );
@@ -52,6 +53,13 @@ export class EducacionComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if(this.tokenService.getToken()){
+      console.log("Get Token true");
+      this.showLogin = true;
+    }
+    else{
+      this.showLogin = false;
+    }
     this.getEducationList();
   }
 

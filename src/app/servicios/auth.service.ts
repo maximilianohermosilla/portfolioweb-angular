@@ -3,6 +3,9 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators'
+import { JwtDTO } from '../models/jwt-dto';
+import { LoginUsuario } from '../models/login-usuario';
+import { NuevoUsuario } from '../models/nuevo-usuario';
 import { UiServiceService } from './ui-service.service';
 
 @Injectable({
@@ -10,22 +13,26 @@ import { UiServiceService } from './ui-service.service';
 })
 export class AuthService {
 
-  api = 'http://localhost:8080/auth/login';
+  api = 'http://localhost:8080/auth/';
   token;
   isLogin: boolean = false;
   currentUserSubject: BehaviorSubject<any>;
 
   constructor(private httpClient: HttpClient, private router: Router, private uiService: UiServiceService) { 
-    console.log("Servicio autenticacion corriendo");
+    //console.log("Servicio autenticacion corriendo");
     this.currentUserSubject = new BehaviorSubject<any>(JSON.parse(sessionStorage.getItem('currentUser') || '{}'));
   }
 
-  iniciarSesion(credenciales: any): Observable<any>{
-    console.log(credenciales);
-    return this.httpClient.post<any>(this.api, credenciales).pipe(map(data=>{
-        console.log(data);
+  public nuevo(nuevoUsuario: NuevoUsuario): Observable<any>{
+    return this.httpClient.post<any>(this.api + 'nuevo', nuevoUsuario);
+  }
+
+  iniciarSesion(credenciales: LoginUsuario): Observable<JwtDTO>{
+    //console.log(credenciales);
+    return this.httpClient.post<any>(this.api + 'login', credenciales).pipe(map(data=>{
+        //console.log(data);
         this.uiService.toggleSession();
-        localStorage.setItem('curentUser', JSON.stringify(data));
+        sessionStorage.setItem('curentUser', JSON.stringify(data));
         this.currentUserSubject.next(data);
 
         return data;
@@ -33,6 +40,7 @@ export class AuthService {
   }
 
   get UsuarioAutenticado(){
+    console.log("Usuario aut: ", this.currentUserSubject.value);
     return this.currentUserSubject.value;
   }
 
