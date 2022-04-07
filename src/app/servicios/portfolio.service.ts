@@ -77,7 +77,7 @@ export class PortfolioService {
 
 
   updateSchool(education: Education): Observable<Portfolio>{
-    const url = `${this.apiPortfolioFull}/${education.idPersona}`
+    const url = `${this.apiPortfolioFull}/${education.id}`
     return this.http.put<Portfolio>(this.apiPortfolioEducation, education, {responseType: "text" as "json"}).pipe(
       tap(() => {
          this.refresh$.next();       
@@ -87,24 +87,11 @@ export class PortfolioService {
 
   updateCompany(experience: Experience): Observable<Portfolio>{
     const url = `${this.apiPortfolioFull}/${experience.id}`
-    console.log("url: ", this.apiPortfolioExperience);
-    console.log("guardar: ",experience);
     return this.http.put<Portfolio>(this.apiPortfolioExperience, experience.id, {responseType: "text" as "json"}).pipe(
       tap(() => {
          this.refresh$.next();       
       })
     );
   }
-
-  /*updateSchool(education: Education): Observable<Portfolio>{
-    const url = `${this.apiPortfolioFull}/${education.idPersona}`
-    return this.http.put<Portfolio>(this.apiPortfolioFull, education, {responseType: "text" as "json"}).pipe(
-      tap(() => {
-         this.refresh$.next();       
-      })
-    );*/
-  
-
-
 
 }

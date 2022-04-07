@@ -4,7 +4,7 @@
         
         <span class="rounded float-end">
             <i class="bi bi-pencil-square"
-                *ngIf="getSession()"
+                *ngIf="isAdmin"
                 [ngStyle]="{'color': color}"
                 [ngStyle]="{'background-color': '{{color}}'}"    
                 style="color: green"

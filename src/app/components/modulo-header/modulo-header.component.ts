@@ -23,6 +23,7 @@ export class ModuloHeaderComponent implements OnInit {
   showSkills: boolean = true; 
   showProjects: boolean = true; 
 
+  isAdmin: boolean = false;
   editMode: boolean= false;
   color: string ="";
 
@@ -34,17 +35,28 @@ export class ModuloHeaderComponent implements OnInit {
 
   ngOnInit(): void {
     if(this.tokenService.getToken()){
-      console.log("Get Token true");
+      //console.log("Get Token true");
       this.showLogin = true;
     }
     else{
       this.showLogin = false;
     }
+    this.getPerfil();
   }
 
   toggleEditMode(){
     this.editMode=!this.editMode;
     this.editMode ?  this.color="#D4EFDF": this.color="green";
+  }
+
+  getPerfil(){
+    const perfiles = this.tokenService.getAuthorities();
+    this.isAdmin = false;
+    perfiles.forEach(perfil => {
+      if (perfil === 'PERFIL_ADMIN') {
+        this.isAdmin = true;
+      }
+    });
   }
 
   onClick(){

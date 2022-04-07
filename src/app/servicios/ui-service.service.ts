@@ -7,12 +7,14 @@ import { Observable, Subject } from 'rxjs';
 export class UiServiceService {
 
   private showLogin: boolean = true;
+  private showAbout: boolean = true; 
   private showPortfolio: boolean = true;
   private showExperience: boolean = true; 
   private showEducation: boolean = true; 
   private showSkills: boolean = true; 
   private showProjects: boolean = true; 
 
+  private editAbout: boolean = false; 
   private editExperience: boolean = false; 
   private editEducation: boolean = false; 
   private editSkills: boolean = false; 
@@ -20,6 +22,7 @@ export class UiServiceService {
 
   private subject$ = new Subject<any>();
   private subjectPortfolio$ = new Subject<any>();
+  private subjectAbout$ = new Subject<any>();
   private subjectExperience$ = new Subject<any>();
   private subjectEducation$ = new Subject<any>();
   private subjectSkills$ = new Subject<any>();
@@ -37,6 +40,11 @@ export class UiServiceService {
   togglePortfolio(): void{
     this.showPortfolio = !this.showPortfolio;
     this.subjectPortfolio$.next(this.showPortfolio);
+  }
+
+  toggleAbout(): void{
+    this.showAbout = !this.showAbout;
+    this.subjectAbout$.next(this.showPortfolio);
   }
 
   toggleExperience(): void{
@@ -60,6 +68,9 @@ export class UiServiceService {
   }
 
 
+  toggleEditAbout(){
+    this.editAbout = !this.editAbout;
+  }
 
   toggleEditExperience(){
     this.editExperience = !this.editExperience;
@@ -79,6 +90,9 @@ export class UiServiceService {
 
 
 
+  public get getEditAbout(): boolean {
+    return this.editAbout;
+  }
 
   public get getEditExperience(): boolean {
     return this.editExperience;
@@ -104,6 +118,10 @@ export class UiServiceService {
 
   onTogglePortfolio(): Observable<any>{
     return this.subjectPortfolio$.asObservable();
+  }
+
+  onToggleAbout(): Observable<any>{
+    return this.subjectAbout$.asObservable();
   }
 
   onToggleExperience(): Observable<any>{

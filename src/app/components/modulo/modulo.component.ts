@@ -17,6 +17,7 @@ export class ModuloComponent implements OnInit {
   showLogin: boolean = false;
   showEditMode: boolean = false;
   showPortfolio: boolean = true;
+  showAbout: boolean = true;
   showExperience: boolean = true; 
   showEducation: boolean = true; 
   showSkills: boolean = true; 
@@ -32,6 +33,9 @@ export class ModuloComponent implements OnInit {
       );
     this.subscription = this.uiService.onTogglePortfolio().subscribe( data =>
         this.showPortfolio = data
+      );
+    this.subscription = this.uiService.onToggleAbout().subscribe( data =>
+        this.showAbout = data
       );
     this.subscription = this.uiService.onToggleExperience().subscribe( data =>
         this.showExperience = data
@@ -49,7 +53,6 @@ export class ModuloComponent implements OnInit {
 
   ngOnInit(): void {
     if(this.tokenService.getToken()){
-      console.log("Get Token true");
       this.showLogin = true;
     }
     else{
@@ -62,7 +65,9 @@ export class ModuloComponent implements OnInit {
     this.editMode ?  this.color="#D4EFDF": this.color="green";
     this.btnToggleEdit.emit();
   }
-
+  toggleEditAbout(){
+    this.uiService.toggleEditAbout();
+  }
   toggleEditExperience(){
     this.uiService.toggleEditExperience();
   }
@@ -78,6 +83,10 @@ export class ModuloComponent implements OnInit {
 
   getEditMode(){
     return this.editMode;
+  }
+
+  getEditAbout(){
+    return this.uiService.getEditAbout;
   }
 
   getEditExperience(){

@@ -13,6 +13,10 @@ import { TokenService } from 'src/app/servicios/token.service';
 export class LoginComponent implements OnInit {
   @Output() btnSubmit = new EventEmitter();
   form: FormGroup;
+  loginUsuario: LoginUsuario = {
+    user: '',
+    password: ''
+  };
 
   isLogged: boolean = false;
   isLoginFail = false;
@@ -51,7 +55,31 @@ export class LoginComponent implements OnInit {
   onLogin(event: Event){
     event.preventDefault;
     this.authService.iniciarSesion(this.form.value).subscribe(data=>{
-      console.log("Data: " + JSON.stringify(data));
+      //console.log("Data: " + JSON.stringify(data));
+      this.isLogged = true;
+      this.isLoginFail = false;
+      this.tokenService.setToken(data.token);
+      this.tokenService.setUserName(data.user);
+      this.tokenService.setAuthorities(data.authorities);
+      this.perfiles = data.authorities;
+      this.route.navigate(['/portfolio']);
+    },
+    error => {
+      this.isLoginFail = true;
+      this.isLogged = false;     
+      this.errMsj = error;
+      console.log("error: ", this.errMsj);
+    }
+    )
+  }
+
+  loginUser(){    
+    this.loginUsuario = { "user": 'user', "password": 'user' };
+    console.log(this.form.value);
+    console.log(this.loginUsuario);
+
+    this.authService.iniciarSesion(this.loginUsuario).subscribe(data=>{
+      //console.log("Data: " + JSON.stringify(data));
       this.isLogged = true;
       this.isLoginFail = false;
       this.tokenService.setToken(data.token);

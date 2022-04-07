@@ -1,11 +1,11 @@
 import { Portfolio } from "./portfolio";
 
 export class LoginUsuario {
-    nombreUsuario: string;
+    user: string;
     password: string;
 
-    constructor(nombreUsuario: string, password: string) {
-        this.nombreUsuario = nombreUsuario;
+    constructor(user: string, password: string) {
+        this.user = user;
         this.password = password;
     }
 

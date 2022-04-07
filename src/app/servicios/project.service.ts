@@ -29,7 +29,6 @@ export class ProjectService {
   } 
 
   getProjectPortfolio(idPersona: Number): Observable<Project[]>{
-    //return this.http.get<Education[]>(this.urlEducation);
     return this.http.get<Project[]>(this.urlProjectsPersona+"/"+idPersona).pipe(
       tap(() => {
          this._refresh$.next();       

@@ -91,13 +91,12 @@ export class ExperienciaComponent implements OnInit {
     this.formGroup.controls['ubication'].setValue(experience.ubication)
 
     this.title="Editar Experiencia";
-    console.log("Set experience: " , this.experiencia);
+    //console.log("Set experience: " , this.experiencia);
   }
 
   emptyExperience(){
     this.newExperience = true;
-    this.experiencia =  {
-      id:0,
+    this.experiencia =  {      
       position:"",
       company:"",
       img:"",
@@ -114,7 +113,6 @@ export class ExperienciaComponent implements OnInit {
   clearExperience(){
     this.newExperience = true;
     this.experiencia =  {
-      id:0,
       position:"",
       company:"",
       img:"",
@@ -149,11 +147,6 @@ export class ExperienciaComponent implements OnInit {
       timeElapsed: this.formGroup.value.timeElapsed,
       ubication: this.formGroup.value.ubication
     }
-    //console.log(this.newExperience);
-    console.log(this.formGroup);
-    console.log("Experience param: " , experience);
-    console.log("this experiencia: " , this.experiencia);
-    //this.setExperience(experience);
     this.newExperience ? this.onInsert(experience): this.onUpdate(experience);
     //this.ngOnInit();    
   }
@@ -166,17 +159,13 @@ export class ExperienciaComponent implements OnInit {
   }
 
   onInsert(experience: Experience){
-    //this.onInsertExperience.emit(experience);
-    console.log(experience);
-    console.log(this.experiencia);
     this.experienceServ.insertExperience(this.idPersona, experience).subscribe((experience)=>(
       this.ngOnInit()
     ))
     this.base64="";
   }
 
-  onDelete(experience: Experience){    
-    console.log("Delete: " , experience);
+  onDelete(experience: Experience){  
     this.onDeleteExperience.emit(experience);
     this.experienceServ.deleteExperience(experience)
       .subscribe(data => {console.log("deleted", data); // {return (this.experienceList = this.experienceList.filter((t) => (t.id !== experience.id))
@@ -215,7 +204,6 @@ export class ExperienciaComponent implements OnInit {
 
   bigImage(){
     this.sizeImage = (this.base64.length > 50000);
-    console.log("Imagen base64 length: ", this.base64.length);
   }
 
   clearImage(experienceImg: string){

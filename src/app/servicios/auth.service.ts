@@ -40,7 +40,7 @@ export class AuthService {
   }
 
   get UsuarioAutenticado(){
-    console.log("Usuario aut: ", this.currentUserSubject.value);
+    //console.log("Usuario aut: ", this.currentUserSubject.value);
     return this.currentUserSubject.value;
   }
 

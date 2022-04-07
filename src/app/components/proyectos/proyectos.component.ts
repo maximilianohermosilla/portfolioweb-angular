@@ -128,9 +128,9 @@ export class ProyectosComponent implements OnInit {
       url : this.formGroup.value.url,
     }
 
-    console.log(this.formGroup);
+    /*console.log(this.formGroup);
     console.log("project param: ", project);
-    console.log("this projectItem: ", this.projectItem);
+    console.log("this projectItem: ", this.projectItem);*/
     this.newProject ? this.onInsert(project): this.onUpdate(project)    
   }
 

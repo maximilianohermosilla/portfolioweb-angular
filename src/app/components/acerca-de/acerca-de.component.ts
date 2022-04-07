@@ -34,6 +34,7 @@ export class AcercaDeComponent implements OnInit {
   fileSelected?: Blob;
   imageUrl?: string;
   sizeImage: boolean = false;
+  isAdmin: boolean = false;
 
   constructor(private servPortfolio: PortfolioService, private formBuilder: FormBuilder, private uiService: UiServiceService, private authService: AuthService, private sant: DomSanitizer, private tokenService: TokenService) {
     this.subscription = this.uiService.onToggleSession().subscribe( data =>
@@ -43,16 +44,13 @@ export class AcercaDeComponent implements OnInit {
       name : ['',[]],
       position : ['',[]],
       ubication : ['',[]],
-      about : ['',[]],
       profilePhoto : ['',[]]       
     })
    }
 
-  ngOnInit(): void {
+  ngOnInit(): void {    
+    this.getPerfil();
     this.getPortfolio();
-    console.log("Portfolio: ", this.miPortfolio);
-    console.log(this.experienceList);
-    console.log(this.educationList);
   }
 
   getPortfolio(){
@@ -80,8 +78,6 @@ export class AcercaDeComponent implements OnInit {
     this.formGroup.controls['ubication'].setValue(this.miPortfolio.ubication);
     this.formGroup.controls['about'].setValue(this.miPortfolio.about); 
     this.base64 = this.miPortfolio.profilePhoto;
-    console.log(this.formGroup);
-    console.log(this.miPortfolio);
   }
 
   clearPortfolio(): Portfolio{
@@ -106,7 +102,6 @@ export class AcercaDeComponent implements OnInit {
     portfolio.name=this.formGroup.value.name;
     portfolio.position=this.formGroup.value.position;
     portfolio.ubication=this.formGroup.value.ubication;
-    portfolio.about=this.formGroup.value.about;
     if(this.base64!=''){portfolio.profilePhoto=this.base64;}    
     this.servPortfolio.updatePortfolio(portfolio).subscribe(result=>{this.ngOnInit();});  
     this.getPortfolio();
@@ -121,6 +116,16 @@ export class AcercaDeComponent implements OnInit {
 
   getSession(): boolean{
     return (this.tokenService.getToken() != null);
+  }
+
+  getPerfil(){
+    const perfiles = this.tokenService.getAuthorities();
+    this.isAdmin = false;
+    perfiles.forEach(perfil => {
+      if (perfil === 'PERFIL_ADMIN') {
+        this.isAdmin = true;
+      }
+    });
   }
 
   onSelectNewFile(event: Event): void{
@@ -145,11 +150,10 @@ export class AcercaDeComponent implements OnInit {
 
   bigImage(){
     this.sizeImage = (this.base64.length > 50000);
-    console.log("Imagen base64 length: ", this.base64.length);
+    //console.log("Imagen base64 length: ", this.base64.length);
   }
 
   clearImage(educationImg: string){
-    console.log("conservar: " , educationImg);
     this.base64=educationImg;
     this.bigImage();
   }  
@@ -165,10 +169,6 @@ export class AcercaDeComponent implements OnInit {
   }
 
   updateCompanySchool(portfolio: Portfolio, education: Education, experience: Experience){ 
-    console.log("portfolio inicial: ", portfolio);       
-    console.log("education: ", education);
-    console.log("esperience: ",experience);
-
     if (education.school = ""){
       console.log("school empty");
       //portfolio.school = this.emptyEducation();
@@ -178,9 +178,6 @@ export class AcercaDeComponent implements OnInit {
       console.log("company empty");
       //portfolio.school = this.emptyEducation();
     }
-
-    console.log("portfolio final: ", portfolio);       
-
     this.miPortfolio.company = experience;
     this.miPortfolio.school = education;
     this.miCompany=experience;

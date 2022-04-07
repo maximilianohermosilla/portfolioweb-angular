@@ -53,13 +53,6 @@ export class EducacionComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if(this.tokenService.getToken()){
-      console.log("Get Token true");
-      this.showLogin = true;
-    }
-    else{
-      this.showLogin = false;
-    }
     this.getEducationList();
   }
 
@@ -67,7 +60,7 @@ export class EducacionComponent implements OnInit {
     this.servPortfolio.getEducationPortfolio(this.idPersona).subscribe(data =>{       
       this.educationList = data;
     });
-    console.log(this.educationList);
+    //console.log(this.educationList);
   }
 
   toggleEditMode(){
@@ -101,7 +94,6 @@ export class EducacionComponent implements OnInit {
   emptyEducation(): Education{
     this.newEducation = true;
     this.educacion =  {
-      id: 0,
       school: "",
       title: "",
       image: "",
@@ -117,7 +109,6 @@ export class EducacionComponent implements OnInit {
   clearEducation(): Education{
     this.newEducation = true;
     this.educacion =  {
-      id: 0,
       school: "",
       title: "",
       image: "",
@@ -149,11 +140,7 @@ export class EducacionComponent implements OnInit {
       start: this.formGroup.value.start,
       end: this.formGroup.value.end
     }
-    console.log(this.formGroup);
-    console.log("education param: " , education);
-    console.log("this educacion: " , this.educacion);
     this.newEducation ? this.onInsert(education): this.onUpdate(education)
-    //console.log(this.newEducation);
   }
   
   onUpdate(education: Education){
@@ -164,14 +151,12 @@ export class EducacionComponent implements OnInit {
 
   onInsert(education: Education){
     this.servPortfolio.insertEducationPersona(this.idPersona,education).subscribe((educacion)=>(
-      //this.educationList.push(educacion)
       this.ngOnInit()
     ))
     this.base64="";
   }
 
-  onDelete(educacion: Education){        
-    console.log("Delete: " , educacion);
+  onDelete(educacion: Education){    
     this.onDeleteEducation.emit(educacion);
     this.servPortfolio.deleteEducation(educacion)
       .subscribe(data => {
@@ -196,8 +181,7 @@ export class EducacionComponent implements OnInit {
     }
     console.log("Imagen url: ", this.imageUrl);
     
-    setTimeout(()=>{                         
-      //this.educacion.image=this.base64;
+    setTimeout(()=>{   
       console.log("Imagen educacion length: ", this.educacion.image.length);
       this.bigImage();
     }, 500);    
@@ -212,8 +196,7 @@ export class EducacionComponent implements OnInit {
     console.log("Imagen base64 length: ", this.base64.length);
   }
 
-  clearImage(educationImg: string){
-    console.log("conservar: " , educationImg);
+  clearImage(educationImg: string){    
     this.base64=educationImg;
     this.bigImage();
   }  

@@ -183,7 +183,7 @@ export class SkillsComponent implements OnInit, OnDestroy {
     this.servPortfolio.insertSkill(this.idPersona, skill).subscribe((element)=>(
       this.ngOnInit()
     ))  
-    
+    this.ngOnInit();  
     location.reload(); 
   }
 

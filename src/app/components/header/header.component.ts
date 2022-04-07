@@ -47,7 +47,6 @@ export class HeaderComponent implements OnInit {
       this.miPortfolio = data;      
     });
     if(this.tokenService.getToken()){
-      console.log("Get Token true");
       this.showLogin = true;
     }
     else{
@@ -56,15 +55,12 @@ export class HeaderComponent implements OnInit {
   }
 
   toggleLogin(){    
-    //this.uiService.toggleSession();
-    //this.authService.login();
     if(this.tokenService.getToken()){
       this.tokenService.logOut();
       this.route.navigate(['/login']);
     }
     else{
       this.route.navigate(['/login']);
-      //this.showLogin = false;
     }
     this.btnToggleLogin.emit();
   }

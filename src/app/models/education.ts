@@ -7,5 +7,4 @@ export interface Education{
     score: string,
     start: string,
     end: string,
-    idPersona?: string
 }

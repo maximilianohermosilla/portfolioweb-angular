@@ -48,29 +48,15 @@ export class PortfolioComponent implements OnInit {
 
   ngOnInit(): void {
     if(this.tokenService.getToken()){
-      console.log("Get Token true");
       this.isLogged = true;
     }
     else{
       this.isLogged = false;
     }
-  /*  this.servPortfolio.getPortfolioFull().subscribe(data =>{
-      this.miPortfolio = data;
-      this.experienceList = data.experience;
-      this.educationList = data.education;
-      this.skillsList = data.skills;
-      this.projectsList = data.projects;
-      console.log(data);
-    });   
-    setTimeout(()=>{                         
-      //console.log(this.experienceList.length>0);
-    }, 500);
-   */ 
   }
 
   toggleExperience(){
     this.uiService.onToggleExperience();
-    console.log(this.showExperience);
   }
 
   toggleEditMode(){
