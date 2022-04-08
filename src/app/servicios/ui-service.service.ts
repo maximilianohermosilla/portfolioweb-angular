@@ -7,7 +7,7 @@ import { Observable, Subject } from 'rxjs';
 export class UiServiceService {
 
   private showLogin: boolean = true;
-  private showAbout: boolean = true; 
+  private showAbout: boolean = false; 
   private showPortfolio: boolean = true;
   private showExperience: boolean = true; 
   private showEducation: boolean = true; 
@@ -109,6 +109,29 @@ export class UiServiceService {
   public get getEditProjects(): boolean {
     return this.editProjects;
   }
+
+
+
+  public get getShowAbout(): boolean {
+    return this.showAbout;
+  }
+
+  public get getShowExperience(): boolean {
+    return this.showExperience;
+  }
+
+  public get getShowEducation(): boolean {
+    return this.showEducation;
+  }
+
+  public get getShowSkills(): boolean {
+    return this.showSkills;
+  }
+
+  public get getShowProjects(): boolean {
+    return this.showProjects;
+  }
+  
   
 
 

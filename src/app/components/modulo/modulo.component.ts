@@ -1,6 +1,5 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { Experience } from 'src/app/models/experience';
 import { PortfolioService } from 'src/app/servicios/portfolio.service';
 import { TokenService } from 'src/app/servicios/token.service';
 import { UiServiceService } from 'src/app/servicios/ui-service.service';
@@ -58,6 +57,7 @@ export class ModuloComponent implements OnInit {
     else{
       this.showLogin = false;
     }
+    this.showAbout=this.uiService.getShowAbout;
   }
 
   toggleEditMode(){

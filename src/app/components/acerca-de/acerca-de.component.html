@@ -1,5 +1,11 @@
 <div class="banner">
-    <div class="banner-background" role="banner">
+    <div class="banner-background" role="banner" style="font-size: 5rem;">
+        <img src="{{miPortfolio.image}}" alt="" id="banner-image">
+        <i class="bi bi-camera rounded float-end" id="banner-select"    
+        (click)="setPortfolio()"
+        *ngIf="editMode"
+        data-bs-toggle="modal" data-bs-target="#bannerModal"
+        ></i>
      </div> 
 </div>
 
@@ -28,8 +34,7 @@
             <h1>{{miPortfolio.name}}</h1>
             <h3>{{miPortfolio.position}}</h3>
             <h5>{{miPortfolio.ubication}}</h5>
-            <h6>Informacion de contacto</h6>
-            <a routerLink="/login" aria-current="page">Información</a> 
+            <h5><a href="" data-bs-toggle="modal" data-bs-target="#viewContactModal">Información de contacto</a></h5>
                 
     </div>
 
@@ -96,8 +101,10 @@
 
 <div class="botonera"  *ngIf="editMode">
     <!-- <button class="btn btn-primary btn">Tengo interes en</button> -->
-    <button class="btn btn-success">Añadir Seccion</button>
-    <button class="btn btn-primary">Mas</button>
+    <button class="btn btn-success" (click)="toggleAbout()">Añadir Seccion</button>
+    <button class="btn btn-primary" (click)="setPortfolioContact()"    
+    data-bs-toggle="modal" data-bs-target="#contactModal"
+    >Datos de contacto</button>
     
     <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#dataModal"> Editar </button> -->
 </div>
@@ -160,7 +167,7 @@
                         <p *ngIf="sizeImage" class="text-danger">El tamaño de la imagen es demasiado grande</p>  
 
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success" [disabled]="sizeImage" data-bs-dismiss="modal">Guardar</button>
+                        <button type="submit" class="btn btn-success" [disabled]="sizeImage || !formGroup.valid" data-bs-dismiss="modal">Guardar</button>
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Salir</button>
                     </div>
                 </form>               
@@ -206,6 +213,151 @@
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Salir</button>
                     </div>
                 </form>               
+
+            </div>            
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="bannerModal" >
+    
+    <div class="modal-dialog" >
+        <div class="modal-content">
+            <div class="modal-header">            
+                <h5 class="modal-title" id="staticBackdropLabel">Seleccione imagen de banner</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+        
+            <div class="modal-body">
+
+                <form [formGroup]="formGroup"
+                    (ngSubmit)="onUpdateBanner(miPortfolio)"                    >
+                    
+                    <div class="form-group">
+                        <label for="image">Seleccione Banner</label>
+                        <div class="input-group mb-3">
+                        <input class="form-control"
+                            type="file" 
+                            formControlName="image"                            
+                            placeholder="{{miPortfolio.image}}"
+                            (change)="onSelectNewFile($event)"
+                        />
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-danger" *ngIf="sizeImage" (click)="clearImage(miPortfolio.image)" type="button">Limpiar</button>
+                          </div>
+                        </div>
+                                               
+                    </div>                    
+                        <p *ngIf="sizeImage" class="text-danger">El tamaño de la imagen es demasiado grande</p>  
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success" [disabled]="sizeImage" data-bs-dismiss="modal">Guardar</button>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Salir</button>
+                    </div>
+                </form>               
+
+            </div>            
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="contactModal" >
+    
+    <div class="modal-dialog" >
+        <div class="modal-content">
+            <div class="modal-header">            
+                <h5 class="modal-title" id="staticBackdropLabel">Editar Datos de contacto</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+        
+            <div class="modal-body">
+
+                <form [formGroup]="formContact"
+                    (ngSubmit)="onUpdateContact(miPortfolio)"
+                    >
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input class="form-control"
+                            type="email" 
+                            formControlName = "email"
+                            placeholder="Ingrese Correo Electrónico" 
+                        />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="facebook">Facebook</label>
+                        <input class="form-control"
+                            type="text" 
+                            formControlName="facebook" 
+                            placeholder="Ingrese Facebook"
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label for="linkedin">Linkedin</label>
+                        <input class="form-control"
+                            type="text" 
+                            formControlName="linkedin" 
+                            placeholder="Ingrese Linkedin"
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label for="github">GitHub</label>
+                        <input class="form-control"
+                            type="text" 
+                            formControlName="github" 
+                            placeholder="Ingrese GitHub"
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label for="youtube">Youtube</label>
+                        <input class="form-control"
+                            type="text" 
+                            formControlName="youtube" 
+                            placeholder="Ingrese Youtube"
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label for="instagram">Instagram</label>
+                        <input class="form-control"
+                            type="text" 
+                            formControlName="instagram" 
+                            placeholder="Ingrese Instagram"
+                        />
+                    </div>
+                    
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success"  data-bs-dismiss="modal">Guardar</button>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Salir</button>
+                    </div>
+                </form>               
+
+            </div>            
+        </div>
+    </div>
+</div>
+
+
+<div class="modal" id="viewContactModal" >
+    
+    <div class="modal-dialog" >
+        <div class="modal-content">
+            <div class="modal-header">            
+                <h5 class="modal-title" id="staticBackdropLabel">Datos de contacto</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+        
+            <div class="modal-body">
+                <h5>Correo electrónico: </h5> <a aria-label="Email" target="_blank" rel="noopener" href={{miPortfolio.email}} title="Email">{{miPortfolio.email}}</a>
+                <h5>GitHub: </h5><a aria-label="GitHub" target="_blank" rel="noopener" href={{miPortfolio.github}} title="GitHub">{{miPortfolio.github}}</a>
+                <h5>Linkedin: </h5><a aria-label="Linkedin" target="_blank" rel="noopener" href={{miPortfolio.linkedin}} title="Linkedin">{{miPortfolio.linkedin}}</a>
+                <h5>Facebook: </h5><a aria-label="Facebook" target="_blank" rel="noopener" href={{miPortfolio.facebook}} title="Facebook">{{miPortfolio.facebook}}</a>
+                <h5>Instagram: </h5><a aria-label="Instagram" target="_blank" rel="noopener" href={{miPortfolio.instagram}} title="Instagram">{{miPortfolio.instagram}}</a>
+                <h5>Youtube: </h5><a aria-label="Youtube" target="_blank" rel="noopener" href={{miPortfolio.youtube}} title="Youtube">{{miPortfolio.youtube}}</a>
+
+                    <div class="modal-footer">                        
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Salir</button>
+                    </div>     
 
             </div>            
         </div>

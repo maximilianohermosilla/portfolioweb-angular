@@ -23,6 +23,12 @@ export class HeaderComponent implements OnInit {
     position: '',
     ubication: '',
     about: '',
+    email: '',
+    facebook: '',
+    linkedin: '',
+    instagram: '',
+    youtube: '',
+    github: '',
     company: {company:'', img:'', position:'', mode:'', start:'', end:'', timeElapsed:'', ubication:''},
     school: {school:'', image:'', title:'', career:'', score:'', start:'', end:'',},
     experience: [],
@@ -44,7 +50,9 @@ export class HeaderComponent implements OnInit {
       this.showLogin = data
     );
     this.servPortfolio.getPortfolioFull().subscribe(data =>{
-      this.miPortfolio = data;      
+      this.miPortfolio = data;   
+      
+      console.log("Header ", this.miPortfolio);   
     });
     if(this.tokenService.getToken()){
       this.showLogin = true;

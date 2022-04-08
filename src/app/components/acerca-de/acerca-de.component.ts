@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
 import { Portfolio } from 'src/app/models/portfolio';
@@ -18,6 +18,7 @@ import { TokenService } from 'src/app/servicios/token.service';
 })
 export class AcercaDeComponent implements OnInit {
   formGroup: FormGroup;
+  formContact: FormGroup;
 
   miPortfolio: Portfolio = this.clearPortfolio();
   experienceList: Experience[] = [];
@@ -39,23 +40,37 @@ export class AcercaDeComponent implements OnInit {
   constructor(private servPortfolio: PortfolioService, private formBuilder: FormBuilder, private uiService: UiServiceService, private authService: AuthService, private sant: DomSanitizer, private tokenService: TokenService) {
     this.subscription = this.uiService.onToggleSession().subscribe( data =>
         this.showLogin = data
-      );      
+      );       
+    
     this.formGroup = this.formBuilder.group({
-      name : ['',[]],
+      name : ['',[Validators.required]],
       position : ['',[]],
       ubication : ['',[]],
+      image : ['',[]],
       profilePhoto : ['',[]]       
+    })  
+
+    this.formContact = this.formBuilder.group({
+      email : ['',[]],
+      facebook : ['',[]],
+      linkedin : ['',[]],
+      instagram : ['',[]],    
+      youtube : ['',[]],  
+      github : ['',[]]     
     })
-   }
+ }
 
   ngOnInit(): void {    
     this.getPerfil();
     this.getPortfolio();
+    
+    
   }
 
   getPortfolio(){
     this.servPortfolio.getPortfolioFull().subscribe(data =>{
       this.miPortfolio = data;
+      console.log(this.miPortfolio);
       this.miSchool = data.school;
       this.miCompany = data.company;
       this.experienceList = [];
@@ -68,7 +83,7 @@ export class AcercaDeComponent implements OnInit {
         const edu: Education = element;
         this.educationList.push(edu);
       });
-    });
+    });    
     
   }
 
@@ -76,8 +91,16 @@ export class AcercaDeComponent implements OnInit {
     this.formGroup.controls['name'].setValue(this.miPortfolio.name);
     this.formGroup.controls['position'].setValue(this.miPortfolio.position);
     this.formGroup.controls['ubication'].setValue(this.miPortfolio.ubication);
-    this.formGroup.controls['about'].setValue(this.miPortfolio.about); 
     this.base64 = this.miPortfolio.profilePhoto;
+  }
+
+  setPortfolioContact(){
+    this.formContact.controls['email'].setValue(this.miPortfolio.email);
+    this.formContact.controls['facebook'].setValue(this.miPortfolio.facebook);
+    this.formContact.controls['linkedin'].setValue(this.miPortfolio.linkedin);
+    this.formContact.controls['instagram'].setValue(this.miPortfolio.instagram); 
+    this.formContact.controls['youtube'].setValue(this.miPortfolio.youtube); 
+    this.formContact.controls['github'].setValue(this.miPortfolio.github); 
   }
 
   clearPortfolio(): Portfolio{
@@ -90,6 +113,12 @@ export class AcercaDeComponent implements OnInit {
       about: '',
       company: {company:'', img:'', position:'', mode:'', start:'', end:'', timeElapsed:'', ubication:''},
       school: {school:'', image:'', title:'', career:'', score:'', start:'', end:'',},
+      email: '',
+      facebook: '',
+      linkedin: '',
+      instagram: '',
+      youtube: '',
+      github: '',
       experience: [],
       education: [],
       skills: [],
@@ -102,16 +131,40 @@ export class AcercaDeComponent implements OnInit {
     portfolio.name=this.formGroup.value.name;
     portfolio.position=this.formGroup.value.position;
     portfolio.ubication=this.formGroup.value.ubication;
+
     if(this.base64!=''){portfolio.profilePhoto=this.base64;}    
     this.servPortfolio.updatePortfolio(portfolio).subscribe(result=>{this.ngOnInit();});  
     this.getPortfolio();
     this.base64="";    
   }
 
+  onUpdateBanner(portfolio: Portfolio){   
+    if(this.base64!=''){portfolio.image=this.base64;}    
+    this.servPortfolio.updatePortfolio(portfolio).subscribe(result=>{this.ngOnInit();});  
+    this.getPortfolio();
+    this.base64="";    
+  }
+
+  onUpdateContact(portfolio: Portfolio){ 
+    portfolio.email=this.formContact.value.email;
+    portfolio.facebook=this.formContact.value.facebook;
+    portfolio.linkedin=this.formContact.value.linkedin;
+    portfolio.instagram=this.formContact.value.instagram;
+    portfolio.youtube=this.formContact.value.youtube;
+    portfolio.github=this.formContact.value.github;
+
+    this.servPortfolio.updatePortfolio(portfolio).subscribe(result=>{this.ngOnInit();});  
+    this.getPortfolio();
+  }
+
   toggleEditMode(){
     this.editMode=!this.editMode;
     this.editMode ?  this.color="#D4EFDF": this.color="green";
     //this.btnToggleEdit.emit();
+  }
+
+  toggleAbout(){
+    this.uiService.toggleAbout();
   }
 
   getSession(): boolean{

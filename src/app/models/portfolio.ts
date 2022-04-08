@@ -13,6 +13,12 @@ export interface Portfolio{
     position: string,
     ubication: string,
     about: string,
+    email: string,
+    facebook: string,
+    linkedin: string,
+    instagram: string,
+    youtube: string,
+    github: string,
 
     company: Experience,
     school: Education,

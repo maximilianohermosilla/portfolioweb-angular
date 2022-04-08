@@ -6,10 +6,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { GuardGuard } from './servicios/guard.guard';
 
 const routes: Routes = [  
-  {path: '', component:LoginComponent },
+  //{path: '', component:LoginComponent },
   {path: 'login', component:LoginComponent },
   {path: 'portfolio', component:PortfolioComponent, canActivate: [GuardGuard] },  
-  { path: '**', redirectTo: '', pathMatch: 'full' }
+  //{ path: '**', redirectTo: '', pathMatch: 'full' }
 ];
 
 @NgModule({
