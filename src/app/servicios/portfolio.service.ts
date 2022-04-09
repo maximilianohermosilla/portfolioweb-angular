@@ -20,10 +20,15 @@ export class PortfolioService {
 
   private _refresh$ = new Subject<void>();
 
-  private apiPortfolio = 'http://localhost:8080/portfolio'
-  private apiPortfolioFull = 'http://localhost:8080/portfolioFull/1'
-  private apiPortfolioExperience = 'http://localhost:8080/portfolioExperience/1'
-  private apiPortfolioEducation = 'http://localhost:8080/portfolioEducation/1'
+  // private apiPortfolio = 'http://localhost:8080/portfolio'
+  // private apiPortfolioFull = 'http://localhost:8080/portfolioFull/1'
+  // private apiPortfolioExperience = 'http://localhost:8080/portfolioExperience/1'
+  // private apiPortfolioEducation = 'http://localhost:8080/portfolioEducation/1'
+
+  private apiPortfolio = 'https://limitless-gorge-37634.herokuapp.com/portfolio'
+  private apiPortfolioFull = 'https://limitless-gorge-37634.herokuapp.com/portfolioFull/1'
+  private apiPortfolioExperience = 'https://limitless-gorge-37634.herokuapp.com/portfolioExperience/1'
+  private apiPortfolioEducation = 'https://limitless-gorge-37634.herokuapp.com/portfolioEducation/1'
 
   constructor(private http:HttpClient) { }
 

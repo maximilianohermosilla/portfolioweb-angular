@@ -14,6 +14,8 @@ import { UiServiceService } from './ui-service.service';
 export class AuthService {
 
   api = 'http://localhost:8080/auth/';
+  apiHeroku = 'https://limitless-gorge-37634.herokuapp.com/auth/';
+
   token;
   isLogin: boolean = false;
   currentUserSubject: BehaviorSubject<any>;
@@ -29,7 +31,7 @@ export class AuthService {
 
   iniciarSesion(credenciales: LoginUsuario): Observable<JwtDTO>{
     //console.log(credenciales);
-    return this.httpClient.post<any>(this.api + 'login', credenciales).pipe(map(data=>{
+    return this.httpClient.post<any>(this.apiHeroku + 'login', credenciales).pipe(map(data=>{
         //console.log(data);
         this.uiService.toggleSession();
         sessionStorage.setItem('curentUser', JSON.stringify(data));

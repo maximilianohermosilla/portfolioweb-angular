@@ -10,8 +10,11 @@ export class ExperienceService {
   
   private _refresh$ = new Subject<void>();
 
-    private apiExperience = 'http://localhost:8080/experience'
-    private apiExperiencePersona = 'http://localhost:8080/experiencePersona'
+    // private apiExperience = 'http://localhost:8080/experience'
+    // private apiExperiencePersona = 'http://localhost:8080/experiencePersona'
+
+    private apiExperience = 'https://limitless-gorge-37634.herokuapp.com/experience'
+    private apiExperiencePersona = 'https://limitless-gorge-37634.herokuapp.com/experiencePersona'
 
   constructor(private http:HttpClient) { }
 

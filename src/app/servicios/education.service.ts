@@ -10,10 +10,15 @@ export class EducationService {
 
   private _refresh$ = new Subject<void>();
 
-    private apiEducation = 'http://localhost:8080/education'
-    private apiEducationFull = 'http://localhost:8080/educationFull'
-    private apiEducationPersona = 'http://localhost:8080/educationPersona'
-    private apiInsertEducation = 'http://localhost:8080/education/'
+    // private apiEducation = 'http://localhost:8080/education'
+    // private apiEducationFull = 'http://localhost:8080/educationFull'
+    // private apiEducationPersona = 'http://localhost:8080/educationPersona'
+    // private apiInsertEducation = 'http://localhost:8080/education/'
+
+    private apiEducation = 'https://limitless-gorge-37634.herokuapp.com/education'
+    private apiEducationFull = 'https://limitless-gorge-37634.herokuapp.com/educationFull'
+    private apiEducationPersona = 'https://limitless-gorge-37634.herokuapp.com/educationPersona'
+    private apiInsertEducation = 'https://limitless-gorge-37634.herokuapp.com/education/'
 
   constructor(private http:HttpClient) { }
 
