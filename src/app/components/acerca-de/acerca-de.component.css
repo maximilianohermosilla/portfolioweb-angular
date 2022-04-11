@@ -12,6 +12,8 @@
     width: auto;
     display: flex;
     position: relative; 
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
   }
 
   #banner-image{
@@ -19,6 +21,8 @@
     max-width: 100%;
     max-height: 100%;
     height: auto;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
   }
 
   .banner-background{
@@ -68,7 +72,7 @@
     display: flex;
     position: relative;
     align-items: center;
-    justify-content: end;
+    justify-content: flex-end;
   }
 
   .content i{
@@ -142,7 +146,7 @@
   }
 
   #banner-select{
-    color: white;
+    color: #DDDDDD;
     position: absolute;
     margin-left: 46%;
     margin-top: 120px;

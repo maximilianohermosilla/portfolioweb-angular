@@ -52,7 +52,7 @@ export class HeaderComponent implements OnInit {
     this.servPortfolio.getPortfolioFull().subscribe(data =>{
       this.miPortfolio = data;   
       
-      console.log("Header ", this.miPortfolio);   
+      //console.log("Header ", this.miPortfolio);   
     });
     if(this.tokenService.getToken()){
       this.showLogin = true;

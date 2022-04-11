@@ -70,7 +70,7 @@ export class AcercaDeComponent implements OnInit {
   getPortfolio(){
     this.servPortfolio.getPortfolioFull().subscribe(data =>{
       this.miPortfolio = data;
-      console.log(this.miPortfolio);
+      //console.log(this.miPortfolio);
       this.miSchool = data.school;
       this.miCompany = data.company;
       this.experienceList = [];
@@ -223,12 +223,12 @@ export class AcercaDeComponent implements OnInit {
 
   updateCompanySchool(portfolio: Portfolio, education: Education, experience: Experience){ 
     if (education.school = ""){
-      console.log("school empty");
+      //console.log("school empty");
       //portfolio.school = this.emptyEducation();
     }
 
     if (experience.company = ""){
-      console.log("company empty");
+      //console.log("company empty");
       //portfolio.school = this.emptyEducation();
     }
     this.miPortfolio.company = experience;
