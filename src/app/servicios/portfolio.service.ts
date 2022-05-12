@@ -72,7 +72,7 @@ export class PortfolioService {
       params: { 'id_company': id_company, 'id_school': id_school}
   };
 
-    console.log("params: ", httpOptions)
+    //console.log("params: ", httpOptions)
     return this.http.put<Portfolio>(this.apiPortfolioFull, httpOptions, {responseType: "text" as "json"}).pipe(
       tap(() => {
          this.refresh$.next();       

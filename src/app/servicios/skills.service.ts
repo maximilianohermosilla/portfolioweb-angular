@@ -10,8 +10,8 @@ export class SkillsService {
 
   private _refresh$ = new Subject<void>();
 
-  // private urlSkills = 'http://localhost:8080/skill'
-  // private urlSkillsPersona = 'http://localhost:8080/skillPersona'
+  //private urlSkills = 'http://localhost:8080/skill'
+  //private urlSkillsPersona = 'http://localhost:8080/skillPersona'
 
   private urlSkills = 'https://limitless-gorge-37634.herokuapp.com/skill'
   private urlSkillsPersona = 'https://limitless-gorge-37634.herokuapp.com/skillPersona'
@@ -50,7 +50,7 @@ export class SkillsService {
   }
 
   insertSkill(idPersona: number, skill: Skill): Observable<Skill>{
-    console.log("insert servicio", skill);
+    //console.log("insert servicio", skill);
     return this.http.post<Skill>(this.urlSkillsPersona+"/"+idPersona, skill);
   }
 

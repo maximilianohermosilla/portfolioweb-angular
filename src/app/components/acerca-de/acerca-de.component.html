@@ -29,31 +29,27 @@
 </div>
 
 <div class="row" style="padding-right: 30px; padding-left: 30px">
-    <div class="col-5" style="margin-bottom: 3em">
+    <div class="col-md-7 col-sm-12 col-xs-12" style="margin-bottom: 3em">
         
-            <h1>{{miPortfolio.name}}</h1>
-            <h3>{{miPortfolio.position}}</h3>
-            <h5>{{miPortfolio.ubication}}</h5>
-            <h5><a href="" data-bs-toggle="modal" data-bs-target="#viewContactModal">Información de contacto</a></h5>
+            <div class="contenedor" style="padding-right: 0">
+                <h3 class="rounded float-start">{{miPortfolio.name}}</h3>
+                <i class="bi bi-pencil-fill  rounded float-end"
+                data-bs-toggle="modal" data-bs-target="#dataModal"
+                                 style="
+                                  margin-right: 10px"
+                                  (click)="setPortfolio()"
+                                  *ngIf="editMode"
+                                  ></i>
+             </div>   
+            <h5>{{miPortfolio.position}}</h5>
+            <p>{{miPortfolio.ubication}}</p>
+            <h6><a href="" data-bs-toggle="modal" data-bs-target="#viewContactModal">Información de contacto</a></h6>
                 
     </div>
 
-    <div class="col-1"> 
-         <div class="contenedor">
-            <i class="bi bi-pencil-fill"
-            data-bs-toggle="modal" data-bs-target="#dataModal"
-                             style="
-                              margin-right: 10px"
-                              (click)="setPortfolio()"
-                              *ngIf="editMode"
-                              ></i>
-         </div>               
-    </div>
-    <div class="col-1">
+    
 
-    </div>
-
-    <div class="col-5">
+    <div class="col-md-5 col-sm-12 col-xs-12">
         
             <div class="row align-items-center" id="card">
                 <div class="col-5">

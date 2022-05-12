@@ -75,8 +75,8 @@ export class LoginComponent implements OnInit {
 
   loginUser(){    
     this.loginUsuario = { "user": 'user', "password": 'user' };
-    console.log(this.form.value);
-    console.log(this.loginUsuario);
+    //console.log(this.form.value);
+    //console.log(this.loginUsuario);
 
     this.authService.iniciarSesion(this.loginUsuario).subscribe(data=>{
       //console.log("Data: " + JSON.stringify(data));

@@ -81,7 +81,7 @@ export class ProyectosComponent implements OnInit {
     
     this.title="Editar Proyecto";
     this.newProject = false;    
-    console.log("Set project: ", this.projectItem);
+    //console.log("Set project: ", this.projectItem);
   }
 
   emptyProject(): Project{
@@ -148,11 +148,11 @@ export class ProyectosComponent implements OnInit {
   }
 
   onDelete(project: Project){  
-    console.log("Delete: " , project);
+    //.log("Delete: " , project);
     this.onDeleteProject.emit(project);
     this.servPortfolio.deleteProject(project)
       .subscribe(data => {
-        console.log("deleted" , data);
+        //console.log("deleted" , data);
         this.ngOnInit();
         });        
   }  
@@ -174,7 +174,7 @@ export class ProyectosComponent implements OnInit {
     reader.onloadend=()=>{
       this.base64=reader.result as string;
     }
-    console.log("Imagen url: ", this.imageUrl);
+    //console.log("Imagen url: ", this.imageUrl);
 
     setTimeout(()=>{                         
       this.bigImage();
@@ -187,11 +187,11 @@ export class ProyectosComponent implements OnInit {
 
   bigImage(){
     this.sizeImage = (this.base64.length > 50000);
-    console.log("Imagen base64 length: ", this.base64.length);
+    //console.log("Imagen base64 length: ", this.base64.length);
   }
 
   clearImage(educationImg: string){
-    console.log("conservar: " , educationImg);
+    //console.log("conservar: " , educationImg);
     this.base64=educationImg;
     this.bigImage();
   }

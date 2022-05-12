@@ -168,7 +168,7 @@ export class ExperienciaComponent implements OnInit {
   onDelete(experience: Experience){  
     this.onDeleteExperience.emit(experience);
     this.experienceServ.deleteExperience(experience)
-      .subscribe(data => {console.log("deleted", data); // {return (this.experienceList = this.experienceList.filter((t) => (t.id !== experience.id))
+      .subscribe(data => {
         this.ngOnInit();}
           );
         //})

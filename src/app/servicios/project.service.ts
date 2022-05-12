@@ -10,8 +10,8 @@ export class ProjectService {
 
   private _refresh$ = new Subject<void>();
 
-  // private urlProjects = 'http://localhost:8080/project'
-  // private urlProjectsPersona = 'http://localhost:8080/projectPersona'
+  //private urlProjects = 'http://localhost:8080/project'
+  //private urlProjectsPersona = 'http://localhost:8080/projectPersona'
 
   private urlProjects = 'https://limitless-gorge-37634.herokuapp.com/project'
   private urlProjectsPersona = 'https://limitless-gorge-37634.herokuapp.com/projectPersona'

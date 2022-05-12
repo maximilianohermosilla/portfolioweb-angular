@@ -19,18 +19,16 @@
 
                 
                 <div class="row align-items-center">
-                    <div class="col-2">
-                        <div class="content">
-                            <img [src]="experience.img" class="logo">
-                        </div>
+                    <div class="col-md-2 col-sm-12">
+                            <img [src]="experience.img" class="logo" style="">
                         
                     </div>
                     <div class="col-lg" style="justify-content:center">      
                     <div class="card-item">
-                        <h2>{{experience.company}}</h2>
-                        <h4>{{experience.position}}</h4>
+                        <h3>{{experience.company}}</h3>
+                        <h5>{{experience.position}}</h5>
                         <h6><time>Desde {{experience.start}}</time> hasta <time>{{experience.end}}</time></h6>
-                        <h6>{{experience.ubication}}</h6>
+                        <p>{{experience.ubication}}</p>
                     </div>          
                     </div>
                     <div class="col-sm">

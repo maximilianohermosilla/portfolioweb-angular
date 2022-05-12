@@ -24,7 +24,7 @@
   }
 
   .contenedor i{
-    font-size: 2rem;
+    font-size: 1.2rem;
      color: green;
      padding:0 8px;
      border-radius: 50px;     
@@ -41,7 +41,7 @@
   }
 
   span i{
-    font-size: 2rem;
+    font-size: 1.2rem;
      color: limegreen;
      padding:0 8px;
      border-radius: 50px;     

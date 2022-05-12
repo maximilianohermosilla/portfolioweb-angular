@@ -88,7 +88,7 @@ export class EducacionComponent implements OnInit {
 
     this.title="Editar Educación";
     this.newEducation = false;   
-    console.log("Set educacion: " , this.educacion); 
+    //console.log("Set educacion: " , this.educacion); 
   }
 
   emptyEducation(): Education{
@@ -179,10 +179,10 @@ export class EducacionComponent implements OnInit {
     reader.onloadend=()=>{
       this.base64=reader.result as string;
     }
-    console.log("Imagen url: ", this.imageUrl);
+    //console.log("Imagen url: ", this.imageUrl);
     
     setTimeout(()=>{   
-      console.log("Imagen educacion length: ", this.educacion.image.length);
+      //console.log("Imagen educacion length: ", this.educacion.image.length);
       this.bigImage();
     }, 500);    
   }
