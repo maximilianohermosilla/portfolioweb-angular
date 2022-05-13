@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginUsuario } from 'src/app/models/login-usuario';
 import { AuthService } from 'src/app/servicios/auth.service';
+import { SpinnerService } from 'src/app/servicios/spinner.service';
 import { TokenService } from 'src/app/servicios/token.service';
 
 @Component({
@@ -25,7 +26,7 @@ export class LoginComponent implements OnInit {
   perfiles: string[] = [];
   errMsj: string = "";
 
-  constructor(private formBuilder: FormBuilder, private authService: AuthService, private route: Router, private tokenService: TokenService) { 
+  constructor(private formBuilder: FormBuilder, private authService: AuthService, private route: Router, private tokenService: TokenService, private spinnerService: SpinnerService) { 
     this.form = this.formBuilder.group({
       user: ['',[Validators.required, Validators.minLength(4)]],
       password: ['',[Validators.required, Validators.minLength(4)]]
@@ -41,7 +42,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(){
-    this.btnSubmit.emit();    
+    this.btnSubmit.emit();
   }
 
   get User(){

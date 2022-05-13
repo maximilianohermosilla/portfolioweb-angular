@@ -66,17 +66,12 @@
   }
 
   .toolbar img {
-    margin: 0 16px;
+    margin: 0 1em;
   }
 
   .toolbar #twitter-logo {
     height: 40px;
-    margin: 0 8px;
-  }
-
-  .toolbar #youtube-logo {
-    height: 40px;
-    margin: 0 16px;
+    margin: 0 1em;
   }
 
   .toolbar #twitter-logo:hover,

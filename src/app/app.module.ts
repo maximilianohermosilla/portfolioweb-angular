@@ -22,6 +22,8 @@ import { ModuloHeaderComponent } from './components/modulo-header/modulo-header.
 import { InterceptorService } from './servicios/interceptor.service';
 import { AboutComponent } from './components/about/about.component';
 import { AppRoutingModule } from './app-routing.module';
+import { SpinnerComponent } from './components/spinner/spinner.component';
+import { SpinnerService } from './servicios/spinner.service';
 
 
 @NgModule({
@@ -40,6 +42,7 @@ import { AppRoutingModule } from './app-routing.module';
     FooterComponent,
     ModuloHeaderComponent,
     AboutComponent,
+    SpinnerComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,7 +55,8 @@ import { AppRoutingModule } from './app-routing.module';
     AppRoutingModule
   ],
   providers: [PortfolioService, 
-  { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true},
+  { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true}, 
+  //{ provide: HTTP_INTERCEPTORS, useClass: SpinnerService, multi: true }
   ],
   bootstrap: [AppComponent]
 })

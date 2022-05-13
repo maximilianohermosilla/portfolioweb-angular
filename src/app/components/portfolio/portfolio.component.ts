@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { PortfolioService } from 'src/app/servicios/portfolio.service';
 import { UiServiceService } from 'src/app/servicios/ui-service.service';
 import { TokenService } from 'src/app/servicios/token.service';
+import { SpinnerService } from 'src/app/servicios/spinner.service';
 
 @Component({
   selector: 'app-portfolio',
@@ -40,19 +41,21 @@ export class PortfolioComponent implements OnInit {
 
   isLogged = false;
 
-  constructor(private servPortfolio: PortfolioService, private uiService: UiServiceService, private tokenService: TokenService) {
+  constructor(private servPortfolio: PortfolioService, private uiService: UiServiceService, private tokenService: TokenService, private spinnerService: SpinnerService) {
     this.subscription = this.uiService.onTogglePortfolio().subscribe( data =>
       this.showPortfolio = data
     );
    }
 
   ngOnInit(): void {
+    this.spinnerService.show();
     if(this.tokenService.getToken()){
       this.isLogged = true;
     }
     else{
       this.isLogged = false;
     }
+    this.spinnerService.hide();
   }
 
   toggleExperience(){

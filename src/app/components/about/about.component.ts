@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { Portfolio } from 'src/app/models/portfolio';
 import { PortfolioService } from 'src/app/servicios/portfolio.service';
+import { SpinnerService } from 'src/app/servicios/spinner.service';
 import { TokenService } from 'src/app/servicios/token.service';
 
 @Component({
@@ -20,20 +21,22 @@ export class AboutComponent implements OnInit {
   subscription? : Subscription;
   color="";
 
-  constructor(private tokenService: TokenService, private servPortfolio: PortfolioService, private formBuilder: FormBuilder) {
+  constructor(private tokenService: TokenService, private servPortfolio: PortfolioService, private formBuilder: FormBuilder, private spinnerService: SpinnerService) {
     this.formGroup = this.formBuilder.group({
       about : ['',[]]     
     })
    }
 
   ngOnInit(): void {
+    this.spinnerService.show();   
     this.getPortfolio();
   }
 
   getPortfolio(){
     this.servPortfolio.getPortfolioFull().subscribe(data =>{
-      this.miPortfolio = data;      
-    });
+      this.miPortfolio = data; 
+      this.spinnerService.hide();   
+  });
     
   }
 

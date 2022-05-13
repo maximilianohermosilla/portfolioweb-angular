@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators'
 import { JwtDTO } from '../models/jwt-dto';
 import { LoginUsuario } from '../models/login-usuario';
 import { NuevoUsuario } from '../models/nuevo-usuario';
+import { SpinnerService } from './spinner.service';
 import { UiServiceService } from './ui-service.service';
 
 @Injectable({
@@ -20,7 +21,7 @@ export class AuthService {
   isLogin: boolean = false;
   currentUserSubject: BehaviorSubject<any>;
 
-  constructor(private httpClient: HttpClient, private router: Router, private uiService: UiServiceService) { 
+  constructor(private httpClient: HttpClient, private router: Router, private uiService: UiServiceService, private spinnerService: SpinnerService) { 
     this.currentUserSubject = new BehaviorSubject<any>(JSON.parse(sessionStorage.getItem('currentUser') || '{}'));
   }
 
@@ -30,19 +31,20 @@ export class AuthService {
 
   iniciarSesion(credenciales: LoginUsuario): Observable<JwtDTO>{
     //console.log(credenciales);
-    return this.httpClient.post<any>(this.apiHeroku + 'login', credenciales).pipe(map(data=>{
+    this.spinnerService.show();
+    return this.httpClient.post<any>(this.apiHeroku + 'login', credenciales).pipe(map(data=>{        
         console.log(data);
         this.uiService.toggleSession();
         sessionStorage.setItem('curentUser', JSON.stringify(data));
         this.currentUserSubject.next(data);
-
+        this.spinnerService.hide();
         return data;
       }))
   }
 
   get UsuarioAutenticado(){
     //console.log("Usuario aut: ", this.currentUserSubject.value);
-    console.log(this.currentUserSubject);
+    //console.log(this.currentUserSubject);
     return this.currentUserSubject.value;
   }
 

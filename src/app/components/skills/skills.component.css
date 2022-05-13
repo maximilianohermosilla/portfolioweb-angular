@@ -53,3 +53,7 @@
 #buttons i:hover{
   opacity: 0.5;
 }
+
+.modal{
+  width: 100%;
+}

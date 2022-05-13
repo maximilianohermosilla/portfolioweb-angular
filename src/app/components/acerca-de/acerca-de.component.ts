@@ -10,6 +10,7 @@ import { UiServiceService } from 'src/app/servicios/ui-service.service';
 import { LoginComponent } from '../login/login.component';
 import { Education } from 'src/app/models/education';
 import { TokenService } from 'src/app/servicios/token.service';
+import { SpinnerService } from 'src/app/servicios/spinner.service';
 
 @Component({
   selector: 'app-acerca-de',
@@ -37,7 +38,13 @@ export class AcercaDeComponent implements OnInit {
   sizeImage: boolean = false;
   isAdmin: boolean = false;
 
-  constructor(private servPortfolio: PortfolioService, private formBuilder: FormBuilder, private uiService: UiServiceService, private authService: AuthService, private sant: DomSanitizer, private tokenService: TokenService) {
+  constructor(private servPortfolio: PortfolioService,
+             private formBuilder: FormBuilder, 
+             private uiService: UiServiceService, 
+             private authService: AuthService, 
+             private sant: DomSanitizer, 
+             private tokenService: TokenService, 
+             private spinnerService: SpinnerService) {
     this.subscription = this.uiService.onToggleSession().subscribe( data =>
         this.showLogin = data
       );       
@@ -60,10 +67,11 @@ export class AcercaDeComponent implements OnInit {
     })
  }
 
-  ngOnInit(): void {    
-    this.getPerfil();
-    this.getPortfolio();
+  ngOnInit(): void { 
     
+    this.spinnerService.show();   
+    this.getPerfil();
+    this.getPortfolio();   
     
   }
 
@@ -82,8 +90,10 @@ export class AcercaDeComponent implements OnInit {
       data.education.forEach(element => {
         const edu: Education = element;
         this.educationList.push(edu);
+        //this.spinnerService.hide();     
+    
       });
-    });    
+    }); 
     
   }
 

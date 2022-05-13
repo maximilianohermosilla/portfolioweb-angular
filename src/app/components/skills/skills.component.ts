@@ -167,75 +167,55 @@ export class SkillsComponent implements OnInit, OnDestroy {
       score: this.formGroup.value.score,
       color: this.skillItem.color
     }
-
-    /*console.log(this.formGroup);
-    console.log("skill param: " , skill);
-    console.log("this skillItem: ", this.skillItem);
-    console.log("chartsFactory list: ", this.chartsFactory);
-    console.log("charts list: ", this.charts);    
-    console.log("chartsFactory list: ", this.chartsFactory);*/
-    //this.chartsFactory=[];
     this.newSkill ? this.onInsert(skill): this.onUpdate(skill)
   }
 
   onInsert(skill: Skill){
-    //this.setSkill(skill);
-    this.servPortfolio.insertSkill(this.idPersona, skill).subscribe((element)=>(
+    this.servPortfolio.insertSkill(this.idPersona, skill).subscribe(result=>{
       this.ngOnInit()
-    ))  
-    this.ngOnInit();  
+    });  
+    this.clearCharts();
     setTimeout(()=>{                         
-      location.reload(); 
-    }, 2000);
+      this.ngOnInit();   
+    }, 1000);
   }
 
   onUpdate(skill: Skill){
-    //this.clearCharts();
-    //console.log(this.skillItem);
-    //console.log(this.formGroup);
-    //console.log(skill);
     this.servPortfolio.updateSkill(skill).subscribe(result=>{      
-      this.ngOnInit()}); 
-    this.ngOnInit();  
+      //this.ngOnInit()
+    }); 
+      this.clearCharts();
     setTimeout(()=>{                         
-      location.reload(); 
-    }, 2000);
+      this.ngOnInit();  
+    }, 1000);
   }
 
   onDelete(skill: Skill){  
-    //console.log("Delete: " , skill);
     this.onDeleteSkill.emit(skill);
     this.servPortfolio.deleteSkill(skill)
     .subscribe(data => {
-      //console.log("deleted" , data);
-      this.ngOnInit()
+      //this.ngOnInit()
       });
-      this.ngOnInit();
-      setTimeout(()=>{                         
-        location.reload(); 
+      this.clearCharts();
+      setTimeout(()=>{
+        this.ngOnInit();  
       }, 1000); 
   }
 
 
   clearCharts(){
-   // console.log("Initial list: ", this.chartsFactory);
     this.chartsFactory.forEach(element => {
-        //console.log(element);
-        //console.log(element.canvas.id);
         const elem = document.getElementById('canvas');
         //console.log(elem);
         if (elem){
           console.log("not null");
           elem.remove(); 
         }    
-        //console.log(elem);
     });
     if (this.chartsFactory && this.chartsFactory.length > 0) this.chartsFactory.forEach(chart => chart.destroy());
     const elem = document.getElementById('canvas');
     this.chartsFactory=[];
     this.charts=[];
-    //console.log("Final list: ", this.chartsFactory);
-    //console.log("Final list: ", this.charts);
   }
 
   
