@@ -43,8 +43,8 @@ export class SkillsComponent implements OnInit, OnDestroy {
     );
 
     this.formGroup = this.formBuilder.group({
-      name: ['',[]],
-      score: ['',[Validators.max(100)]],
+      name: ['',[Validators.required]],
+      score: ['',[Validators.required, Validators.max(100)]],
       color: ['',[]],
     })
   }

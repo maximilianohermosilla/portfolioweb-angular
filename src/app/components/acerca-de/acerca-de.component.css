@@ -50,7 +50,6 @@
     position: relative;
     align-items: center;
     justify-content: space-between;
-    padding-right: 60px;
     margin: 8px 0;
   }
 
@@ -76,14 +75,15 @@
   }
 
   .content i{
-    font-size: 2rem;
+    font-size: 1.2rem;
      color: green;
      padding: 0 8px;
-     border-radius: 50px;     
+     border-radius: 50px;  
+     margin-right: 16px;   
   }
 
   .content i:hover{
-    opacity: 0.5;
+    opacity: 0.7;
     color:grey;
   }
   

@@ -69,7 +69,8 @@ export class LoginComponent implements OnInit {
       this.isLoginFail = true;
       this.isLogged = false;     
       this.errMsj = error;
-      console.log("error: ", this.errMsj);
+      //console.log("error: ", this.errMsj);      
+      this.spinnerService.hide(); 
     }
     )
   }

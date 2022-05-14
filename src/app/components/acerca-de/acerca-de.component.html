@@ -17,12 +17,11 @@
          data-bs-toggle="modal" data-bs-target="#photoModal"
          ></i>   
 
-    <div class="content">
+    <div class="content" style="color: green">
         <i class="bi bi-pencil-square"
         *ngIf="isAdmin"
         [ngStyle]="{'color': color}"
         [ngStyle]="{'background-color': '{{color}}'}"    
-        style="color: green"
         (click)="toggleEditMode()"
         ></i>
     </div>     

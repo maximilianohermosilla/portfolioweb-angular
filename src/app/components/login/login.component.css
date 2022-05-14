@@ -1,3 +1,12 @@
+p{
+    font-size: 0.8em;
+}
+
+strong{
+    color: #5a8bf6;
+    font-size: 1.3em;
+}
+
 .form-control {
     margin: 1vw 0;
 }
@@ -59,4 +68,9 @@ span>img{
 
 .btn-success{
     margin: 1.5vw 0;
+}
+
+#logo-login{
+    height: 92px;
+    width: 223px
 }

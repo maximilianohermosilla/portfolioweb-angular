@@ -44,7 +44,7 @@
         <!-- <app-button text="Iniciar Sesion" ></app-button>
       </a>       -->
       <app-button id="btnLogin" 
-        icon = "{{showLogin ? 'btn-warning btn-lg': 'btn-success btn-lg'}}"
+        icon = "{{showLogin ? 'btn-danger btn-lg': 'btn-success btn-lg'}}"
         color="white"
         text="{{showLogin ? 'Cerrar Sesion': 'Iniciar Sesion'}}"
         type="button"
@@ -57,7 +57,7 @@
   <!-- MODAL -->
 <div class="modal" id="loginModal" >
     
-  <div class="modal-dialog" >
+  <div class="modal-dialog" style="max-width: 355px">
       <div class="modal-content" [ngSwitch]="showLogin">
           <div class="modal-header">            
               <h5 class="modal-title" id="staticBackdropLabel">{{showLogin ? 'Cerrar Sesión': 'Iniciar Sesión'}}</h5>
@@ -70,7 +70,7 @@
             >
               <div class="form-group">
                 <div class="content">
-                  <h3>¿Desea cerrar la sesión?</h3>   
+                  <h5>¿Desea cerrar la sesión?</h5>   
                   <h1></h1>       
                 <button type="submit" class="btn-success btn-lg" data-bs-dismiss="modal">Confirmar</button>    
                 </div>
