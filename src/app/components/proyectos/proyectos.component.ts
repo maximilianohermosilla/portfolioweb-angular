@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
 import { Project } from 'src/app/models/project';
@@ -41,7 +41,7 @@ export class ProyectosComponent implements OnInit {
     );
 
     this.formGroup = this.formBuilder.group({
-      name: ['',[]],
+      name: ['',[Validators.required]],
       start: ['',[]],
       description: ['',[]],
       url: ['',[]],
@@ -196,5 +196,7 @@ export class ProyectosComponent implements OnInit {
     this.bigImage();
   }
 
-
+  get Name(){
+    return this.formGroup.get('name');
+  }
 }

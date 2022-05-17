@@ -77,7 +77,6 @@ export class AcercaDeComponent implements OnInit {
   getPortfolio(){
     this.servPortfolio.getPortfolioFull().subscribe(data =>{
       this.miPortfolio = data;
-      //console.log(this.miPortfolio);
       this.miSchool = data.school;
       this.miCompany = data.company;
       this.experienceList = [];
@@ -121,7 +120,7 @@ export class AcercaDeComponent implements OnInit {
       ubication: '',
       about: '',
       company: {company:'', img:'', position:'', mode:'', start:'', end:'', timeElapsed:'', ubication:''},
-      school: {school:'', image:'', title:'', career:'', score:'', start:'', end:'',},
+      school: {school:'', image:'', title:'', career:'', score:0, start:'', end:'',},
       email: '',
       facebook: '',
       linkedin: '',
@@ -221,7 +220,7 @@ export class AcercaDeComponent implements OnInit {
   }  
 
   emptyEducation(): Education{
-    let education: Education = {    school: '',    title: '',    image: '',    career: '',    score: '',    start: '',    end: ''  };
+    let education: Education = {    school: '',    title: '',    image: '',    career: '',    score: 0,    start: '',    end: ''  };
     return education;
   }
 

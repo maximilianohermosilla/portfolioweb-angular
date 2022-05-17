@@ -62,12 +62,13 @@
                                 (ngSubmit)="onSubmit(experiencia)"
                                 >
                                 <div class="form-group">
-                                    <label for="company">Empresa</label>
+                                    <label for="company">* Empresa</label>
                                     <input class="form-control"
                                         type="text" 
                                         formControlName="company" 
                                         placeholder="{{experiencia.company}}"
                                     />
+                                    <p *ngIf="Company?.hasError('required')" class="text-danger">Este campo es obligatorio</p> 
                                 </div>
     
                                 <div class="form-group">
@@ -127,7 +128,7 @@
                                 </div>                    
                                     <p *ngIf="sizeImage" class="text-danger">El tamaño de la imagen es demasiado grande</p> 
                                 <div class="modal-footer">
-                                    <button type="submit" class="btn btn-success" [disabled]="sizeImage" data-bs-dismiss="modal">Guardar</button>
+                                    <button type="submit" class="btn btn-success" [disabled]="!formGroup.valid || sizeImage" data-bs-dismiss="modal">Guardar</button>
                                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Salir</button>
                                 </div>
                             </form> 

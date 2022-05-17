@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, Input, NgIterable } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
 import { Experience } from 'src/app/models/experience';
@@ -44,7 +44,7 @@ export class ExperienciaComponent implements OnInit {
       
     this.formGroup = this.formBuilder.group({
       position : ['',[]],
-      company : ['',[]],
+      company : ['',[Validators.required]],
       img : [null,[]],
       mode : ['',[]],
       start : ['',[]],
@@ -210,5 +210,9 @@ export class ExperienciaComponent implements OnInit {
     this.base64=experienceImg;
     this.formGroup.value.img='';
     this.bigImage();
+  }
+
+  get Company(){
+    return this.formGroup.get('company');
   }
 }

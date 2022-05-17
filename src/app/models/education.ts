@@ -4,7 +4,7 @@ export interface Education{
     title: string,
     image: string,
     career: string,
-    score: string,
+    score: number,
     start: string,
     end: string,
 }

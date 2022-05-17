@@ -59,7 +59,7 @@ export class AboutComponent implements OnInit {
       youtube: '',
       github: '',
       company: {company:'', img:'', position:'', mode:'', start:'', end:'', timeElapsed:'', ubication:''},
-      school: {school:'', image:'', title:'', career:'', score:'', start:'', end:'',},
+      school: {school:'', image:'', title:'', career:'', score:0, start:'', end:'',},
       experience: [],
       education: [],
       skills: [],

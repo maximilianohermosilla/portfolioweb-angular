@@ -42,11 +42,11 @@ export class EducacionComponent implements OnInit {
     );
 
     this.formGroup = this.formBuilder.group({
-      school: ['',[]],
+      school: ['',[Validators.required]],
       title: ['',[]],
       image: [null,[Validators.maxLength(50000)]],
       career: ['',[]],
-      score: ['',[]],
+      score: [0,[Validators.required, Validators.min(1), Validators.max(10)]],
       start: ['',[]],
       end: ['',[]]
     })
@@ -98,7 +98,7 @@ export class EducacionComponent implements OnInit {
       title: "",
       image: "",
       career: "",
-      score: "",
+      score: 0,
       start: "",
       end: ""
     }
@@ -113,7 +113,7 @@ export class EducacionComponent implements OnInit {
       title: "",
       image: "",
       career: "",
-      score: "",
+      score: 0,
       start: "",
       end: ""
     }
@@ -199,7 +199,15 @@ export class EducacionComponent implements OnInit {
   clearImage(educationImg: string){    
     this.base64=educationImg;
     this.bigImage();
-  }  
+  } 
+  
+  get School(){
+    return this.formGroup.get('school');
+  }
+
+  get Score(){
+    return this.formGroup.get('score');
+  }
 
 }
 

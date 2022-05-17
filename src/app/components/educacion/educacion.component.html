@@ -59,16 +59,17 @@
                     (ngSubmit)="onSubmit(educacion)"
                     >
                     <div class="form-group">
-                        <label for="school">Institución</label>
+                        <label for="school">* Institución</label>
                         <input class="form-control"
                             type="text" 
                             formControlName="school" 
                             placeholder="{{educacion.school}}"
                         />
+                        <p *ngIf="School?.hasError('required')" class="text-danger">Este campo es obligatorio</p> 
                     </div>
 
                     <div class="form-group">
-                        <label for="title">Título</label>
+                        <label for="title">* Título</label>
                         <input class="form-control"
                             type="title" 
                             formControlName="title" 
@@ -78,7 +79,7 @@
 
 
                     <div class="form-group">
-                        <label for="career">Carrera</label>
+                        <label for="career">* Carrera</label>
                         <input class="form-control"
                             type="text" 
                             formControlName="career" 
@@ -87,12 +88,13 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="score">Promedio</label>
+                        <label for="score">* Promedio</label>
                         <input class="form-control"
-                            type="text" 
+                            type="number" 
                             formControlName="score" 
                             placeholder="{{educacion.score}}" 
                         />
+                        <p *ngIf="Score?.hasError('max')" class="text-danger">El valor debe ser superior a 1 e inferior a 10</p> 
                     </div>
 
                     <div class="form-group">
@@ -128,7 +130,7 @@
                     </div>                    
                         <p *ngIf="sizeImage" class="text-danger">El tamaño de la imagen es demasiado grande</p>                        
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-success" [disabled]="sizeImage" data-bs-dismiss="modal">Guardar</button>
+                        <button type="submit" class="btn btn-success" [disabled]="!formGroup.valid" data-bs-dismiss="modal">Guardar</button>
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Salir</button>
                     </div>
                 </form> 

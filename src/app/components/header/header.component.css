@@ -57,12 +57,16 @@
     background-color: #03146a;
     background-size:100%;
     color: white;
-    
+    justify-content: space-between;
     outline: 1px solid #111;
     font-weight: 600;
     border-bottom:4px solid white;
-    min-width: 664px;
     z-index: 100;
+  }
+
+  .toolbar-item{
+    display: flex;
+    align-items: center;
   }
 
   .toolbar img {
@@ -104,7 +108,6 @@
   #btnLogin{   
     box-sizing: border-box;
     margin: 1em;
-    width: 155px;
   }
 
 
