@@ -67,9 +67,8 @@ export class AcercaDeComponent implements OnInit {
     })
  }
 
-  ngOnInit(): void { 
-    
-    this.spinnerService.show();   
+  ngOnInit(): void {     
+    //this.spinnerService.show();   
     this.getPerfil();
     this.getPortfolio();   
     
@@ -243,11 +242,14 @@ export class AcercaDeComponent implements OnInit {
     }
     this.miPortfolio.company = experience;
     this.miPortfolio.school = education;
-    this.miCompany=experience;
-    this.miSchool=education;
-
-    this.servPortfolio.updatePortfolio(portfolio).subscribe(result=>{this.ngOnInit();});  
-    this.toggleEditMode();
+    
+    
+    this.servPortfolio.updatePortfolio(portfolio).subscribe(result=>{
+      this.ngOnInit();
+      this.miCompany=experience;
+      this.miSchool=education;      
+      this.toggleEditMode();
+    });  
     this.getPortfolio();
   }
 
