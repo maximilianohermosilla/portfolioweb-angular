@@ -1,0 +1,49 @@
+body, html{
+    background: black;
+}
+
+.content{
+    background: black;
+}
+
+.background{
+    background-image: url(/assets/404.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-bottom: 0px;  
+    height: 100%;
+    width: 100%;
+    min-width: 720px;
+    display: absolute;
+  }
+
+  .error{
+      width: 640px;
+      height: 640px;
+  }
+
+  @media (max-width: 480px) {
+    .error{
+        width: 480px;
+        height: 640px;
+    }
+  }
+
+  @media (max-width: 360px) {
+    .error{
+        width: 300px;
+        height: 640px;
+    }
+
+    .background{
+        background-image: url(/assets/404.png);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        margin-bottom: 0px;  
+        height: 640px;
+        width: 360px;
+        display: absolute;
+      }
+  }

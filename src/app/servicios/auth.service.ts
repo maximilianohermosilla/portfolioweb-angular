@@ -33,7 +33,7 @@ export class AuthService {
     //console.log(credenciales);
     this.spinnerService.show();
     return this.httpClient.post<any>(this.apiHeroku + 'login', credenciales).pipe(map(data=>{        
-        console.log(data);
+        //console.log(data);
         this.uiService.toggleSession();
         sessionStorage.setItem('curentUser', JSON.stringify(data));
         this.currentUserSubject.next(data);

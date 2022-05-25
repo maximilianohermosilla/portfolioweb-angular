@@ -24,6 +24,7 @@ import { AboutComponent } from './components/about/about.component';
 import { AppRoutingModule } from './app-routing.module';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { SpinnerService } from './servicios/spinner.service';
+import { NotfoundComponent } from './components/notfound/notfound.component';
 
 
 @NgModule({
@@ -43,6 +44,7 @@ import { SpinnerService } from './servicios/spinner.service';
     ModuloHeaderComponent,
     AboutComponent,
     SpinnerComponent,
+    NotfoundComponent,
   ],
   imports: [
     BrowserModule,

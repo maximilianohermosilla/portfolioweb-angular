@@ -4,11 +4,13 @@ import { LoginComponent } from './components/login/login.component';
 import { PortfolioComponent } from './components/portfolio/portfolio.component';
 import { RouterModule, Routes } from '@angular/router';
 import { GuardGuard } from './servicios/guard.guard';
+import { NotfoundComponent } from './components/notfound/notfound.component';
 
 const routes: Routes = [  
   {path: '', component:LoginComponent },
   {path: 'login', component:LoginComponent },
-  {path: 'portfolio', component:PortfolioComponent, canActivate: [GuardGuard] },  
+  {path: 'portfolio', component:PortfolioComponent, canActivate: [GuardGuard] }, 
+  {path: '404', component:NotfoundComponent },
   { path: '**', redirectTo: 'login', pathMatch: 'full' }
 ];
 
